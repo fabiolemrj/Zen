@@ -1,0 +1,38 @@
+﻿@model AdminLte2.ViewModels.PerfilViewModel.AlterarSenhaViewModel
+
+<div class="row">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="#">Alterar Senha</a>
+        </div>
+        <div class="register-box-body">
+
+            @using (Html.BeginForm())
+            {
+            <div class="box  box-primary info-box-text">
+                @*<img src="~/images/chico2.png" class="center-block user-image img-circle" style=" width:100px; height:100px;" alt="User Image" />*@
+                <img src="@Url.Action("ObterImagem","Custom")" class="center-block user-image img-circle" style=" width:100px; height:100px;" alt="User Image"/>
+                <p class="login-box-msg">@Model.NmUsuario</p>
+            </div>
+                <div class="form-group has-feedback">
+                    @Html.EditorFor(model => model.SenhaAtual, new { htmlAttributes = new { @class = "form-control", placeholder = "Senha Atual" } })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.EditorFor(model => model.NovaSenha, new { htmlAttributes = new { @class = "form-control", placeholder = "Nova Senha" } })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.EditorFor(model => model.ConfirmacaoSenha, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirmar nova Senha" } })
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-block btn-primary">Alterar</button>                   
+                </div>
+            }
+        </div>
+
+      
+
+    </div>
+</div>

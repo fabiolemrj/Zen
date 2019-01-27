@@ -1,0 +1,74 @@
+﻿@*
+    LTE_OLD
+    This partial controls the top menu of the AdminLTE Template, being called automatically by _AdminLteLayout
+       TODO: All of the content in here is stand-in that must be replaced by the real behavior of your app
+*@
+
+@{
+    ViewBag.Layout = null;
+}
+
+<header class="main-header">
+    <!-- Logo -->
+    <a href="@Url.Action("Principal","AdminLte")" class="logo">
+        <img src="~/images/zen.svg" style="width:45px;height:45px;border:0;" />
+        Zen Serigrafia
+    </a>
+    @*@Html.ActionLink("Zen Serigrafia", "Principal", "adminlte", new { area = "" }, new { @class = "navbar-brand logo" })*@
+    @*<a href="index2.html" class="logo"></a>*@
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Messages: style can be found in dropdown.less-->
+                <!-- User Account: style can be found in dropdown.less -->
+
+                <li class="dropdown user user-menu">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            @*<img src="~/images/chico2.png" class="user-image" alt="User Image" />*@
+                            <img src="@Url.Action("ObterImagem","Custom")" class="user-image" style="float:left; width:30px; height:30px; margin-right:10px; margin-top:1px; " alt="User Image" />
+                            <span class="hidden-xs">@ViewBag.NmUsuarioLogado</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="@Url.Action("ObterImagem","Custom")" class="img-circle" alt="User Image" />
+                                @*<img src="~/images/chico2.png" class="img-circle" alt="User Image" />*@
+                                <p>
+                                    @ViewBag.NmUsuarioLogado
+                                    <small>@ViewBag.FuncaoUsuarioLogado</small>
+                                    @*<small>Tipo: @ViewBag.TipoUsuarioLogado</small>*@
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="box-footer">
+                                <div class="col-xs-4 text-center">
+                                    @*<li><a href="@Url.Action("Index","Usuarios")"><i class="fa fa-user"></i> Usuários</a></li>*@
+                                    <a href="@Url.Action("AlterarSenha", "Perfil")">Alterar Senha</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="@Url.Action("AlterarFoto", "Autenticacao")">Foto</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="@Url.Action("Logout", "Autenticacao")">Logout</a>
+                                </div>
+
+                            </li>
+
+                        </ul>
+                    }
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+

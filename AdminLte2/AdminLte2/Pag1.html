@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <input type="button" id="btnOpenDialog" value="Open Confirm Dialog" />
+    <div id="dialog-confirm"></div>
+    <div id="result"></div>
+
+    <script>
+        function fnOpenNormalDialog(id) {
+            $("#dialog-confirm").html("Deseja realmente apagar o registro "+id+"?");
+
+            // Define the Dialog and its properties.
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                modal: true,
+                title: "Apagar registro",
+                height: 250,
+                width: 400,
+                buttons: {
+                    "Sim": function () {
+                        $(this).dialog('close');
+                        callback(true);
+                    },
+                    "Não": function () {
+                        $(this).dialog('close');
+                        callback(false);
+                    }
+                }
+            });
+        }
+
+        let i = 10;
+        $('#btnOpenDialog').click(function () { fnOpenNormalDialog(this.id); });
+
+        function callback(value) {
+            if (value) {
+                $("#result").html("Confirmed");
+            } else {
+                $("#result").html("Rejected");
+            }
+        }
+    </script>
+</body>
+</html>

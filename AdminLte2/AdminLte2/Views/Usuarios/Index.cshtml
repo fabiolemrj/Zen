@@ -1,0 +1,105 @@
+﻿@model AdminLte2.ViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "Usuários";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+  
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Pesquisa por Nome</h3>
+                </div>
+                <div class="box-body">
+                   
+                    <div class="input-group input-group-sm">
+                        
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+
+                        </div>
+                        @Html.TextBoxFor(p => Model.filtroNome, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                    <div class="box-body">
+                        @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-info pull-right" })
+                    </div>
+
+
+                    <div class="box-body">
+                        <table id="tbusuarios" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Login</th>
+                                    <th>E-mail</th>
+                                    <th>Situação</th>
+                                    <th>Perfil</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.LstUsuarios)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Login)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Situacao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Perfil.Descricao)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit",new { id=item.Id})" class="btn btn-info btn-sm" title="Editar">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        <a href="@Url.Action("Delete",new { id=item.Id})" class="btn btn-danger btn-sm" title="Apagar">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>                         
+
+                                    </td>
+
+                                </tr>
+                                }
+                            </tbody>
+                            @*<tfoot>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Login</th>
+                                    <th>Tipo de Acesso</th>
+                                    <th></th>
+                                </tr>
+
+                            </tfoot>*@
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+}
+
+
+
