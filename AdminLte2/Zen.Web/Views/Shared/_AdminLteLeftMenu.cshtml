@@ -1,0 +1,237 @@
+﻿@{
+    Layout = null;
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Menu de navegação</li>
+                <!-- Optionally, you can add icons to the links -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-folder"></i>  <span>Arquivo</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CLI.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "Cliente")"><i class="fa fa-male"></i> Clientes</a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-male"></i> Clientes</a></li>*@
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_FORNEC.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "Fornecedor")"><i class="fa fa-industry"></i> Fornecedores</a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-industry"></i> Fornecedores</a></li>*@
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_FORNEC.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "Material")"><i class="fa fa-file-image-o"></i> Insumos </a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-file-image-o"></i> Insumos</a></li>*@
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-folder-o"></i> Cadastros Auxiliares<i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_BANCOS.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Banco")"><i class="fa fa-bank"></i> Banco</a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-bank"></i>Bancos</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CORES.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Cor")"><i class="fa fa-tint"></i> Cores</a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-tint"></i>Cores</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_FACAS.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Facas")"><i class="fa fa-file"></i> Facas</a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-file"></i>Facas</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_FORMAPGM.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "FormaPag")"><i class="fa fa-money"></i> Formas de Pagamento</a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-money"></i>Formas de pagamento</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_IMPRESS.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Impressor")"><i class="fa fa-user"></i> Impressores </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-user"></i>Impressores</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_ITENSDESP.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Despesa")"><i class="fa fa-dollar"></i> Item de Despesa </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-dollar"></i>Itens de despesas</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_MAQ.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Maquina")"><i class="fa fa-print"></i> Maquinas </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-print"></i>Maquinas</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_SETORES.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Setor")"><i class="fa fa-file"></i> Setores </a></li>
+                                }
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_TIPOREC.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "TipoReceita")"><i class="fa fa-dollar"></i> Tipo de Receita </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-dollar"></i>Tipo de receita</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_TIPODOC.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "TipoDoc")"><i class="fa fa-file"></i> Tipo de Documento </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-file"></i>Tipo de documento</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_TPTINT.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "TipoTinta")"><i class="fa fa-tint"></i> Tipo de Tinta </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-tint"></i>Tipo de tinta</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_TRANS.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Transporte")"><i class="fa fa-truck"></i> Transporte </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-truck"></i>Transporte</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_ZONA.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Serv")"><i class="fa fa-bookmark"></i> Serviços </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-bookmark"></i>Serviços</a></li>*@
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_ZONA.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Zona")"><i class="fa fa-map"></i> Zonas </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-map"></i>Zonas</a></li>*@
+                            </ul>
+                        </li>
+                    </ul>
+
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-folder"></i>  <span>Orçamento</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-file-o"></i> Pedido de Orçamento</a></li>
+                        <li><a href="#"><i class="fa fa-file-text"></i> Orçamento</a></li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-folder-o"></i> Tabela de Custos <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CONFIG.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Edit", "Config")"><i class="fa fa-cog"></i> Configurações </a></li>
+                                }
+                                @*<li><a href="#"><i class="fa fa-cog"></i>Configuração</a></li>*@
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-folder-o"></i> Controle de OSI <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-file"></i>Pendentes/Concluídas</a></li>
+                                <li><a href="#"><i class="fa fa-file"></i>Canceladas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-balance-scale"></i> Comparativa de clientes </a></li>
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_PRD.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "Produto")"><i class="fa fa-gift"></i> Produtos </a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-gift"></i> Produtos </a></li>*@
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-cogs"></i> <span>Produção</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-bar-chart"></i> Cronograma</a></li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-folder-o"></i> Produção diária<i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-check-square-o"></i>Concluída</a></li>
+                                <li><a href="#"><i class="fa fa-square-o"></i>Em andamento</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-truck"></i> Expedição</a></li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-folder-o"></i> Itens de OSI<i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-file-image-o"></i>Acabamento</a></li>
+                                <li><a href="#"><i class="fa fa-file-image-o"></i>Matrizes</a></li>
+                                <li><a href="#"><i class="fa fa-file-image-o"></i>Tinta</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dollar"></i> <span>Financeiro</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-money"></i> Receitas</a></li>
+                        <li><a href="#"><i class="fa fa-money"></i> Despesas</a></li>
+                        <li><a href="#"><i class="fa fa-money"></i> Despesas Fixas</a></li>
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CC.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "ContaCorrente")"><i class="fa fa-money"></i> Contas Correntes </a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-money"></i> Contas Correntes</a></li>*@
+                        <li><a href="#"><i class="fa fa-money"></i> Fluxo de Caixa</a></li>
+                        <li><a href="#"><i class="fa fa-money"></i> Realizado</a></li>
+                        <li><a href="#"><i class="fa fa-exchange"></i> Transferência</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-lock"></i> <span>Controle de Acesso</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_USR_CONS.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "Usuarios")"><i class="fa fa-user"></i> Usuários</a></li>
+                        }
+                        @*<li><a href="@Url.Action("Index", "Usuarios")"><i class="fa fa-user"></i> Usuários</a></li>*@
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_PERFIL_CONS.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "Perfil")"><i class="fa fa-users"></i> Perfis</a></li>
+                        }
+                        @*  <li><a href="@Url.Action("Index", "Perfil")"><i class="fa fa-users"></i> Perfis</a></li>*@
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-cog"></i> <span>Manutenção</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-repeat"></i> Acertar movimentação CC</a></li>
+
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_EDIT_CONFIG.ToString()))
+                        {
+                            <li><a href="@Url.Action("Editar", "Configuracao")"><i class="fa fa-envelope-o"></i> Configuração de E-mail</a></li>
+                        }
+
+                        <li><a href="#"><i class="fa fa-wrench"></i> Manutenção do sistema</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.sidebar-menu -->
+            
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+}

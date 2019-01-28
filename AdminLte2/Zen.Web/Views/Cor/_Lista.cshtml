@@ -1,0 +1,95 @@
+﻿@model Zen.Web.ViewModels.CorViewModel.ListaViewModel
+
+@using (Html.BeginForm("Index", "Cor"))
+{
+    <div class="row">
+
+        <div class="col-md-5">
+            <div class="box box-body box-info">
+                <div class="form-group">
+                    <div class="col-md-9">
+
+                        @Html.LabelFor(model => model.IdCorDest, htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.IdCorDest, (SelectList)ViewBag.CorDest, new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.IdCorDest, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" id="btunificar" class="btn btn-app btn-instagram" title="Unificar cores selecionadas">
+                        <i class="fa fa-sort-amount-desc"></i> Unificar
+                    </button>
+                    @*<div class="col-md-2">
+                        <a href="@Url.Action("Index","Cor") " class="btn btn-app btn-instagram" title="Apagar">
+                            <i class="fa  fa-sort-amount-desc"></i> Unificar
+                        </a>
+                    </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="box-header">
+                        <label>Pesquisar Cores</label>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Buscar Cor" name="filtro" id="filtro" value="@ViewBag.Filtro">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info btn-flat">
+                                <span class="glyphicon glyphicon-search" onclick="Atualizar()"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-body">
+        <table id="tabela" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center" style="width:100px"></th>
+                </tr>
+            </thead>
+            <tbody>           
+                @for (var i = 0; i < Model.ListaCores.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.ListaCores[i].Nome)
+                        </td>
+
+                        <td align="center">
+                            @Html.HiddenFor(model => model.ListaCores[i].CorReal)
+                            @Html.HiddenFor(model => model.ListaCores[i].IdCor)
+                            @Html.CheckBoxFor(modelItem => Model.ListaCores[i].Selecionado)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+<script>
+    function Atualizar() {
+
+        $.ajax({
+            url: '_Lista',
+            data: { filtro: $('#filtro').val() },
+
+            success: function (data) {
+                $('#resultado').html(data);
+
+            },
+            error: function (err) {
+
+                $('#resultado').html(err.statusText);
+            }
+        });
+    }
+</script>

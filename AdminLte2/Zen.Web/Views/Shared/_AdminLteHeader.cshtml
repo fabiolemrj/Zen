@@ -1,0 +1,47 @@
+﻿            <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Zen Serigrafia
+
+    </h1>
+    <h4 class="text-center">
+
+        @Html.Raw(TempData["nometela"])
+    </h4>
+
+    @if (@TempData["breadcrumb"] != null)
+    {
+        @Html.Raw(@TempData["breadcrumb"]);
+    }
+    @*<ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
+        </ol>*@
+
+    @if (@TempData["sucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div id="resultado">
+                @Html.Raw(@TempData["sucesso"])
+            </div>
+        </div>
+    }
+    else if (@TempData["erro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div id="resultado">
+                @Html.Raw(@TempData["erro"])
+            </div>
+        </div>
+    }
+</section>
+
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(1000, function () {
+            $(this).remove();
+        });
+    }, 8000);
+</script>

@@ -1,0 +1,86 @@
+﻿@model Zen.Web.ViewModels.UsuarioViewModel.AddEditViewModel
+@{
+    ViewBag.Title = "Usuário";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="box-body">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Editar</h3>
+            </div>
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NmUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.NmUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NmUsuario, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Funcao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Funcao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Funcao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TipoAcesso, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EnumDropDownListFor(model => model.TipoAcesso, "", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.TipoAcesso, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Situacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.EnumDropDownListFor(model => model.Situacao, "", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.Situacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="box-footer">
+                    @*<input type="submit" value="Salvar" class="btn btn-primary" />*@
+                    <button type="submit" id="btsalvar" class="btn btn-app ">
+                        <i class="fa fa-save"></i> Salvar
+                    </button>
+                    <button id="btsalvar" class="btn btn-app " onclick="history.go(-1); return false;">
+                        <i class="fa fa-arrow-circle-o-left"></i> Cancelar
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
