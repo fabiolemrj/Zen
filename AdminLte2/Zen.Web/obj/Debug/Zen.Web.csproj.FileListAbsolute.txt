@@ -208,3 +208,4 @@ C:\fonte\Zen\Zen\AdminLte2\Zen.Web\obj\Debug\Zen.Web.csproj.CoreCompileInputs.ca
 C:\fonte\Zen\Zen\AdminLte2\Zen.Web\obj\Debug\Zen.Web.csproj.CopyComplete
 C:\fonte\Zen\Zen\AdminLte2\Zen.Web\obj\Debug\Zen.Web.dll
 C:\fonte\Zen\Zen\AdminLte2\Zen.Web\obj\Debug\Zen.Web.pdb
+C:\fonte\Zen\Zen\AdminLte2\Zen.Web\obj\Debug\Zen.Web.csprojAssemblyReference.cache

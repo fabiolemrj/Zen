@@ -77,7 +77,7 @@ namespace Zen.Web.Controllers
             Url.IsLocalUrl(viewmodel.UrlRetorno))
                 return Redirect(viewmodel.UrlRetorno);
             else
-                return RedirectToAction("Index", "Painel");
+                return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Logout()
