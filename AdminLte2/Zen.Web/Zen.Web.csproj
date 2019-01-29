@@ -1817,6 +1817,7 @@
     <Compile Include="Models\Configuracao.cs" />
     <Compile Include="Models\Constantes.cs" />
     <Compile Include="Models\ContaCorrente.cs" />
+    <Compile Include="Models\contasreceber.cs" />
     <Compile Include="Models\Cor.cs" />
     <Compile Include="Models\Despesa.cs" />
     <Compile Include="Models\DireitoAcesso.cs" />
