@@ -7,8 +7,8 @@ using System.Web;
 
 namespace Zen.Web.Models
 {
-    [Table("clientes")]
-    public class contasreceber
+    [Table("contasreceber")]
+    public class ContasReceber
     {
         [Key]
         [Column(name: "IDTITULO")]
@@ -32,27 +32,27 @@ namespace Zen.Web.Models
         public string Historico { get; set; }
 
         [Column(name: "IDBANCOCHQ")]
-        public int IdBancoCheque { get; set; }
+        public int? IdBancoCheque { get; set; }
 
         [NotMapped]
         public Banco BancoCheque { get; set; }
 
         [Column(name: "IDCC")]
-        public int IdCc { get; set; }
+        public int? IdCc { get; set; }
 
         [NotMapped]
         public ContaCorrente ContaCorrente { get; set; }
 
         [Column(name: "IDCHQ")]
-        public int IdCheque { get; set; }
+        public int? IdCheque { get; set; }
 
         [Column(name: "IDCLIENTE")]
-        public int IdCliente { get; set; }
+        public int? IdCliente { get; set; }
         [NotMapped]
         public Cliente Cliente { get; set; }
 
         [Column(name: "IDDONOCHQ")]
-        public int IdDoNoChq { get; set; }
+        public int? IdDoNoChq { get; set; }
 
         [Column(name: "IDFORMAPGM")]
         public int IdFormaPag { get; set; }
@@ -60,26 +60,38 @@ namespace Zen.Web.Models
         public FormaPag FormaPag { get; set; }
 
         [Column(name: "IDLINK")]
-        public int IdLink { get; set; }
+        public int? IdLink { get; set; }
 
         [Column(name: "IDSETOR")]
-        public int IdSetor { get; set; }
+        public int? IdSetor { get; set; }
+
+        [NotMapped]
+        public Setor Setor { get; set; }
 
         [Column(name: "IDTIPODOC")]
-        public int IdTipoDoc { get; set; }
+        public int? IdTipoDoc { get; set; }
+
+        [NotMapped]
+        public TipoDoc TipoDoc { get; set; }
 
         [Column(name: "IDTIPOREC")]
-        public int IdTipoReceita { get; set; }
+        public int? IdTipoReceita { get; set; }
+
+        [NotMapped]
+        public TipoReceita TipoReceita { get; set; }
 
         [Column(name: "IDUSUARIO")]
-        public int IdUsuario { get; set; }
+        public int? IdUsuario { get; set; }
+
+        [NotMapped]
+        public Usuario Usuario { get; set; }
 
         [Column(name: "JUROS")]
         [Range(0, 9999999999999999.99)]
         public double Juros { get; set; } = 0;
 
         [Column(name: "NUM_AG_CHQ")]
-        public int NumAgChq { get; set; }
+        public int? NumAgChq { get; set; }
 
         [Column(name: "NUM_CHQ")]
         [MaxLength(15)]
@@ -112,5 +124,18 @@ namespace Zen.Web.Models
         [Column(name: "VALOR")]
         [Range(0, 9999999999999999.99)]
         public double Valor { get; set; } = 0;
+
+        [Column(name: "DESCONTO")]
+        [Range(0, 9999999999999999.99)]
+        public double Desconto { get; set; } = 0;
+
+        [Column(name: "DTPAG")]
+        public DateTime? DtPag { get; set; }
+
+        [Column(name: "DTPAG_TIT_DESC")]
+        public DateTime? DtPagDesc { get; set; }
+
+        [Column(name: "DTVENC")]
+        public DateTime? DtVenc { get; set; }
     }
 }

@@ -41,6 +41,7 @@ namespace Zen.Web.Models
         public DbSet<Material> Materiais { get; set; }
         public DbSet<ContaCorrente> ContasCorrentes { get; set; }
         public DbSet<Config> Configs { get; set; }
+        public DbSet<ContasReceber> ContasReceber { get; set; }
 
     }
 }
