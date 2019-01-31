@@ -1,0 +1,118 @@
+﻿@using X.PagedList.Mvc
+@model X.PagedList.PagedList<Zen.Web.Models.ContasReceber>
+@{
+    ViewBag.Title = "Contas Receber";
+}
+
+
+
+@using (Html.BeginForm("Index", "ContaReceber", FormMethod.Get, new { id = "formContaReceber" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="result">
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Pesquisa de Contas a Receber</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select name="tpfiltro" id="tpfiltro" class="form-control select2-dropdown">
+                                        <option value="1" @(ViewBag.TpFiltro == 1 ? "selected" : "")>Historico</option>
+                                        <option value="2" @(ViewBag.TpFiltro == 2 ? "selected" : "")>Banco</option>
+                                        <option value="3" @(ViewBag.TpFiltro == 3 ? "selected" : "")>Data De Vencimento</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm">
+                                @* @Html.TextBoxFor(p => Model.Filtro, new { @class = "form-control" })*@
+                                <input type="text" class="form-control" placeholder="Buscar Conta Receber..." name="filtro" value="@ViewBag.Filtro">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-info btn-flat">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-info pull-right" })
+                </div>
+
+                <div class="box-body">
+                    <table id="tabela" class="table table-bordered table-hover table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:70px">Titulo</th>
+                                <th class="text-center" style="width:10px">Tipo de Receita</th>
+                                <th class="text-center" style="width:30px">Data Vencimento</th>
+                                <th class="text-center" style="width:30px">Data Pagamento</th>
+                                <th class="text-center" style="width:30px">Situação</th>
+                                <th class="text-center" style="width:20px">Historico</th>
+                                <th class="text-center" style="width:70px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TipoReceita)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DtVenc)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DtPag)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SitTitDesc)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Historico)
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="@Url.Action("Edit",new { id=item.Id})" class="btn btn-info btn-sm" title="Editar">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </a>
+                                            <a href="@Url.Action("Delete",new { id=item.Id})" class="btn btn-danger btn-sm" title="Apagar">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, filtro = ViewBag.Filtro, tpfiltro = ViewBag.TpFiltro }))
+        </div>
+        <div class="col-md-6">
+            <span class="pull-right">
+                Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+            </span>
+        </div>
+    </div>
+
+
+}

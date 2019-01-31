@@ -180,7 +180,11 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-money"></i> Receitas</a></li>
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CC.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "ContaReceber")"><i class="fa fa-money"></i> Contas Receber </a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-money"></i> Receitas</a></li>*@
                         <li><a href="#"><i class="fa fa-money"></i> Despesas</a></li>
                         <li><a href="#"><i class="fa fa-money"></i> Despesas Fixas</a></li>
                         @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CC.ToString()))

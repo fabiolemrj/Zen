@@ -55,7 +55,7 @@ namespace Zen.Web.Models
         public int? IdDoNoChq { get; set; }
 
         [Column(name: "IDFORMAPGM")]
-        public int IdFormaPag { get; set; }
+        public int? IdFormaPag { get; set; }
         [NotMapped]
         public FormaPag FormaPag { get; set; }
 
@@ -88,7 +88,7 @@ namespace Zen.Web.Models
 
         [Column(name: "JUROS")]
         [Range(0, 9999999999999999.99)]
-        public double Juros { get; set; } = 0;
+        public double? Juros { get; set; } = 0;
 
         [Column(name: "NUM_AG_CHQ")]
         public int? NumAgChq { get; set; }
@@ -111,7 +111,7 @@ namespace Zen.Web.Models
 
         [Column(name: "PERC_TIT_DESC")]
         [Range(0, 9999999999999999.99)]
-        public double PercTitDesc { get; set; } = 0;
+        public double? PercTitDesc { get; set; } = 0;
 
         [Column(name: "SIT_TIT_DESC")]
         [MaxLength(1)]
@@ -123,11 +123,11 @@ namespace Zen.Web.Models
 
         [Column(name: "VALOR")]
         [Range(0, 9999999999999999.99)]
-        public double Valor { get; set; } = 0;
+        public double? Valor { get; set; } = 0;
 
-        [Column(name: "DESCONTO")]
+        [Column(name: "DESCONTOS")]
         [Range(0, 9999999999999999.99)]
-        public double Desconto { get; set; } = 0;
+        public double? Desconto { get; set; } = 0;
 
         [Column(name: "DTPAG")]
         public DateTime? DtPag { get; set; }

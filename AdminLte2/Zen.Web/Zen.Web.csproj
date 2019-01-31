@@ -1783,6 +1783,7 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\ConfiguracaoController.cs" />
     <Compile Include="Controllers\ContaCorrenteController.cs" />
+    <Compile Include="Controllers\ContaReceberController.cs" />
     <Compile Include="Controllers\CorController.cs" />
     <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\DespesaController.cs" />
@@ -1888,6 +1889,8 @@
     <Compile Include="ViewModels\ConfigViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\ContaCorrente\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\ContaCorrente\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\ContaReceberViewModel\CreateEditViewModel.cs" />
+    <Compile Include="ViewModels\ContaReceberViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\CorViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\CorViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\CorViewModel\IndexViewModel.cs" />
@@ -2035,6 +2038,7 @@
     <Content Include="Views\ContaCorrente\Create.cshtml" />
     <Content Include="Views\ContaCorrente\Delete.cshtml" />
     <Content Include="Views\Config\Edit.cshtml" />
+    <Content Include="Views\ContaReceber\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
