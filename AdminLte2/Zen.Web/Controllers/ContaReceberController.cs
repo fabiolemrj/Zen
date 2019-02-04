@@ -53,7 +53,7 @@ namespace Zen.Web.Controllers
 
 
         // GET: ContaReceber
-        public ActionResult Index(int tpfiltro = 1, string filtro = "", int pagina = 1, int tamPag = Constantes.TamanhoPagina)
+        public ActionResult Index(int tpfiltro = 1, string filtro = "", int pagina = 1, int tamPag = Constantes.TamanhoPagina, string dtini="", string dtfim="")
         {
             TempData["breadcrumb"] = CreateBreadCrumbIndex();
             TempData["nometela"] = "Contas a Receber";

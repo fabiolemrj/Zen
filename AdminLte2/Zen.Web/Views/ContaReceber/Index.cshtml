@@ -4,7 +4,7 @@
     ViewBag.Title = "Contas Receber";
 }
 
-
+<link href="~/Lib/jquery/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 
 @using (Html.BeginForm("Index", "ContaReceber", FormMethod.Get, new { id = "formContaReceber" }))
 {
@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Pesquisa de Contas a Receber</h3>
@@ -33,12 +33,65 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group input-group-sm">
+                        <div class="form-group">
+                            <div class="col-md-4">
+
                                 @* @Html.TextBoxFor(p => Model.Filtro, new { @class = "form-control" })*@
                                 <input type="text" class="form-control" placeholder="Buscar Conta Receber..." name="filtro" value="@ViewBag.Filtro">
+                                @*<span class="input-group-btn">
+                                        <button type="submit" class="btn btn-info btn-flat">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>*@
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="col-md-6">
+                                <label>Data Inicial</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />
+                                </div>
+                                @* <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />*@
+                            </div>
+                            <div class="col-md-6">
+                                <label>Data Final</label>
+                                @*<input type="datetime" class="form-control" id="dtfim" name="dtfim" placeholder="Data Fim" value="@ViewBag.Dtfim" />*@
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="dtfim" name="dtfim" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <div class="col-md-6">
+                                <label>Situacao</label>
+                                <select name="situacao" id="situacao" class="form-control select2-dropdown">
+                                    <option value="T" @(ViewBag.situacao == "T" ? "selected" : "")>Todos</option>
+                                    <option value="L" @(ViewBag.situacao == "L" ? "selected" : "")>Em Aberto</option>
+                                    <option value="P" @(ViewBag.situacao == "P" ? "selected" : "")>Pagos</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label></label>
                                 <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-info btn-flat">
+                                    <button type="submit" class="btn btn-block btn-info">
                                         <span class="glyphicon glyphicon-search"></span>
                                     </button>
                                 </span>
@@ -46,6 +99,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="box-body">
                     @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-info pull-right" })
                 </div>
@@ -71,7 +125,7 @@
                                         @Html.DisplayFor(modelItem => item.Id)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.TipoReceita)
+                                        @Html.DisplayFor(modelItem => item.TipoReceita.Nome)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.DtVenc)
@@ -80,7 +134,7 @@
                                         @Html.DisplayFor(modelItem => item.DtPag)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.SitTitDesc)
+                                        @Html.DisplayFor(modelItem => item.Estado)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Historico)
@@ -116,3 +170,31 @@
 
 
 }
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('#dtini').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#dtfim').mask('00/00/0000', { placeholder: "__/__/____" });
+  
+
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        })
+    });
+
+</script>
+<!-- InputMask -->
+<!-- InputMask -->
+<script src="~/Lib/jquery/input-mask/jquery.inputmask.js"></script>
+<script src="~/Lib/jquery/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="~/Lib/jquery/input-mask/jquery.inputmask.extensions.js"></script>
+
+<script src="~/Lib/jquery/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+
