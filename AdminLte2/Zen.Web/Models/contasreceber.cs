@@ -129,12 +129,15 @@ namespace Zen.Web.Models
         [Range(0, 9999999999999999.99)]
         public double? Desconto { get; set; } = 0;
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Column(name: "DTPAG")]
         public DateTime? DtPag { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Column(name: "DTPAG_TIT_DESC")]
         public DateTime? DtPagDesc { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Column(name: "DTVENC")]
         public DateTime? DtVenc { get; set; }
     }

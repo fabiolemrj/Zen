@@ -49,8 +49,8 @@ namespace Zen.Web.Servico
                          join td in db.TiposDoc on cr.IdTipoDoc equals td.Id
                          into _td
                          from td in _td.DefaultIfEmpty()
-                         select new { cr, cl, tr, bc, cc, st, fp, td }).OrderByDescending(b => b.cr.DtVenc);
-
+                         select new { cr, cl, tr, bc, cc, st, fp, td });
+               
                 foreach (var item in q)
                 {
                     lst.Add(new ContasReceber
@@ -190,9 +190,9 @@ namespace Zen.Web.Servico
                                          from fp in _fp.DefaultIfEmpty()
                                          join td in db.TiposDoc on cr.IdTipoDoc equals td.Id
                                          into _td
-                                         from td in _td.DefaultIfEmpty()
+                                         from td in _td.DefaultIfEmpty()                                        
                                          select new { cr, cl, tr, bc, cc, st, fp, td }).Where(c => c.bc.Nome.Contains(filtroNome)).OrderByDescending(b => b.cr.DtVenc);
-
+                                        
                                 foreach (var item in q)
                                 {
                                     lst.Add(new ContasReceber
@@ -305,10 +305,9 @@ namespace Zen.Web.Servico
                             }
                             break;
                         }
-
                 }
             }
-           
+
             
             return lst.AsQueryable();
         }

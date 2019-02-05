@@ -4,8 +4,6 @@
     ViewBag.Title = "Contas Receber";
 }
 
-<link href="~/Lib/jquery/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
-
 @using (Html.BeginForm("Index", "ContaReceber", FormMethod.Get, new { id = "formContaReceber" }))
 {
     @Html.AntiForgeryToken()
@@ -39,10 +37,10 @@
                                 @* @Html.TextBoxFor(p => Model.Filtro, new { @class = "form-control" })*@
                                 <input type="text" class="form-control" placeholder="Buscar Conta Receber..." name="filtro" value="@ViewBag.Filtro">
                                 @*<span class="input-group-btn">
-                                        <button type="submit" class="btn btn-info btn-flat">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>*@
+                            <button type="submit" class="btn btn-info btn-flat">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>*@
 
                             </div>
                         </div>
@@ -52,9 +50,20 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
+                        <div class="col-md-8">
+                            <div class="col-md-6">
+                                <label>Vencimento</label>
+                                </div>
+                            <div class="col-md-2">   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
                         <div class="col-md-4">
                             <div class="col-md-6">
-                                <label>Data Inicial</label>
+                                Data Inicial
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
@@ -64,13 +73,13 @@
                                 @* <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />*@
                             </div>
                             <div class="col-md-6">
-                                <label>Data Final</label>
+                                Data Final
                                 @*<input type="datetime" class="form-control" id="dtfim" name="dtfim" placeholder="Data Fim" value="@ViewBag.Dtfim" />*@
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control" id="dtfim" name="dtfim" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                    <input type="datetime" class="form-control pull-right" id="dtfim" name="dtfim" placeholder="Data Final" value="@ViewBag.Dtfim" />
                                 </div>
                             </div>
                         </div>
@@ -84,7 +93,7 @@
                                 <label>Situacao</label>
                                 <select name="situacao" id="situacao" class="form-control select2-dropdown">
                                     <option value="T" @(ViewBag.situacao == "T" ? "selected" : "")>Todos</option>
-                                    <option value="L" @(ViewBag.situacao == "L" ? "selected" : "")>Em Aberto</option>
+                                    <option value="L" @(ViewBag.situacao == "L" ? "selected" : "")>Lançados</option>
                                     <option value="P" @(ViewBag.situacao == "P" ? "selected" : "")>Pagos</option>
                                 </select>
                             </div>
@@ -134,13 +143,25 @@
                                         @Html.DisplayFor(modelItem => item.DtPag)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Estado)
+                                        @if (item.Estado == "P")
+                                        {
+                                            @Html.Raw("Pago")
+                                        }
+                                        else if (item.Estado == "L")
+                                        {
+                                            @Html.Raw("Lançado")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("")
+                                        }
+                                        @*@Html.DisplayFor(modelItem => item.Estado)*@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Historico)
                                     </td>
                                     <td>
-                                        <div class="btn-group">
+                                        <div class="btn-block btn-group ">
                                             <a href="@Url.Action("Edit",new { id=item.Id})" class="btn btn-info btn-sm" title="Editar">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
@@ -159,7 +180,8 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, filtro = ViewBag.Filtro, tpfiltro = ViewBag.TpFiltro }))
+            
+            @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, filtro = ViewBag.Filtro, tpfiltro = ViewBag.TpFiltro, situacao = ViewBag.situacao, dtfim = ViewBag.Dtfim, dtini = ViewBag.Dtini }))
         </div>
         <div class="col-md-6">
             <span class="pull-right">
@@ -178,23 +200,15 @@
 <script>
     $(document).ready(function () {
 
-        $('#dtini').mask('00/00/0000', { placeholder: "__/__/____" });
-        $('#dtfim').mask('00/00/0000', { placeholder: "__/__/____" });
-  
+        $('#dtini').mask('00/00/0000', { placeholder: "dd/mm/aaaa" });
+        $('#dtfim').mask('00/00/0000', { placeholder: "dd/mm/aaaa" });
 
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true
-        })
+
+ 
     });
 
-</script>
-<!-- InputMask -->
-<!-- InputMask -->
-<script src="~/Lib/jquery/input-mask/jquery.inputmask.js"></script>
-<script src="~/Lib/jquery/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="~/Lib/jquery/input-mask/jquery.inputmask.extensions.js"></script>
 
-<script src="~/Lib/jquery/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+</script>
+
 
 
