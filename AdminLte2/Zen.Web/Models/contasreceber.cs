@@ -19,7 +19,7 @@ namespace Zen.Web.Models
         [Column(name: "FLG_TIT_DESC")]
         public string FlgTitDesc { get; set; }
 
-        [MaxLength(1)]
+        [MaxLength(2)]
         [Column(name: "ESTADO")]
         public string Estado { get; set; }
 
@@ -56,6 +56,7 @@ namespace Zen.Web.Models
 
         [Column(name: "IDFORMAPGM")]
         public int? IdFormaPag { get; set; }
+
         [NotMapped]
         public FormaPag FormaPag { get; set; }
 

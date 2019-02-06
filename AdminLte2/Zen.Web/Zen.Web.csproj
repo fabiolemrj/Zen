@@ -2337,6 +2337,7 @@
     <Content Include="Views\ContaCorrente\Delete.cshtml" />
     <Content Include="Views\Config\Edit.cshtml" />
     <Content Include="Views\ContaReceber\Index.cshtml" />
+    <Content Include="Views\ContaReceber\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
