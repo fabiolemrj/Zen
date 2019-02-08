@@ -129,48 +129,48 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TipoReceita.Nome)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DtVenc)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DtPag)
-                                    </td>
-                                    <td>
-                                        @if (item.Estado == "P")
-                                        {
-                                            @Html.Raw("Pago")
-                                        }
-                                        else if (item.Estado == "L")
-                                        {
-                                            @Html.Raw("Lançado")
-                                        }
-                                        else
-                                        {
-                                            @Html.Raw("")
-                                        }
-                                        @*@Html.DisplayFor(modelItem => item.Estado)*@
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Historico)
-                                    </td>
-                                    <td>
-                                        <div class="btn-block btn-group ">
-                                            <a href="@Url.Action("Edit",new { id=item.Id})" class="btn btn-info btn-sm" title="Editar">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>
-                                            <a href="@Url.Action("Delete",new { id=item.Id})" class="btn btn-danger btn-sm" title="Apagar">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoReceita.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DtVenc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DtPag)
+                                </td>
+                                <td>
+                                    @if (item.Estado == "P")
+                                    {
+                                        @Html.Raw("Pago")
+                                    }
+                                    else if (item.Estado == "L")
+                                    {
+                                        @Html.Raw("Lançado")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("")
+                                    }
+                                    @*@Html.DisplayFor(modelItem => item.Estado)*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Historico)
+                                </td>
+                                <td  align="center">
+                                    <div class="btn-block btn-group ">
+                                        <a href="@Url.Action("Edit",new { id=item.Id})" class="btn btn-info btn-sm" title="Editar">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        <a href="@Url.Action("Delete",new { id=item.Id})" class="btn btn-danger btn-sm" title="Apagar">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

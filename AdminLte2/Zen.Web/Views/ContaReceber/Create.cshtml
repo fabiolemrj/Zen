@@ -92,7 +92,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-2">
-                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control",onchange = "CalcTotal()" } })
                             @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-1">
@@ -174,19 +174,42 @@
 
 <script>
 
-    $(document).ready(function () {
-        
+    $(document).ready(function () {      
         $('#DtVenc').mask('00/00/0000', { placeholder: "__/__/____" });
         $('#DtPag').mask('00/00/0000', { placeholder: "__/__/____" });
 
         $('#Valor').mask("#.##0,00", { reverse: true });
         $('#Desconto').mask("#.##0,00", { reverse: true });
         $('#Juros').mask("#.##0,00", { reverse: true });
+        $('#Total').mask("#.##0,00", { reverse: true });
+                
+        $('#Juros').prop('readOnly', true);
+        $('#Desconto').prop('readOnly', true);
+
+       
+        $('#Total').prop('readOnly', true);
     });
 
     function Desabilitar() {
         DoDesabilitar('Juros');
         DoDesabilitar('Desconto');       
+    }
+    function replace(x) {
+        var valor = x.replace(".", "");
+        return valor.replace(",", "."); 
+    }
+
+    function CalcTotal() {
+
+        var juros = parseFloat(replace($("#Juros").val()));
+        alert(juros);
+        var desc = parseFloat(replace($("#Desconto").val()));
+        alert(desc);
+        var valor = parseFloat(replace($("#Valor").val()));
+        alert(valor);
+        var tot = parseFloat(((valor + juros) - desc));
+        //alert(tot);
+        $("#Total").val(tot);
     }
 
     function DoDesabilitar(id) {

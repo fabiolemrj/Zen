@@ -21,6 +21,7 @@ namespace Zen.Web.Controllers
         ServicoTipoDoc servTpDoc = new ServicoTipoDoc();
         ServicoFormaPag servFormaPag = new ServicoFormaPag();
         ServicoSetor servSetor = new ServicoSetor();
+        ServicoCliente servCli = new ServicoCliente();
 
         private string CreateBreadCrumbIndex()
         {
@@ -136,7 +137,7 @@ namespace Zen.Web.Controllers
 
             var model = CriarViewModelAddEdit();
             model.Id = -1;
-            model.DtVenc = DateTime.Now;
+            model.DtVenc = DateTime.Now.AddDays(30);
             model.Valor = 0;
             model.Desconto = 0;
             model.Juros = 0;
@@ -149,12 +150,7 @@ namespace Zen.Web.Controllers
 
         private CreateEditViewModel CriarViewModelAddEdit()
         {
-            ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNao, "Sigla", "Nome");
-            ViewBag.Banco = new SelectList(servBanco.ObterListaObjetos(db, ""), "IdBanco", "Nome");
-            ViewBag.TipoRec = new SelectList(servTpRec.ObterListaObjetos(db,""),"Id","Nome");
-            ViewBag.TipoDoc = new SelectList(servTpDoc.ObterListaObjetos(db, ""), "Id", "Nome");
-            ViewBag.FormaPag = new SelectList(servFormaPag.ObterListaObjetos(db,""),"Id","Nome");
-            ViewBag.Setor = new SelectList(servSetor.ObterListaObjetos(db,""),"Id","Nome");
+            PopularViewBag();
 
             var model = new CreateEditViewModel();
             return model;
@@ -170,12 +166,7 @@ namespace Zen.Web.Controllers
                 TempData["nometela"] = "Nova Conta Receber";
                 TempData["lboper"] = "Nova";
 
-                ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNao, "Sigla", "Nome");
-                ViewBag.Banco = new SelectList(servBanco.ObterListaObjetos(db, ""), "IdBanco", "Nome");
-                ViewBag.TipoRec = new SelectList(servTpRec.ObterListaObjetos(db, ""), "Id", "Nome");
-                ViewBag.TipoDoc = new SelectList(servTpDoc.ObterListaObjetos(db, ""),"Id","Nome");
-                ViewBag.FormaPag = new SelectList(servFormaPag.ObterListaObjetos(db, ""), "Id", "Nome");
-                ViewBag.Setor = new SelectList(servSetor.ObterListaObjetos(db, ""), "Id", "Nome");
+                PopularViewBag();
 
                 return View(model);
             }
@@ -222,6 +213,117 @@ namespace Zen.Web.Controllers
             objeto.PercTitDesc = model.PercTitDesc;
             
             return objeto;
+        }
+
+        [DireitoAcesso(Constantes.AC_EDIT_CAD_CR)]
+        public ActionResult Edit(int id)
+        {
+            TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+            TempData["nometela"] = "Editar Conta Receber";
+            TempData["lboper"] = "Editar";
+
+            var model = CriarViewModelAddEdit();
+            var objeto = servico.ObterObjetoPorId(db, id);
+           
+            ObjetoParaModel(objeto, model);
+
+            return View("Create", model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CreateEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+                TempData["nometela"] = "Editar Conta Receber";
+                TempData["lboper"] = "Editar";
+
+                PopularViewBag();
+                return View("Create", model);
+            }
+            var objeto = servico.ObterObjetoPorId(db, model.Id);
+            
+            ModelParaObjeto(model, objeto);
+                        
+            try
+            {
+                servico.Salvar(db, objeto);
+                TempData["sucesso"] = $@"Conta Receber salvo com sucesso!";
+            }
+            catch (Exception e)
+            {
+                TempData["erro"] = $@"Erro ao tentar editar o Conta Receber {objeto.Id}";
+            }
+            
+            return RedirectToAction("Index");
+        }
+
+        private void PopularViewBag()
+        {
+            ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNao, "Sigla", "Nome");
+            ViewBag.Banco = new SelectList(servBanco.ObterListaObjetos(db, ""), "IdBanco", "Nome");
+            ViewBag.TipoRec = new SelectList(servTpRec.ObterListaObjetos(db, ""), "Id", "Nome");
+            ViewBag.TipoDoc = new SelectList(servTpDoc.ObterListaObjetos(db, ""), "Id", "Nome");
+            ViewBag.FormaPag = new SelectList(servFormaPag.ObterListaObjetos(db, ""), "Id", "Nome");
+            ViewBag.Setor = new SelectList(servSetor.ObterListaObjetos(db, ""), "Id", "Nome");
+            ViewBag.Cliente = new SelectList(servCli.ObterListaObjetosPorNome(db, ""), "IdCliente", "Nome");
+        }
+
+        private void ObjetoParaModel(ContasReceber objeto, CreateEditViewModel model)
+        {
+            model.Id = objeto.Id;
+            try
+            {
+                model.Desconto = objeto.Desconto.Value;
+            }
+            catch (Exception ex)
+            {
+                model.Desconto = 0;
+            }
+            
+            model.DtPag = objeto.DtPag;
+            model.DtPagDesc = objeto.DtPagDesc;
+            model.DtVenc = objeto.DtVenc;
+            model.Estado = objeto.Estado;
+            model.FlgConf = objeto.FlgConf;
+            model.Historico = objeto.Historico;
+            model.IdBancoCheque = objeto.IdBancoCheque;
+            model.IdCc = objeto.IdCc;
+            model.IdCheque = objeto.IdCheque;
+            model.IdCliente = objeto.IdCliente;
+            model.IdFormaPag = objeto.IdFormaPag;
+            model.IdSetor = objeto.IdFormaPag;
+            model.IdTipoDoc = objeto.IdTipoDoc;
+            model.IdTipoReceita = objeto.IdTipoReceita;
+            model.IdUsuario = objeto.IdUsuario;
+            
+            try
+            {
+                model.Juros = objeto.Juros.Value;
+            }
+            catch (Exception ex)
+            {
+                model.Juros = 0;
+            }
+            model.NumAgChq = objeto.NumAgChq;
+            model.NumChq = objeto.NumChq;
+            model.NumDoc = objeto.NumDoc;
+            model.NumOsi = objeto.NumOsi;
+            model.NumParc = objeto.NumParc;
+            model.Obs = objeto.Obs;
+            try
+            {
+                model.PercTitDesc = objeto.PercTitDesc.Value;
+            }
+            catch (Exception ex)
+            {
+                model.PercTitDesc = 0;
+            }
+            
+            model.Valor = objeto.Valor.Value;
+            model.Total = model.Valor + model.Juros - model.Desconto;
+            
         }
 
     }

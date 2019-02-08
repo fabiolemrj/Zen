@@ -106,6 +106,10 @@ namespace Zen.Web.Models
         [MaxLength(10)]
         public string NumParc { get; set; }
 
+        [Column(name: "NUMDOC")]
+        [MaxLength(10)]
+        public string NumDoc { get; set; }
+
         [Column(name: "OBS")]
         [MaxLength(64)]
         public string Obs { get; set; }
