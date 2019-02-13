@@ -21,5 +21,27 @@ namespace Zen.Web.Utils
             }
             return result.ToString();
         }
+
+        public static string GerarSenha()
+        {
+            string validar = "abcdefghijklmnozABCDEFGHIJKLMNOZ1234567890@#$%&*!";
+            var resultado = "";
+            var TamanhoDaSenha = 8;
+            try
+            {
+                StringBuilder strbld = new StringBuilder(100);
+                Random random = new Random();
+                while (0 < TamanhoDaSenha--)
+                {
+                    strbld.Append(validar[random.Next(validar.Length)]);
+                }
+                resultado = strbld.ToString();
+            }
+            catch (Exception ex)
+            {
+                resultado = "zen";
+            }
+            return resultado;
+        }
     }
 }

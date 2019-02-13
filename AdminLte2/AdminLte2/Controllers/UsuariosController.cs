@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Zen.Web.Servico;
 
 namespace AdminLte2.Controllers
 {
@@ -83,6 +84,8 @@ namespace AdminLte2.Controllers
             servico.Salvar(db, usuario);
             return RedirectToAction("Index");
         }
+
+        
 
         private AddEditViewModel CriarAddEditViewModel(Usuario usurio)
         {
@@ -172,6 +175,8 @@ namespace AdminLte2.Controllers
             ServicoPerfil servPerfil = new ServicoPerfil();
             ViewBag.IdPerfil = new SelectList(servPerfil.ObterListaPerfils(db, ""),"Id","Descricao");
         }
+
+      
 
     }
 

@@ -142,5 +142,42 @@ namespace Zen.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var usuario = servico.ObterListaUsuarios(db,"").FirstOrDefault(c=>c.Email == model.Email);
+            ServicoEmail servEmail = new ServicoEmail();
+            if (usuario != null)
+            {
+                var novaSenha = Hash.GerarSenha();
+
+                if (servEmail.EnviarEmail(db, usuario, novaSenha))
+                {
+                    usuario.Senha = Hash.GerarHash(novaSenha);
+                    //servico.Salvar(db, usuario);
+                    TempData["sucesso"] = $@"Sua senha foi resetada com sucesso!";
+                }
+                else
+                {
+                    TempData["erro"] = $@"Erro ao tentar resetar senha do usuário {usuario.Nome}";
+                }
+            }
+            else
+            {
+                TempData["erro"] = $@"Usuário {model.Email} não encontrado!";
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -2120,6 +2120,7 @@
     <Compile Include="Models\Cor.cs" />
     <Compile Include="Models\Despesa.cs" />
     <Compile Include="Models\DireitoAcesso.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Facas.cs" />
     <Compile Include="Models\FormaPag.cs" />
     <Compile Include="Models\Fornecedor.cs" />
@@ -2153,6 +2154,7 @@
     <Compile Include="Servico\ServicoContaReceber.cs" />
     <Compile Include="Servico\ServicoCor.cs" />
     <Compile Include="Servico\ServicoDespesa.cs" />
+    <Compile Include="Servico\ServicoEmail.cs" />
     <Compile Include="Servico\ServicoFacas.cs" />
     <Compile Include="Servico\ServicoFormaPag.cs" />
     <Compile Include="Servico\ServicoFornecedor.cs" />
@@ -2176,6 +2178,7 @@
     <Compile Include="Utils\Hash.cs" />
     <Compile Include="Utils\ListasGenericas.cs" />
     <Compile Include="ViewModels\AutenticacaoViewModel\AlterarFotoViewModel.cs" />
+    <Compile Include="ViewModels\AutenticacaoViewModel\ForgotPassword.cs" />
     <Compile Include="ViewModels\AutenticacaoViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModels\BancoViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\BancoViewModel\DeleteViewModel.cs" />
@@ -2338,6 +2341,8 @@
     <Content Include="Views\Config\Edit.cshtml" />
     <Content Include="Views\ContaReceber\Index.cshtml" />
     <Content Include="Views\ContaReceber\Create.cshtml" />
+    <Content Include="Views\ContaReceber\Delete.cshtml" />
+    <Content Include="Views\Autenticacao\ForgotPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -32,6 +32,7 @@ namespace Zen.Web.ViewModels.ContaReceberViewModel
         public int? IdCliente { get; set; }
      
         [Display(Name= "Forma de Pagamento")]
+        [Required(ErrorMessage = "O campo forma de pagamento é obrigatório", AllowEmptyStrings = false)]
         public int? IdFormaPag { get; set; }
         
         [Display(Name= "Setor")]
@@ -41,6 +42,7 @@ namespace Zen.Web.ViewModels.ContaReceberViewModel
         public int? IdTipoDoc { get; set; }
 
         [Display(Name = "Tipo de Receita")]
+        [Required(ErrorMessage = "O campo tipo de receita é obrigatório", AllowEmptyStrings = false)]
         public int? IdTipoReceita { get; set; }
 
         [Display(Name = "Usuário")]

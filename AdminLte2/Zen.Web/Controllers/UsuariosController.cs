@@ -216,5 +216,30 @@ namespace Zen.Web.Controllers
             ServicoPerfil servPerfil = new ServicoPerfil();
             ViewBag.IdPerfil = new SelectList(servPerfil.ObterListaPerfils(db, ""), "Id", "Descricao");
         }
+
+        public ActionResult ResetPassword(int id)
+        {
+           
+            var usuario = servico.ObterUsuarioPorId(db, id);
+            ServicoEmail servEmail = new ServicoEmail();
+            if (usuario != null)
+            {
+                var novaSenha = Hash.GerarSenha();
+
+                if (servEmail.EnviarEmail(db, usuario, novaSenha))
+                {
+                    usuario.Senha = Hash.GerarHash(novaSenha);
+                    servico.Salvar(db, usuario);
+                    TempData["sucesso"] = $@"A senha do {usuario.Nome} foi resetada com sucesso!";
+                }
+                else
+                {
+                    TempData["erro"] = $@"Erro ao tentar resetar senha do usuário {usuario.Nome}";
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
     }
+
 }

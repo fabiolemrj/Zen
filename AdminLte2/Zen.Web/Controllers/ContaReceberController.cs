@@ -142,6 +142,7 @@ namespace Zen.Web.Controllers
             model.Desconto = 0;
             model.Juros = 0;
             model.Estado = "L";
+            model.Total = 0;
             model.FlgConf = "N";
             model.IdUsuario = valorDaClaim;
 
@@ -173,6 +174,7 @@ namespace Zen.Web.Controllers
 
             var objeto = new ContasReceber();
             ModelParaObjeto(model, objeto);
+     
             
             try
             {
@@ -324,6 +326,39 @@ namespace Zen.Web.Controllers
             model.Valor = objeto.Valor.Value;
             model.Total = model.Valor + model.Juros - model.Desconto;
             
+        }
+
+        [DireitoAcesso(Constantes.AC_APG_CAD_CR)]
+        public ActionResult Delete(int id)
+        {
+            TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+            TempData["nometela"] = "Apagar Conta a Receber";
+
+            var objeto = servico.ObterObjetoPorId(db, id);
+            DeleteViewModel model = new DeleteViewModel();
+            model.Id = objeto.Id;
+            model.Nome = objeto.Historico;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(DeleteViewModel model)
+        {
+            var objeto = servico.ObterObjetoPorId(db, model.Id);
+            try
+            {
+                if (objeto != null)
+                {
+                    servico.Delete(db, objeto);
+
+                }
+                TempData["sucesso"] = $@"A conta a receber {objeto.Historico} foi apagada com sucesso!";
+            }
+            catch
+            {
+                TempData["erro"] = $@"Erro ao tentar apagar a conta a receber {objeto.Historico}";
+            }
+            return RedirectToAction("Index");
         }
 
     }
