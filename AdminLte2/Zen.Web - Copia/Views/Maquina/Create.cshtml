@@ -1,0 +1,87 @@
+﻿@model Zen.Web.ViewModels.MaquinaViewModel.CreateEditViewModel
+
+@{
+    ViewBag.Title = "Maquina";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="col-md-12">
+        <div class="box-body">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        @if (@TempData["lboper"] != null)
+                        {
+                            @Html.Raw(@TempData["lboper"]);
+                        }
+                    </h3>
+                </div>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IdImpressor, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownListFor(model => model.IdImpressor, (SelectList)ViewBag.Impressor, new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.IdImpressor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IdAuxiliar, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownListFor(model => model.IdAuxiliar, (SelectList)ViewBag.Auxiliar, new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.IdAuxiliar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Situacao, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownListFor(model => model.Situacao, (SelectList)ViewBag.ObterAtivo, new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.Situacao, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Classificacao, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownListFor(model => model.Classificacao, (SelectList)ViewBag.Classificacao, new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.Classificacao, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="col-md-10">
+                            <div class="box-footer">
+                                <div class="btn">
+                                    <button type="submit" id="btsalvar" class="btn btn-app ">
+                                        <i class="fa fa-save"></i> Salvar
+                                    </button>
+                                    <a href="@Url.Action("Index","Maquina") " class="btn btn-app " title="Apagar">
+                                        <i class="fa fa-arrow-circle-o-left"></i> Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

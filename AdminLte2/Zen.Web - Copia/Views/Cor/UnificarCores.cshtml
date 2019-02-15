@@ -1,0 +1,67 @@
+﻿
+
+@{
+    ViewBag.Title = "Cores";
+}
+
+<div class="result"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            @*<div class="box-header">
+                <h3 class="box-title">Pesquisa de Cores</h3>
+            </div>*@
+            @*<div class="box-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="Buscar Cor" name="filtro" id="filtro" value="@ViewBag.Filtro">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info btn-flat">
+                                        <span class="glyphicon glyphicon-search" onclick="Atualizar()"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <div class="box-body">
+              
+            </div>
+            <div class="box-body">
+                <div id="resultado">
+                    @Html.Action("_Lista")
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>*@
+
+@*<script>
+    function Atualizar() {
+
+        $.ajax({
+            url: '_Lista',
+            data: { filtro: $('#filtro').val() },
+
+            success: function (data) {
+                $('#resultado').html(data);
+
+            },
+            error: function (err) {
+
+                $('#resultado').html(err.statusText);
+            }
+        });
+    }
+</script>*@

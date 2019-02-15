@@ -25,7 +25,7 @@
 
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-1" })
+                            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-6">
                                 @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
@@ -33,7 +33,7 @@
 
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.IdImpressor, htmlAttributes: new { @class = "control-label col-md-1" })
+                            @Html.LabelFor(model => model.IdImpressor, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
                                 @Html.DropDownListFor(model => model.IdImpressor, (SelectList)ViewBag.Impressor, new { @class = "form-control select2" })
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.IdAuxiliar, htmlAttributes: new { @class = "control-label col-md-1" })
+                            @Html.LabelFor(model => model.IdAuxiliar, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
                                 @Html.DropDownListFor(model => model.IdAuxiliar, (SelectList)ViewBag.Auxiliar, new { @class = "form-control select2" })
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Situacao, htmlAttributes: new { @class = "control-label col-md-1" })
+                            @Html.LabelFor(model => model.Situacao, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
                                 @Html.DropDownListFor(model => model.Situacao, (SelectList)ViewBag.ObterAtivo, new { @class = "form-control select2" })
@@ -58,7 +58,7 @@
 
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Classificacao, htmlAttributes: new { @class = "control-label col-md-1" })
+                            @Html.LabelFor(model => model.Classificacao, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
                                 @Html.DropDownListFor(model => model.Classificacao, (SelectList)ViewBag.Classificacao, new { @class = "form-control select2" })

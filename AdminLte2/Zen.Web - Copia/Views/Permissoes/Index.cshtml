@@ -1,0 +1,101 @@
+﻿@model Zen.Web.ViewModels.PermissoesViewModel.IndexViewModel
+
+<h2 class="page-header">Permissões de Acesso</h2>
+<h4> @Model.NmUsuario</h4>
+<div class="row">
+    <div class="col-md-9">
+        <!-- Custom Tabs -->
+        <div class="box-body">
+            @using (Html.BeginForm("Index", "Permissoes"))
+            {
+                @Html.HiddenFor(m => m.idPerfil)
+
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tabcadastro" data-toggle="tab">Cadastro</a></li>
+                        <li><a href="#tabtesouraria" data-toggle="tab">Tesouraria</a></li>
+                        <li><a href="#tabAux" data-toggle="tab">Tabela Auxiliares</a></li>
+                        <li><a href="#tabRel" data-toggle="tab">Relatórios</a></li>
+                        <li><a href="#tabOrc" data-toggle="tab">Orçamento</a></li>
+                        <li><a href="#tabProd" data-toggle="tab">Produção</a></li>
+                        <li class="pull-right">
+                            <button type="submit" id="btsalvar" class="btn btn-app ">
+                                <i class="fa fa-save"></i> Salvar
+                            </button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabcadastro">
+                            @for (var i = 0; i < Model.LstPermAbaCadastro.Count; i++)
+                            {
+                                <div>
+                                    @Html.HiddenFor(modelItem => Model.LstPermAbaCadastro[i].Id)
+                                    @Html.CheckBoxFor(modelItem => Model.LstPermAbaCadastro[i].Selecionado, htmlAttributes: new { @class = "flat-red" })
+                                    @Html.DisplayFor(modelItem => Model.LstPermAbaCadastro[i].Descr)
+                                </div>
+                            }
+
+                        </div>
+                        <div class="tab-pane" id="tabtesouraria">
+                            @for (var i = 0; i < Model.LstPermAbaTesouraria.Count; i++)
+                            {
+                                <div>
+                                    @Html.HiddenFor(modelItem => Model.LstPermAbaTesouraria[i].Id)
+                                    @Html.CheckBoxFor(modelItem => Model.LstPermAbaTesouraria[i].Selecionado, htmlAttributes: new { @class = "flat-red" })
+                                    @Html.DisplayFor(modelItem => Model.LstPermAbaTesouraria[i].Descr)
+                                </div>
+                            }
+                        </div>
+                        <div class="tab-pane" id="tabAux">
+                            @for (var i = 0; i < Model.LstPermAbaTabAux.Count; i++)
+                            {
+                                <div>
+                                    @Html.HiddenFor(modelItem => Model.LstPermAbaTabAux[i].Id)
+                                    @Html.CheckBoxFor(modelItem => Model.LstPermAbaTabAux[i].Selecionado, htmlAttributes: new { @class = "flat-red" })
+                                    @Html.DisplayFor(modelItem => Model.LstPermAbaTabAux[i].Descr)
+                                </div>
+                            }
+
+                        </div>
+                        <div class="tab-pane" id="tabRel">
+                            @for (var i = 0; i < Model.LstPermAbaTabRel.Count; i++)
+                            {
+                                <div>
+                                    @Html.HiddenFor(modelItem => Model.LstPermAbaTabRel[i].Id)
+                                    @Html.CheckBoxFor(modelItem => Model.LstPermAbaTabRel[i].Selecionado, htmlAttributes: new { @class = "flat-red" })
+                                    @Html.DisplayFor(modelItem => Model.LstPermAbaTabRel[i].Descr)
+                                </div>
+                            }
+
+                        </div>
+                        <div class="tab-pane" id="tabOrc">
+                            @for (var i = 0; i < Model.LstPermAbaTabOrcamento.Count; i++)
+                            {
+                                <div>
+                                    @Html.HiddenFor(modelItem => Model.LstPermAbaTabOrcamento[i].Id)
+                                    @Html.CheckBoxFor(modelItem => Model.LstPermAbaTabOrcamento[i].Selecionado, htmlAttributes: new { @class = "flat-red" })
+                                    @Html.DisplayFor(modelItem => Model.LstPermAbaTabOrcamento[i].Descr)
+                                </div>
+                            }
+
+                        </div>
+                        <div class="tab-pane" id="tabProd">
+                            @for (var i = 0; i < Model.LstPermAbaTabProducao.Count; i++)
+                            {
+                                <div>
+                                    @Html.HiddenFor(modelItem => Model.LstPermAbaTabProducao[i].Id)
+                                    @Html.CheckBoxFor(modelItem => Model.LstPermAbaTabProducao[i].Selecionado, htmlAttributes: new { @class = "flat-red" })
+                                    @Html.DisplayFor(modelItem => Model.LstPermAbaTabProducao[i].Descr)
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+    </div>
+</div>

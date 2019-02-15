@@ -42,6 +42,8 @@ namespace Zen.Web.Models
         public DbSet<ContaCorrente> ContasCorrentes { get; set; }
         public DbSet<Config> Configs { get; set; }
         public DbSet<ContasReceber> ContasReceber { get; set; }
+        public DbSet<ContaPagar> ContasPagar { get; set; }
+        public DbSet<ContaPagarFixa> ContasPagarFixas { get; set; }
 
     }
 }

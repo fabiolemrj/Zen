@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Pagina Nao autorizada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content">
+        <div class="error-page">
+
+            <div class="error-content">
+                <h3><i class="fa fa-warning text-yellow"></i> Você não tem autorização para acessar essa pagina!</h3>
+
+            </div> 
+
+            @Html.ActionLink("Login", "Login", "Autenticacao", new { @class = "btn btn-primary btn-block text -center" })
+
+
+            <div class="btn-block"></div>
+            <!-- /.error-content -->
+        </div>
+    </section>
+</div>

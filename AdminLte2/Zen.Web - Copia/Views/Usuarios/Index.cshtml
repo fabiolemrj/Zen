@@ -1,0 +1,124 @@
+﻿@model Zen.Web.ViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "Usuários";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="result">
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Pesquisa por Nome</h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-xs-5">
+                        <div class="input-group input-group-sm">
+                            @Html.TextBoxFor(p => Model.filtroNome, new { @class = "form-control" })
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-info btn-flat">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="box-body">
+                    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-info pull-right" })
+                </div>
+
+
+                <div class="box-body">
+                    <table id="tbusuarios" class="table table-bordered table-hover table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Login</th>
+                                <th>E-mail</th>
+                                <th>Situação</th>
+                                <th>Perfil</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.LstUsuarios)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Login)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Situacao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Perfil.Descricao)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit",new { id=item.Id})" class="btn btn-info btn-sm" title="Editar">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        <a href="@Url.Action("Delete",new { id=item.Id})" class="btn btn-danger btn-sm" title="Apagar">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+
+                                        <a href="@Url.Action("ResetPassword",new { id=item.Id})" class="btn btn-info btn-sm" title="Resetar senha">
+                                            <span class="glyphicon glyphicon-refresh"></span>
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                        @*<tfoot>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Login</th>
+                                    <th>Tipo de Acesso</th>
+                                    <th></th>
+                                </tr>
+
+                            </tfoot>*@
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert alert-success hidden" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Salvo com sucesso!
+    </div>
+
+    @*<button style="margin: 10px" type="button" onClick="selector()" class="btn btn-primary" data-toggle="modal" data-target="#category">save</button>*@
+}
+<script src="~/Lib/jquery/dist/jquery.min.js"></script>
+<script>
+    function selector() {
+        $(".alert").stop().fadeTo(1, 1).removeClass('hidden');
+        window.setTimeout(function () {
+            $(".alert").fadeTo(2000, 0).slideUp(500, function () {
+                $(".alert").addClass('hidden');
+            });
+        }, 1000);
+    }
+
+
+</script>
+
+

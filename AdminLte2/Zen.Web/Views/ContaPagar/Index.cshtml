@@ -1,0 +1,233 @@
+﻿@*<link rel="stylesheet" href="~/Lib/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">*@
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+@using X.PagedList.Mvc
+@model X.PagedList.PagedList<Zen.Web.Models.ContaPagar>
+@{
+    ViewBag.Title = "Contas Pagar";
+}
+
+@using (Html.BeginForm("Index", "ContaPagar", FormMethod.Get, new { id = "formContaPagar" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="result">
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Pesquisa de Contas a Pagar</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select name="tpfiltro" id="tpfiltro" class="form-control select2-dropdown">
+                                        <option value="1" @(ViewBag.TpFiltro == 1 ? "selected" : "")>Historico</option>
+                                        <option value="2" @(ViewBag.TpFiltro == 2 ? "selected" : "")>Banco</option>
+                                        <option value="3" @(ViewBag.TpFiltro == 3 ? "selected" : "")>Data De Vencimento</option>
+                                        <option value="4" @(ViewBag.TpFiltro == 4 ? "selected" : "")>Fornecedor</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4">
+
+                                @* @Html.TextBoxFor(p => Model.Filtro, new { @class = "form-control" })*@
+                                <input type="text" class="form-control" placeholder="Buscar titulo" name="filtro" value="@ViewBag.Filtro">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <div class="col-md-6">
+                                <label>Vencimento</label>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="col-md-6">
+                                Data Inicial
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />
+                                </div>
+                                @* <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />*@
+                            </div>
+                            <div class="col-md-6">
+                                Data Final
+                                @*<input type="datetime" class="form-control" id="dtfim" name="dtfim" placeholder="Data Fim" value="@ViewBag.Dtfim" />*@
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="datetime" class="form-control pull-right" id="dtfim" name="dtfim" placeholder="Data Final" value="@ViewBag.Dtfim" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>                 
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <div class="col-md-6">
+                                <label>Situacao</label>
+                                <select name="situacao" id="situacao" class="form-control select2-dropdown">
+                                    <option value="T" @(ViewBag.situacao == "T" ? "selected" : "")>Todos</option>
+                                    <option value="L" @(ViewBag.situacao == "L" ? "selected" : "")>Lançados</option>
+                                    <option value="P" @(ViewBag.situacao == "P" ? "selected" : "")>Pagos</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label></label>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-block btn-info">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-info pull-right" })
+                </div>
+
+                <div class="box-body">
+                    <table id="tabela" class="table table-bordered table-hover table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:70px">Titulo</th>
+                                <th class="text-center" style="width:50px">Despesa</th>
+                                <th class="text-center" style="width:50px">Fornecedor</th>
+                                <th class="text-center" style="width:30px">Data Vencimento</th>
+                                <th class="text-center" style="width:30px">Data Pagamento</th>
+                                <th class="text-center" style="width:30px">Situação</th>
+                                <th class="text-center" style="width:20px">Historico</th>
+                                <th class="text-center" style="width:70px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubDespesa.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DtVenc)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DtPag)
+                                    </td>
+                                    <td>
+                                        @if (item.Estado == "P")
+                                        {
+                                            @Html.Raw("Pago")
+                                        }
+                                        else if (item.Estado == "L")
+                                        {
+                                            @Html.Raw("Lançado")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("")
+                                        }
+                                        @*@Html.DisplayFor(modelItem => item.Estado)*@
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Historico)
+                                    </td>
+                                    <td align="center">
+                                        <div class="btn-block btn-group ">
+                                            <a href="@Url.Action("Edit",new { id=item.Id})" class="btn btn-info btn-sm" title="Editar">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </a>
+                                            <a href="@Url.Action("Delete",new { id=item.Id})" class="btn btn-danger btn-sm" title="Apagar">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+
+            @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, filtro = ViewBag.Filtro, tpfiltro = ViewBag.TpFiltro, situacao = ViewBag.situacao, dtfim = ViewBag.Dtfim, dtini = ViewBag.Dtini }))
+        </div>
+        <div class="col-md-6">
+            <span class="pull-right">
+                Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+            </span>
+        </div>
+    </div>
+
+
+}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<!-- Bootstrap 3.3.7 -->
+@*<script src="~/Lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="~/Lib/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#dtini').mask('00/00/0000', { placeholder: "dd/mm/aaaa" });
+        $('#dtfim').mask('00/00/0000', { placeholder: "dd/mm/aaaa" });
+
+        //Date picker
+        $('#dtini').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        })
+
+        //Date picker
+        $('#dtfim').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        })
+
+    });
+</script>

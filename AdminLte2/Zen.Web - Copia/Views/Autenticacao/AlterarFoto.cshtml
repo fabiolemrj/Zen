@@ -1,0 +1,84 @@
+﻿
+@model Zen.Web.ViewModels.AutenticacaoViewModel.AlterarFotoViewModel
+
+<div class="register-box">
+    <div class="register-logo">
+        <a href="#">Alterar Foto</a>
+    </div>
+    <div class="register-box-body">
+        @using (Html.BeginForm("AlterarFoto", "Autenticacao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="box-body box-widget">
+                @*@if (Model.Foto == null)
+                    {
+                        <img src="~/images/user-admin.png" id="imgfoto" class="center-block user-image img-circle" style=" width:200px; height:200px;" alt="User Image" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Action("ObterImagem","Custom,")" id="imgfoto" class="center-block user-image img-circle" style=" width:200px; height:200px;" alt="User Image" />
+                    }*@
+                <img src="@Url.Action("ObterImagem","Custom")" id="imgfoto" class="center-block user-image img-circle" style=" width:200px; height:200px;" alt="User Image" />
+                <p class="login-box-msg">@Model.NmUsuario</p>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="Foto">Selecionar Imagem</label>
+                <input type="file" name="file" id="file" class="btn btn-block" onchange="atribuifoto()" />
+                @* <input type="file" name="Foto" id="Foto" class="btn btn-block" onchange="atribuifoto()">*@
+
+            </div>
+            <div class="box-footer">
+
+                @*<li><a href="@Url.Action("Index","Usuarios")"><i class="fa fa-user"></i> Usuários</a></li>*@
+                <button type="submit" id="btalterar" class="btn btn-block btn-primary">Alterar</button>
+
+            </div>
+
+        }
+    </div>
+</div>
+
+
+<script>
+
+    function atribuifoto() {
+        var imagem = document.getElementById("file");
+
+        if (imagem.files.length != 0 && imagem.files[0].type.match(/image.*/)) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var imgElem = document.getElementById("imgfoto");
+                imgElem.src = e.target.result;
+            };
+            reader.error = function (e) {
+                alert("erro");
+            };
+            reader.readAsDataURL(imagem.files[0]);
+
+        } else {
+            alert("selecione um arquivo do tipo imagem");
+        }
+    }
+
+
+    function UploadImagem() {
+        var imagem = document.getElementById("Foto");
+        var id = document.getElementById("Id");
+
+        if (imagem.files.length != 0 && imagem.files[0].type.match(/image.*/)) {
+
+            var arquivoselecionado = imagem.files[0];
+            var formData = new FormData();
+            formData.append("imagem", arquivoselecionado);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/Autenticacao/AlterarFoto", true);
+
+            xhr.send(formData);
+        }
+    };
+
+
+
+</script>

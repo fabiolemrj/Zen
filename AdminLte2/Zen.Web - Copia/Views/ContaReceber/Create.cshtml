@@ -1,0 +1,244 @@
+﻿@model Zen.Web.ViewModels.ContaReceberViewModel.CreateEditViewModel
+@{ ViewBag.Title = "Conta a Receber";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12">
+        <div class="box-body">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        @if (@TempData["lboper"] != null)
+                        {
+                            @Html.Raw(@TempData["lboper"]);
+                        }
+                    </h3>
+                </div>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Historico, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Historico, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Historico, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdTipoReceita, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdTipoReceita, (SelectList)ViewBag.TipoRec, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdTipoReceita, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdTipoDoc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdTipoDoc, (SelectList)ViewBag.TipoDoc, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdTipoDoc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NumDoc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NumDoc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NumDoc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdFormaPag, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdFormaPag, (SelectList)ViewBag.TipoDoc, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdFormaPag, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NumOsi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NumOsi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NumOsi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdSetor, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdSetor, (SelectList)ViewBag.Setor, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdSetor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdCc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdCc, (SelectList)ViewBag.Banco, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdCc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DtVenc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.DtVenc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DtVenc, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.DtPag, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.DtPag, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DtPag, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", onchange = "CalcTotal()" } })
+                            @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                        </div>
+                        @*<div class="col-md-1">
+                <button type="button" class="btn btn-primary btn-flat pull-right" onclick="Desabilitar()">
+                    <span class="fa fa-unlock"></span>
+                </button>
+            </div>*@
+                    </div>
+                    @if (User.IsInRole(Zen.Web.Models.Constantes.AC_JUR_DESC_CAD_CR.ToString()))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Juros, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.Juros, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Juros, "", new { @class = "text-danger" })
+                            </div>
+
+                            @Html.LabelFor(model => model.Desconto, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.Desconto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Desconto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Juros, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.Juros, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.Juros, "", new { @class = "text-danger" })
+                            </div>
+
+                            @Html.LabelFor(model => model.Desconto, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.Desconto, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.Desconto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NumChq, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.NumChq, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NumChq, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.NumAgChq, htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.NumAgChq, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NumAgChq, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.IdBancoCheque, htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-3">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdBancoCheque, (SelectList)ViewBag.Banco, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdBancoCheque, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="box box-footer">
+                                <div class="btn">
+                                    <button type="submit" id="btsalvar" class="btn btn-app ">
+                                        <i class="fa fa-save"></i> Salvar
+                                    </button>
+                                    <a href="@Url.Action("Index","ContaReceber") " class="btn btn-app " title="Apagar">
+                                        <i class="fa fa-arrow-circle-o-left"></i> Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#DtVenc').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#DtPag').mask('00/00/0000', { placeholder: "__/__/____" });
+
+        $('#Valor').mask("#.##0,00", { reverse: true });
+        $('#Desconto').mask("#.##0,00", { reverse: true });
+        $('#Juros').mask("#.##0,00", { reverse: true });
+        $('#Total').mask("#.##0,00", { reverse: true });
+
+        //   $('#Juros').prop('readOnly', true);
+        //    $('#Desconto').prop('readOnly', true);
+
+
+        $('#Total').prop('readOnly', true);
+        $('#NumOsi').prop('readOnly', true);
+    });
+
+    function Desabilitar() {
+        DoDesabilitar('Juros');
+        DoDesabilitar('Desconto');
+    }
+    function replace(x) {
+        var valor = x.replace(".", "");
+        return valor.replace(",", ".");
+    }
+
+    function CalcTotal() {
+
+        var juros = parseFloat(replace($("#Juros").val()));
+      //  alert(juros);
+        var desc = parseFloat(replace($("#Desconto").val()));
+    //    alert(desc);
+        var valor = parseFloat(replace($("#Valor").val()));
+   //     alert(valor);
+        var tot = parseFloat(((valor + juros) - desc));
+        //alert(tot);
+        $("#Total").val(tot);
+    }
+
+    function DoDesabilitar(id) {
+        if ($("#" + id).attr("readonly")) {
+            $("#" + id).removeClass("readOnly");
+            $("#" + id).removeAttr("readonly");
+            $("#" + id).attr('enabled', 'enabled');
+        }
+        else {
+            $("#" + id).addClass("readOnly");
+            $("#" + id).attr('readonly', 'readonly');
+        }
+    }
+</script>

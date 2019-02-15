@@ -1,4 +1,5 @@
-﻿@model Zen.Web.ViewModels.MaterialViewModel.CreateEditViewModel
+﻿<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+@model Zen.Web.ViewModels.MaterialViewModel.CreateEditViewModel
 @{
     ViewBag.Title = "Material";
 }
@@ -32,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.IdFornecedor, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
                                 @Html.DropDownListFor(model => model.IdFornecedor, (SelectList)ViewBag.Fornecedor, new { @class = "form-control select2" })
                                 @Html.ValidationMessageFor(model => model.IdFornecedor, "", new { @class = "text-danger" })
@@ -48,14 +49,14 @@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Alt, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 @Html.EditorFor(model => model.Alt, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Alt, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Larg, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 @Html.EditorFor(model => model.Larg, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Larg, "", new { @class = "text-danger" })
                             </div>
@@ -63,21 +64,21 @@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.NumFolha, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 @Html.EditorFor(model => model.NumFolha, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.NumFolha, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.ValorTotal, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 @Html.EditorFor(model => model.ValorTotal, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ValorTotal, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.ValorUnit, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 @Html.EditorFor(model => model.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ValorUnit, "", new { @class = "text-danger" })
                             </div>
@@ -101,10 +102,16 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.DtAtu, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.DtAtu, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.DtAtu, "", new { @class = "text-danger" })
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+
+                                    @Html.EditorFor(model => model.DtAtu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DtAtu, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
+                            </div>
                         <div class="col-md-10">
                             <div class="box-footer">
                                 <div class="btn">
@@ -127,6 +134,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
 <script>
     $(document).ready(function () {
 
@@ -135,5 +144,12 @@
         $('#ValorTotal').mask("#.##0,00", { reverse: true });
         $('#ValorUnit').mask("#.##0,00", { reverse: true });
 
+        $('#DtAtu').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        })
     });
 </script>
