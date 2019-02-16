@@ -1,0 +1,194 @@
+﻿<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+@model Zen.Web.ViewModels.ContaPagarFixaViewModel.CreateEditViewModel
+@{ ViewBag.Title = "Conta a Pagar Fixa";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12">
+        <div class="box-body">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        @if (@TempData["lboper"] != null)
+                        {
+                            @Html.Raw(@TempData["lboper"]);
+                        }
+                    </h3>
+                </div>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Historico, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Historico, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Historico, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdSubDesp, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdSubDesp, (SelectList)ViewBag.SubDespesa, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdSubDesp, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdFornecedor, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdFornecedor, (SelectList)ViewBag.Fornecedor, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdFornecedor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdTipoDoc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdTipoDoc, (SelectList)ViewBag.TipoDoc, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdTipoDoc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdFormaPag, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdFormaPag, (SelectList)ViewBag.TipoDoc, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdFormaPag, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdCc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdCc, (SelectList)ViewBag.Banco, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdCc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdSetor, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.IdSetor, (SelectList)ViewBag.Setor, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.IdSetor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.Estado, (SelectList)ViewBag.SituacaoAtivoSusp, new { @class = "form-control select2" })
+                            @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Dia, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Dia, new { htmlAttributes = new { @class = "form-control", onchange = "CalcTotal()" } })
+                            @Html.ValidationMessageFor(model => model.Dia, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.DtPrimLanc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.EditorFor(model => model.DtPrimLanc, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DtPrimLanc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Periodicidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Periodicidade, new { htmlAttributes = new { @class = "form-control", onchange = "descrPeriodicidade()" } })
+                            @Html.ValidationMessageFor(model => model.Periodicidade, "", new { @class = "text-danger" })
+
+                        </div>
+                        <label id="descrPeriod" name="descrPeriod" class="control-label col-md-1"></label>
+                        @*@Html.LabelFor(model => model.Periodicidade, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Periodicidade, (SelectList)ViewBag.Periodicidade, new { @class = "form-control select2" })
+                @Html.ValidationMessageFor(model => model.Periodicidade, "", new { @class = "text-danger" })
+            </div>*@
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NuParcAtu, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.NuParcAtu, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NuParcAtu, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.NumParc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.NumParc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NumParc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="box box-footer">
+                                <div class="btn">
+                                    <button type="submit" id="btsalvar" class="btn btn-app ">
+                                        <i class="fa fa-save"></i> Salvar
+                                    </button>
+                                    <a href="@Url.Action("Index","ContaPagarFixa") " class="btn btn-app " title="Apagar">
+                                        <i class="fa fa-arrow-circle-o-left"></i> Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#DtPrimLanc').mask('00/00/0000', { placeholder: "__/__/____" });
+        
+        $('#Valor').mask("#.##0,00", { reverse: true });
+       
+
+        //Date picker
+        $('#DtPrimLanc').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        })
+
+        descrPeriodicidade();
+    });
+
+    function descrPeriodicidade() {
+        
+        var period = $("#Periodicidade").val();
+
+        var url = "/ContaPagarFixa/DescrPeriodicidade?period=" + period;
+        $.get(url, null, function (data) {
+            // alert(data);
+            $("#descrPeriod").html(data);
+        });
+    }
+</script>

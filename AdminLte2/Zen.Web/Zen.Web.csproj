@@ -7372,6 +7372,8 @@
     <Compile Include="ViewModels\ConfigViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\ContaCorrente\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\ContaCorrente\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\ContaPagarFixaViewModel\CreateEditViewModel.cs" />
+    <Compile Include="ViewModels\ContaPagarFixaViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\ContaPagarViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\ContaPagarViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\ContaReceberViewModel\CreateEditViewModel.cs" />
@@ -7521,6 +7523,9 @@
     <Content Include="Views\ContaPagar\Index.cshtml" />
     <Content Include="Views\ContaPagar\Create.cshtml" />
     <Content Include="Views\ContaPagar\Delete.cshtml" />
+    <Content Include="Views\ContaPagarFixa\Index.cshtml" />
+    <Content Include="Views\ContaPagarFixa\Create.cshtml" />
+    <Content Include="Views\ContaPagarFixa\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -7530,7 +7535,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ContaPagarFixa\" />
     <Folder Include="Views\Custom\" />
   </ItemGroup>
   <ItemGroup>

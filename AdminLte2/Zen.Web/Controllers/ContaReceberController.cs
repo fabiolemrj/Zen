@@ -269,6 +269,7 @@ namespace Zen.Web.Controllers
             ViewBag.TipoDoc = new SelectList(servTpDoc.ObterListaObjetos(db, ""), "Id", "Nome");
             ViewBag.FormaPag = new SelectList(servFormaPag.ObterListaObjetos(db, ""), "Id", "Nome");
             ViewBag.Setor = new SelectList(servSetor.ObterListaObjetos(db, ""), "Id", "Nome");
+            ViewBag.SituacaoAtivoSusp = new SelectList(ListasGenericas.SituacaoAtivoSusp, "Sigla", "Nome");
             ViewBag.Cliente = new SelectList(servCli.ObterListaObjetosPorNome(db, ""), "IdCliente", "Nome");
         }
 

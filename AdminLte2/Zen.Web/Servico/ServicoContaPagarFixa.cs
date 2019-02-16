@@ -17,16 +17,19 @@ namespace Zen.Web.Servico
         ServicoFornecedor servFornec = new ServicoFornecedor();
         ServicoTipoDoc servTpdoc = new ServicoTipoDoc();
 
-        public ContaPagarFixa ObterObjetoPorId(ZenContext db, int id)
+        public ContaPagarFixa ObterObjetoPorId(ZenContext db, int id, int idsubdesp)
         {
-            return db.ContasPagarFixas.Find(id);
+            return db.ContasPagarFixas.FirstOrDefault(c=>c.IdDesp == id && c.IdSubDesp == idsubdesp);
         }
 
         public void Salvar(ZenContext db, ContaPagarFixa objeto)
         {
-            if (ObterObjetoPorId(db, objeto.Id) == null)
+            if (ObterObjetoPorId(db, objeto.IdDesp, objeto.IdSubDesp) == null)
             {
-                objeto.Id = db.ContasPagarFixas.Max(c => c.Id) + 1;
+                var subdesp = servSubDesp.ObterObjetoPorId(db, objeto.IdSubDesp);
+
+                objeto.IdDesp = subdesp.IdDesp;
+                //objeto.Id = db.ContasPagarFixas.Max(c => c.Id) + 1;
                 db.ContasPagarFixas.Add(objeto);
             }
 
@@ -39,7 +42,7 @@ namespace Zen.Web.Servico
             db.SaveChanges();
         }
 
-        public IQueryable<ContaPagarFixa> ObterListaObjetos(ZenContext db, string filtroNome, int tpfiltro)
+        public IQueryable<ContaPagarFixa> ObterListaObjetos(ZenContext db, string filtroNome)
         {
             var lst = new List<ContaPagarFixa>();
 
@@ -70,7 +73,7 @@ namespace Zen.Web.Servico
                 {
                     lst.Add(new ContaPagarFixa
                     {
-                        Id = item.cr.Id,
+                        IdDesp = item.cr.IdDesp,
                         Dia = item.cr.Dia ,
                         NumParc = item.cr.NumParc,
                         NumParcAtu = item.cr.NumParcAtu,
@@ -83,7 +86,7 @@ namespace Zen.Web.Servico
                         IdTipoDoc = item.cr.IdTipoDoc,
                         IdSubDesp = item.cr.IdSubDesp,
                         IdUsuario = item.cr.IdUsuario,
-                        IdDesp = item.cr.IdDesp,
+                       Periodicidade = item.cr.Periodicidade,
                         Valor = item.cr.Valor,
                         Fornecedor = item.cl,
                         SubDespesa = item.tr,

@@ -11,7 +11,7 @@ namespace Zen.Web.Utils
         {
             new {Sigla = "", Nome = "Nenhum"},
             new {Sigla = "S", Nome = "Sim"},
-            new {Sigla = "N", Nome = "Não"},
+            new {Sigla = "N", Nome = "Não"}
         };
 
         public static List<object> Vazia = new List<object>
@@ -24,20 +24,39 @@ namespace Zen.Web.Utils
         {
             new {Sigla = "C", Nome = "Comum"},
             new {Sigla = "E", Nome = "Especial"},
-            new {Sigla = "M", Nome = "Meio Corte"},
+            new {Sigla = "M", Nome = "Meio Corte"}
+        };
+
+        public static List<object> ListaPeriodicidade = new List<object>
+        {
+          //  new {Sigla = "", Nome = "Nenhum"},
+            new {Sigla = "M", Nome = "Mensal"},
+            new {Sigla = "B", Nome = "Bimestral"},
+            new {Sigla = "T", Nome = "Trimestral"},
+            new {Sigla = "Q", Nome = "Quadrimestral"},
+            new {Sigla = "S", Nome = "Semestral"},
+            new {Sigla = "A", Nome = "Anual"},
+        };
+
+
+        public static List<object> SituacaoAtivoSusp = new List<object>
+        {
+            new {Sigla = "A", Nome = "Ativo"},
+            new {Sigla = "S", Nome = "Suspenso"}
+            
         };
 
         public static List<object> ObterAtivo = new List<object>
         {
             new {Sigla = "", Nome = "Nenhum"},
             new {Sigla = "A", Nome = "Sim"},
-            new {Sigla = "D", Nome = "Inativo"},
+            new {Sigla = "D", Nome = "Inativo"}
         };
 
         public static List<object> ObterClassif = new List<object>
         {
             new {Sigla = "M", Nome = "Manual"},
-            new {Sigla = "S", Nome = "Semi-automatica"},
+            new {Sigla = "S", Nome = "Semi-automatica"}
         };
 
         public static List<object> ObterEstados = new List<object>

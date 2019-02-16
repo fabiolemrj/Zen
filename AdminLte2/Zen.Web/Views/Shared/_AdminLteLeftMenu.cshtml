@@ -190,7 +190,11 @@
                             <li><a href="@Url.Action("Index", "ContaPagar")"><i class="fa fa-money"></i> Despesas </a></li>
                         }
                         @*<li><a href="#"><i class="fa fa-money"></i> Despesas</a></li>*@
-                        <li><a href="#"><i class="fa fa-money"></i> Despesas Fixas</a></li>
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CP.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "ContaPagarFixa")"><i class="fa fa-money"></i> Despesas Fixas </a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-money"></i> Despesas Fixas</a></li>*@
                         @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CC.ToString()))
                         {
                             <li><a href="@Url.Action("Index", "ContaCorrente")"><i class="fa fa-money"></i> Contas Correntes </a></li>

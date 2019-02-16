@@ -11,9 +11,19 @@ namespace Zen.Web.Models
     public class ContaPagarFixa
     {
         [Key]
-        [Column(name: "IDDESP")]
+        [Column(name: "IDDESP", Order =1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public int IdDesp { get; set; }
+
+        [NotMapped]
+        public Despesa Despesa { get; set; }
+
+        [Key]
+        [Column(name: "IDSUBDESP", Order =2)]
+        public int IdSubDesp { get; set; }
+
+        [NotMapped]
+        public SubDespesa SubDespesa { get; set; }
 
         [Column(name: "DIA")]
         public int? Dia { get; set; }
@@ -40,12 +50,6 @@ namespace Zen.Web.Models
 
         [NotMapped]
         public ContaCorrente ContaCorrente { get; set; }
-
-        [Column(name: "IDDESP")]
-        public int? IdDesp { get; set; }
-
-        [NotMapped]
-        public Despesa Despesa { get; set; }
         
         [Column(name: "IDFORMAPGM")]
         public int? IdFormaPag { get; set; }
@@ -64,12 +68,6 @@ namespace Zen.Web.Models
 
         [NotMapped]
         public Setor Setor { get; set; }
-
-        [Column(name: "IDSUBDESP")]
-        public int? IdSubDesp { get; set; }
-
-        [NotMapped]
-        public SubDespesa SubDespesa { get; set; }
 
         [Column(name: "IDTIPODOC")]
         public int? IdTipoDoc { get; set; }
