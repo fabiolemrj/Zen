@@ -7264,12 +7264,14 @@
     <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\DespesaController.cs" />
     <Compile Include="Controllers\FacasController.cs" />
+    <Compile Include="Controllers\FluxoCaixaController.cs" />
     <Compile Include="Controllers\FormaPagController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpressorController.cs" />
     <Compile Include="Controllers\MaquinaController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\MovCcController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PermissoesController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -7302,11 +7304,13 @@
     <Compile Include="Models\DireitoAcesso.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Facas.cs" />
+    <Compile Include="Models\FluxoCaixa.cs" />
     <Compile Include="Models\FormaPag.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Impressor.cs" />
     <Compile Include="Models\Maquina.cs" />
     <Compile Include="Models\material.cs" />
+    <Compile Include="Models\MovCc.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\PerfilAcoes.cs" />
     <Compile Include="Models\Permissoes.cs" />
@@ -7338,11 +7342,13 @@
     <Compile Include="Servico\ServicoDespesa.cs" />
     <Compile Include="Servico\ServicoEmail.cs" />
     <Compile Include="Servico\ServicoFacas.cs" />
+    <Compile Include="Servico\ServicoFluxoCaixa.cs" />
     <Compile Include="Servico\ServicoFormaPag.cs" />
     <Compile Include="Servico\ServicoFornecedor.cs" />
     <Compile Include="Servico\ServicoImpressor.cs" />
     <Compile Include="Servico\ServicoMaquina.cs" />
     <Compile Include="Servico\ServicoMaterial.cs" />
+    <Compile Include="Servico\ServicoMovCc.cs" />
     <Compile Include="Servico\ServicoPerfil.cs" />
     <Compile Include="Servico\ServicoPerfilAcoes.cs" />
     <Compile Include="Servico\ServicoProduto.cs" />
@@ -7526,6 +7532,8 @@
     <Content Include="Views\ContaPagarFixa\Index.cshtml" />
     <Content Include="Views\ContaPagarFixa\Create.cshtml" />
     <Content Include="Views\ContaPagarFixa\Delete.cshtml" />
+    <Content Include="Views\MovCc\Index.cshtml" />
+    <Content Include="Views\FluxoCaixa\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

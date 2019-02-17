@@ -106,9 +106,10 @@ namespace Zen.Web.Controllers
             model.IdSubDesp = -1;
             model.IdDesp = -1;
             model.Valor = 0;
-            model.Estado = "L";
+            model.Estado = "A";
             model.IdUsuario = valorDaClaim;
-
+            model.Periodicidade = "M";
+            
             return View(model);
         }
 
@@ -153,6 +154,10 @@ namespace Zen.Web.Controllers
 
             try
             {
+                if(objeto.NumParc > 0)
+                {
+                    objeto.NumParcAtu = objeto.NumParcAtu + 1;
+                }
                 servico.Salvar(db, objeto);
                 TempData["sucesso"] = $@"Conta a Pagar Fixa salva com sucesso!";
             }

@@ -8,6 +8,7 @@ namespace Zen.Web.Models
     public static class Constantes
     {
         public const int TamanhoPagina = 10;
+        public const int TamanhoPagina100 = 100;
 
         public const int AC_USR_CONS = 10;
         public const int AC_USR_CAD = 11;

@@ -6,7 +6,6 @@
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">Menu de navegação</li>
                 <!-- Optionally, you can add icons to the links -->
@@ -108,7 +107,6 @@
                             </ul>
                         </li>
                     </ul>
-
                 </li>
                 <li class="treeview">
                     <a href="#">
@@ -200,7 +198,12 @@
                             <li><a href="@Url.Action("Index", "ContaCorrente")"><i class="fa fa-money"></i> Contas Correntes </a></li>
                         }
                         @*<li><a href="#"><i class="fa fa-money"></i> Contas Correntes</a></li>*@
-                        <li><a href="#"><i class="fa fa-money"></i> Fluxo de Caixa</a></li>
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CP.ToString()) ||
+                                User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CR.ToString()))
+                        {
+                            <li><a href="@Url.Action("Index", "FluxoCaixa")"><i class="fa fa-money"></i> Fluxo de Caixa </a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-money"></i> Fluxo de Caixa</a></li>*@
                         <li><a href="#"><i class="fa fa-money"></i> Realizado</a></li>
                         <li><a href="#"><i class="fa fa-exchange"></i> Transferência</a></li>
                     </ul>
@@ -230,19 +233,16 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-repeat"></i> Acertar movimentação CC</a></li>
-
                         @if (User.IsInRole(Zen.Web.Models.Constantes.AC_EDIT_CONFIG.ToString()))
                         {
                             <li><a href="@Url.Action("Editar", "Configuracao")"><i class="fa fa-envelope-o"></i> Configuração de E-mail</a></li>
                         }
-
                         <li><a href="#"><i class="fa fa-wrench"></i> Manutenção do sistema</a></li>
-
                     </ul>
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
-            
+
         </section>
         <!-- /.sidebar -->
     </aside>
