@@ -34,26 +34,31 @@ namespace Zen.Web.Controllers
         }
         // GET: FluxoCaixa
         public ActionResult Index(int pagina = 1, int tamPag = Constantes.TamanhoPagina100, string dtini = "", string dtfim = "", string sentido = "T", 
-            string historico = "", string fornecCli = "", string formapag = "")
+            string hist = "", string forneccli = "", string formapag = "", string estado = "T")
         {
             TempData["breadcrumb"] = CreateBreadCrumbIndex();
             TempData["nometela"] = "Fluxo de Caixa";
 
-            var lista = PrepararViewModel(pagina, tamPag, dtini, dtfim, sentido,historico,fornecCli,formapag);
+            var lista = PrepararViewModel(pagina, tamPag, dtini, dtfim, sentido,hist,forneccli,formapag, estado);
 
             return View(lista);
 
         }
 
         private IPagedList<FluxoCaixa> PrepararViewModel(int pagina, int tamPag, string dtini, string dtfim,
-            string sentido, string historico,string fornecCli, string formapag)
+            string sentido, string historico,string fornecCli, string formapag, string estado)
         {
             //PopularViewBag();
             var lst = new List<FluxoCaixa>();
+            var lstAux = new List<FluxoCaixa>();
 
             ViewBag.Sentido = sentido;
 
             ViewBag.TamanhoPagina = tamPag;
+            ViewBag.hist = historico;
+            ViewBag.forneccli = fornecCli;
+            ViewBag.formapag = formapag;
+            ViewBag.estado = estado;
        
 
             var _dtini = DateTime.Now;
@@ -75,11 +80,56 @@ namespace Zen.Web.Controllers
             ViewBag.dtini = dtini;
             ViewBag.dtfim = dtfim;
 
-            lst = servico.ObterListaObjetos(db, _dtini, _dtfim, sentido,historico,fornecCli,formapag).OrderByDescending(c=>c.DtVenc).ToList();
+            lstAux = servico.ObterListaObjetos(db, _dtini, _dtfim, sentido,historico,fornecCli,formapag).OrderByDescending(c=>c.DtVenc).ToList();
+
+            if (!string.IsNullOrEmpty(historico))
+            {
+                lst.AddRange(lstAux.Where(c=> c.Historico != null && c.Historico.Contains(historico)));
+                lstAux.Clear();
+            }
+            else
+            {
+                lst.AddRange(lstAux);
+                lstAux.Clear();
+            }
+
+            if (!string.IsNullOrEmpty(fornecCli))
+            {
+                lstAux.AddRange(lst.Where(c => c.FornecCliente != null && c.FornecCliente.Contains(fornecCli)));
+                lst.Clear();
+            }
+            else
+            {
+                lstAux.AddRange(lst);
+                lst.Clear();
+            }
+
+            if (!string.IsNullOrEmpty(formapag))
+            {
+                
+                lst.AddRange(lstAux.Where(c => c.Formapag != null && c.Formapag.Nome.Contains(formapag)));
+                lstAux.Clear();
+            }
+            else
+            {
+                lst.AddRange(lstAux);
+                lstAux.Clear();
+            }
+
+            if (estado != "T")
+            {
+                lstAux.AddRange(lst.Where(c => c.Estado.Contains(estado)));
+                lst.Clear();
+            }
+            else
+            {
+                lstAux.AddRange(lst);
+                lst.Clear();
+            }
 
             var desp = 0.0;
             var cred = 0.0;
-            foreach(var item in lst)
+            foreach(var item in lstAux)
             {
                 if (item.Sentido == "D")
                     desp += item.Valor;
@@ -87,10 +137,46 @@ namespace Zen.Web.Controllers
                     cred += item.Valor;
             }
 
+            var lstgrupo = new List<FormaPagGrupo>();
+            var grpfpNull = new FormaPagGrupo();
+            grpfpNull.Id = -1;
+            grpfpNull.Nome = "Nulo";
+
+            foreach(var item in lstAux)
+            {
+                if (item.Formapag != null)
+                {
+                    var fp = item.Formapag;
+                    if (lstgrupo.FirstOrDefault(c => c.Id == fp.Id) == null)
+                    {
+                        lstgrupo.Add(new FormaPagGrupo {
+                            Id = fp.Id,
+                            Nome = fp.Nome,
+                            Valor = item.Valor
+                        });
+                    }
+                    else
+                    {
+                        var grupo = lstgrupo.FirstOrDefault(c => c.Id == fp.Id);
+                        lstgrupo.Remove(grupo);
+
+                        grupo.Valor += item.Valor;
+                        lstgrupo.Add(grupo);
+                    }
+                }
+                else
+                {
+                    grpfpNull.Valor += item.Valor;
+                }
+            }
+            lstgrupo.Add(grpfpNull);
+            //lstgrupo.AddRange(.ToList());
+
             ViewBag.saldocr = string.Format("{0:c}", cred);
             ViewBag.saldocp = string.Format("{0:c}", desp); 
             ViewBag.saldotot = string.Format("{0:c}", (cred - desp));
-            return lst.ToPagedList(pagina, tamPag);
+            ViewBag.lstFormapag = lstgrupo;
+            return lstAux.ToPagedList(pagina, tamPag);
         }
     }
 }

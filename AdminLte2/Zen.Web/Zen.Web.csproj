@@ -7306,6 +7306,7 @@
     <Compile Include="Models\Facas.cs" />
     <Compile Include="Models\FluxoCaixa.cs" />
     <Compile Include="Models\FormaPag.cs" />
+    <Compile Include="Models\FormaPagGrupo.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Impressor.cs" />
     <Compile Include="Models\Maquina.cs" />

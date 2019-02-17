@@ -18,70 +18,94 @@
                     <h3 class="box-title">Pesquisa por Período de Vencimento</h3>
                 </div>
                 <div class="box-body">
-                    <div class="form-group">
+                    <div class="col-md-6">
                         <div class="row">
                             <div class="form-group">
+
                                 <div class="col-md-4">
-                                    <div class="col-md-6">
-                                        Data Inicial
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.dtini" />
+                                    Data Inicial
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
                                         </div>
-                                        @* <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />*@
+                                        <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.dtini" />
                                     </div>
-                                    <div class="col-md-6">
-                                        Data Final
-                                        @*<input type="datetime" class="form-control" id="dtfim" name="dtfim" placeholder="Data Fim" value="@ViewBag.Dtfim" />*@
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="datetime" class="form-control pull-right" id="dtfim" name="dtfim" placeholder="Data Final" value="@ViewBag.dtfim" />
+                                    @* <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />*@
+                                </div>
+                                <div class="col-md-4">
+                                    Data Final
+                                    @*<input type="datetime" class="form-control" id="dtfim" name="dtfim" placeholder="Data Fim" value="@ViewBag.Dtfim" />*@
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
                                         </div>
+                                        <input type="datetime" class="form-control pull-right" id="dtfim" name="dtfim" placeholder="Data Final" value="@ViewBag.dtfim" />
                                     </div>
                                 </div>
+
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-8">
-                                    <div class="col-md-6">
-                                        <label>Sentido</label>
-                                        <select name="sentido" id="sentido" class="form-control select2-dropdown">
-                                            <option value="T" @(ViewBag.situacao == "T" ? "selected" : "")>Todos</option>
-                                            <option value="C" @(ViewBag.situacao == "C" ? "selected" : "")>Crédito</option>
-                                            <option value="D" @(ViewBag.situacao == "D" ? "selected" : "")>Débito</option>
-                                        </select>
-                                    </div>
-
+                                    <label class="control-label">Histórico</label>
+                                    <input type="text" class="form-control" placeholder="Buscar histórico..." id="hist" name="hist" value="@ViewBag.hist">
                                 </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+
+                                <div class="col-md-8">
+                                    <label class="control-label">Cliente/Fornecedor</label>
+                                    <input type="text" class="form-control" placeholder="Buscar cliente/fornecedor..." id="forneccli" name="forneccli" value="@ViewBag.forneccli">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+
+                                <div class="col-md-8">
+                                    <label class="control-label">Forma de pagamento</label>
+                                    <input type="text" class="form-control" placeholder="Buscar forma de pagamento..." id="formapag" name="formapag" value="@ViewBag.formapag">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label>Sentido</label>
+                                    <select name="sentido" id="sentido" class="form-control select2-dropdown">
+                                        <option value="T" @(ViewBag.sentido == "T" ? "selected" : "")>Todos</option>
+                                        <option value="C" @(ViewBag.sentido == "C" ? "selected" : "")>Crédito</option>
+                                        <option value="D" @(ViewBag.sentido == "D" ? "selected" : "")>Débito</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Estado</label>
+                                    <select name="estado" id="estado" class="form-control select2-dropdown">
+                                        <option value="T" @(ViewBag.estado == "T" ? "selected" : "")>Todos</option>
+                                        <option value="L" @(ViewBag.estado == "L" ? "selected" : "")>Lançados</option>
+                                        <option value="P" @(ViewBag.estado == "P" ? "selected" : "")>Pagos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group">
-                                <div class="col-md-9">
-                                    <div class="col-md-3">
-                                        <label class="control-label">Créditos (+)</label>
-                                        <input type="text" class="form-control" id="saldocp" name="saldocp" readonly="readonly" value="@ViewBag.saldocr" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="control-label">Débitos (-)</label>
-                                        <input type="text" class="form-control" id="saldocr" name="saldocr" readonly="readonly" value="@ViewBag.saldocp" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="control-label">Saldo Total (=)</label>
-                                        <input type="text" class="form-control" id="saldocr" name="saldotot" readonly="readonly" value="@ViewBag.saldotot" />
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <span class="input-group-btn">
                                     <button type="submit" class="btn btn-block btn-info">
                                         <span class="glyphicon glyphicon-search"></span>
@@ -90,18 +114,87 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">                       
+
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tabsumario" data-toggle="tab">Sumário</a></li>
+                                    <li><a href="#tabformapag" data-toggle="tab">Formas de Pagamentos</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tabsumario">
+                                        
+                                            <div class="col-md-6">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-aqua">
+                                                        <i class="fa fa-dollar"></i>
+                                                    </span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">CREDITOS</span>
+                                                        <span class="info-box-number">@ViewBag.saldocr</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-red">
+                                                        <i class="fa fa-dollar"></i>
+                                                    </span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">DEBITOS</span>
+                                                        <span class="info-box-number">@ViewBag.saldocp</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-yellow">
+                                                        <i class="fa fa-dollar"></i>
+                                                    </span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">SALDO</span>
+                                                        <span class="info-box-number">@ViewBag.saldotot</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="tab-pane" id="tabformapag">
+                                        @if (ViewBag.lstFormapag != null)
+                                        {
+                                        <table class="table">
+                                            @foreach (var itm in @ViewBag.lstFormapag)
+                                            {
+                                            <tr>
+                                                <td>@itm.Nome</td>
+                                                <td>@string.Format("{0:C}", @itm.Valor) </td>
+                                            </tr>
+                                            }
+                                        </table>
+                                        }
+
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group"></div>
+                            </div>                             
+                        
+                    </div>
                 </div>
 
                 <div class="box-body">
-                    <table id="tabela" class="table table-bordered table-hover table-striped">
+                    <table id="tabela" class="table table-bordered ">
                         <thead>
                             <tr>
-                                <th class="text-center">Data</th>
+                                <th class="text-center">Data de Vencimento</th>
                                 <th class="text-center">Tipo de Documento</th>
                                 <th class="text-center">Forma de pagamento</th>
                                 <th class="text-center">Histórico</th>
                                 <th class="text-center">Fornecedor/Cliente</th>
                                 <th class="text-center">Valor</th>
+                                <th class="text-center">Estado</th>
                                 <th class="text-center">Sentido</th>
 
                             </tr>
@@ -109,41 +202,85 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DtVenc)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TipoDocumento.Nome)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Formapag.Nome)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Historico)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FornecCliente)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Valor)
-                                    </td>
-
-                                    @if (item.Sentido == "C")
-                                    {
-                                        <td class="bg-primary">
+                                if (item.Sentido == "C")
+                                {
+                                    <tr class="bg-aqua">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DtVenc)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoDocumento.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Formapag.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Historico)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FornecCliente)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Valor)
+                                        </td>
+                                        <td>
+                                            @if (item.Estado == "P")
+                                            {
+                                                @Html.Raw("Pago")
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Lançado")
+                                            }
+                                        </td>
+                                        <td>
 
                                             @Html.Raw("Crédito")
                                         </td>
-                                    }
-                                    else if (item.Sentido == "D")
-                                    {
-                                        <td class="bg-danger">
+
+
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr class="bg-red">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DtVenc)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoDocumento.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Formapag.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Historico)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FornecCliente)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Valor)
+                                        </td>
+                                        <td>
+                                            @if (item.Estado == "P")
+                                            {
+                                                @Html.Raw("Pago")
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Lançado")
+                                            }
+                                        </td>
+
+                                        <td>
                                             @Html.Raw("Débito")
                                         </td>
-                                    }
 
-                                </tr>
+
+                                    </tr>
+                                }
+
                             }
                         </tbody>
                     </table>
@@ -154,7 +291,8 @@
     <div class="row">
         <div class="col-md-6">
             @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, dtini = ViewBag.dtini, dtfim = ViewBag.dtfim, sentido = ViewBag.Sentido,
-                         saldocr = ViewBag.saldocr, saldocp = ViewBag.saldocp, saldotot = ViewBag.saldotot }))
+           saldocr = ViewBag.saldocr, saldocp = ViewBag.saldocp, saldotot = ViewBag.saldotot, hist=ViewBag.hist, forneccli = ViewBag.forneccli,
+           formapag = ViewBag.formapag, estado = ViewBag.estado }))
 
         </div>
         <div class="col-md-6">
