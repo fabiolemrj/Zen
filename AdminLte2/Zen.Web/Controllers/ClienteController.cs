@@ -313,12 +313,12 @@ namespace Zen.Web.Controllers
         private Cliente ModelParaObjeto(CreateEditViewModel model, Cliente cliente)
         {
             cliente.IdCliente = model.IdCliente;
-            cliente.Apelido = model.Apelido;
-            cliente.Bairro = model.Bairro;
-            cliente.BairroRs = model.BairroRs;
-            cliente.cargo = model.cargo;
-            cliente.Celular1 = model.Celular1;
-            cliente.Celular2 = model.Celular2;
+            cliente.Apelido = model.Apelido.ToUpper();
+            cliente.Bairro = model.Bairro.ToUpper();
+            cliente.BairroRs = model.BairroRs.ToUpper();
+            cliente.cargo = model.cargo.ToUpper();
+            cliente.Celular1 = model.Celular1.ToUpper();
+            cliente.Celular2 = model.Celular2.ToUpper();
 
             if (!string.IsNullOrEmpty(cliente.Cep))
               cliente.Cep = model.Cep.Replace(".","").Replace("-","");
@@ -326,38 +326,38 @@ namespace Zen.Web.Controllers
             if (!string.IsNullOrEmpty(cliente.CepRs))
                 cliente.CepRs = model.CepRs.Replace(".", "").Replace("-", ""); ;
 
-            cliente.Cidade = model.Cidade;
-            cliente.CidadeRs = model.CidadeRs;
+            cliente.Cidade = model.Cidade.ToUpper();
+            cliente.CidadeRs = model.CidadeRs.ToUpper();
             cliente.Cnpj = model.Cnpj;
             cliente.Comissao = model.Comissao;
-            cliente.Contato = model.Contato;
+            cliente.Contato = model.Contato.ToUpper();
             cliente.Cpf = model.Cpf;
             cliente.DadosOk = model.DadosOk;
             cliente.DtAtu = model.DtAtu;
             cliente.DtIns = model.DtIns;
             cliente.EhCliente = model.EhCliente;
             cliente.EhDesign = model.EhDesign;
-            cliente.Email = model.Email;
-            cliente.Endereco = model.Endereco;
-            cliente.EndRs = model.EndRs;
-            cliente.Fax1 = model.Fax1;
-            cliente.Fax2 = model.Fax2;
+            cliente.Email = model.Email.ToUpper();
+            cliente.Endereco = model.Endereco.ToUpper();
+            cliente.EndRs = model.EndRs.ToUpper();
+            cliente.Fax1 = model.Fax1.ToUpper();
+            cliente.Fax2 = model.Fax2.ToUpper();
             cliente.InscEstadual = model.InscEstadual;
             cliente.InscMunicipal = model.InscMunicipal;
-            cliente.Nome = model.Nome;
-            cliente.Obs = model.Obs;
-            cliente.Ramal1 = model.Ramal1;
-            cliente.Ramal2 = model.Ramal2;
-            cliente.RamalF1 = model.Ramal1;
-            cliente.RamalF2 = model.Ramal2;
-            cliente.RazaoSocial = model.RazaoSocial;
-            cliente.Site = model.Site;
-            cliente.Tel1 = model.Tel1;
-            cliente.Tel2 = model.Tel2;
-            cliente.Tel0800 = model.Tel0800;
-            cliente.Tel3 = model.Tel3;
-            cliente.Uf = model.Uf;
-            cliente.UfRs = model.UfRs;
+            cliente.Nome = model.Nome.ToUpper();
+            cliente.Obs = model.Obs.ToUpper();
+            cliente.Ramal1 = model.Ramal1.ToUpper();
+            cliente.Ramal2 = model.Ramal2.ToUpper();
+            cliente.RamalF1 = model.Ramal1.ToUpper();
+            cliente.RamalF2 = model.Ramal2.ToUpper();
+            cliente.RazaoSocial = model.RazaoSocial.ToUpper();
+            cliente.Site = model.Site.ToUpper();
+            cliente.Tel1 = model.Tel1.ToUpper();
+            cliente.Tel2 = model.Tel2.ToUpper();
+            cliente.Tel0800 = model.Tel0800.ToUpper();
+            cliente.Tel3 = model.Tel3.ToUpper();
+            cliente.Uf = model.Uf.ToUpper();
+            cliente.UfRs = model.UfRs.ToUpper();
 
             return cliente;
         }

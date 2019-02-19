@@ -17,22 +17,27 @@ namespace Zen.Web.ViewModels.ContaPagarViewModel
 
         [MaxLength(64, ErrorMessage = "O campo histórico deve ter até 64 caracter")]
         [Display(Name = "Histórico")]
+        [Required(ErrorMessage = "O campo histórico é obrigatório", AllowEmptyStrings = false)]
         public string Historico { get; set; }
         
         [MaxLength(255, ErrorMessage = "O campo histórico deve ter até 255 caracter")]
         [Display(Name = "Detalhe da Compra")]
+        [Required(ErrorMessage = "O campo detalhe da compra é obrigatório", AllowEmptyStrings = false)]
         public string DetCompra { get; set; }
 
         [Display(Name = "Banco")]
+        [Required(ErrorMessage = "O campo banco é obrigatório", AllowEmptyStrings = false)]
         public int? IdBanco { get; set; }
 
         [Display(Name = "Conta Corrente")]
+        [Required(ErrorMessage = "O campo conta corrente é obrigatório", AllowEmptyStrings = false)]
         public int? IdCc { get; set; }
 
         [Display(Name = "Cheque")]
         public int? IdCheque { get; set; }
 
         [Display(Name = "Fornecedor")]
+        [Required(ErrorMessage = "O campo fornecedor é obrigatório", AllowEmptyStrings = false)]
         public int? IdFornecedor { get; set; }
 
         [Display(Name = "Forma de Pagamento")]
@@ -53,7 +58,6 @@ namespace Zen.Web.ViewModels.ContaPagarViewModel
         public int? IdUsuario { get; set; }
 
         [Display(Name = "Juros")]
-        [Range(0, 9999999999999999.99)]
         public double Juros { get; set; }
 
         [MaxLength(10, ErrorMessage = "O campo Numero do cheque deve ter até 15 caracter")]
@@ -73,11 +77,11 @@ namespace Zen.Web.ViewModels.ContaPagarViewModel
         public string Obs { get; set; }
 
         [Display(Name = "Valor")]
-        [Range(0, 9999999999999999.99)]
+        [Required(ErrorMessage = "O campo valor é obrigatório", AllowEmptyStrings = false)]
         public double Valor { get; set; }
 
         [Display(Name = "Desconto")]
-        [Range(0, 9999999999999999.99)]
+        [Required(ErrorMessage = "O campo desconto é obrigatório", AllowEmptyStrings = false)]
         public double Desconto { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -85,11 +89,11 @@ namespace Zen.Web.ViewModels.ContaPagarViewModel
         public DateTime? DtPag { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [Required(ErrorMessage = "O campo data de vencimento é obrigatório", AllowEmptyStrings = false)]
         [Display(Name = "Data de Vencimento")]
         public DateTime? DtVenc { get; set; }
 
         [Display(Name = "Total")]
-        [Range(0, 9999999999999999.99)]
         public double Total { get; set; }
     }
 }

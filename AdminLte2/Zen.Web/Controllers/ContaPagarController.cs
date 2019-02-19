@@ -25,6 +25,7 @@ namespace Zen.Web.Controllers
         ServicoTipoDoc servTpdoc = new ServicoTipoDoc();
 
         ServicoContaPagar servico = new ServicoContaPagar();
+        ServicoContaCorrente servcCc = new ServicoContaCorrente();
 
         private string CreateBreadCrumbIndex()
         {
@@ -68,7 +69,7 @@ namespace Zen.Web.Controllers
         {
             TempData["breadcrumb"] = CreateBreadCrumbIndex();
             TempData["nometela"] = "Contas a Pagar";
-          
+
             var lista = PrepararViewModel(tpfiltro, filtro, pagina, tamPag, dtini, dtfim, situacao);
 
             return View(lista);
@@ -93,14 +94,14 @@ namespace Zen.Web.Controllers
 
             if (!string.IsNullOrEmpty(dtini) && !string.IsNullOrEmpty(dtfim))
             {
-                
+
                 var _dtini = DateTime.Now;
                 var _dtfim = DateTime.Now.AddDays(30);
                 try
                 {
                     _dtini = Convert.ToDateTime(dtini);
                     _dtfim = Convert.ToDateTime(dtfim);
-                    
+
                     lstCompl.AddRange(lista.Where(c => c.DtVenc >= _dtini && c.DtVenc <= _dtfim));
                 }
                 catch (Exception ex)
@@ -168,8 +169,9 @@ namespace Zen.Web.Controllers
             ViewBag.TipoDoc = new SelectList(servTpdoc.ObterListaObjetos(db, ""), "Id", "Nome");
             ViewBag.FormaPag = new SelectList(servFormapag.ObterListaObjetos(db, ""), "Id", "Nome");
             ViewBag.Setor = new SelectList(servSetor.ObterListaObjetos(db, ""), "Id", "Nome");
-            ViewBag.Fornecedor = new SelectList(servFornec.ObterListaObjetos(db, "",1), "Id", "Nome");
+            ViewBag.Fornecedor = new SelectList(servFornec.ObterListaObjetos(db, "", 1), "Id", "Nome");
             ViewBag.SituacaoAtivoSusp = new SelectList(ListasGenericas.SituacaoAtivoSusp, "Sigla", "Nome");
+            ViewBag.Cc = new SelectList(servcCc.ObterListaObjetos(db, ""), "Id", "NomeAgencia");
         }
 
         [HttpPost]
@@ -192,7 +194,7 @@ namespace Zen.Web.Controllers
 
             try
             {
-                
+
                 servico.Salvar(db, objeto);
                 TempData["sucesso"] = $@"Conta a Pagar salva com sucesso!";
             }
@@ -209,11 +211,23 @@ namespace Zen.Web.Controllers
             objeto.IdBanco = model.IdBanco;
             objeto.IdCc = model.IdCc;
             objeto.Desconto = model.Desconto;
-            objeto.DtPag = model.DtPag;           
+            objeto.DtPag = model.DtPag;
             objeto.DtVenc = model.DtVenc;
-            objeto.Estado = model.Estado;
+
+            if (((model.Estado != "P") ||(string.IsNullOrEmpty(model.Estado)))&& model.DtPag != null)
+            {
+                objeto.Estado = "P";
+            }
+            else
+                objeto.Estado = model.Estado;
+
+            if (string.IsNullOrEmpty(objeto.Estado))
+            {
+                objeto.Estado = "L";
+            }
+
             objeto.FlgConf = model.FlgConf;
-            objeto.Historico = model.Historico;
+            objeto.Historico = model.Historico.ToUpper();
             objeto.IdFornecedor = model.IdFornecedor;
             objeto.IdFormaPag = model.IdFormaPag;
             objeto.IdSetor = model.IdSetor;
@@ -222,7 +236,8 @@ namespace Zen.Web.Controllers
             objeto.Juros = model.Juros;
             objeto.NumChq = model.NumCheque;
             objeto.Obs = model.Obs;
-            
+            objeto.DetalheCompra = model.DetCompra.ToUpper();
+
             return objeto;
         }
 
@@ -252,7 +267,7 @@ namespace Zen.Web.Controllers
             {
                 model.Desconto = 0;
             }
-
+            //     model.DetCompra = objeto.DetalheCompra;
             model.DtPag = objeto.DtPag;
             model.DtVenc = objeto.DtVenc;
             model.Estado = objeto.Estado;

@@ -20,6 +20,7 @@
                 <div class="form-horizontal">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
+                    <input type="hidden" id="estado" value="ViewBag.Estado" /> 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Historico, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-9">
@@ -51,14 +52,13 @@
                             @Html.ValidationMessageFor(model => model.NumDoc, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
-                            @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
                             @Html.DropDownListFor(model => model.Estado, (SelectList)ViewBag.SituacaoAtivoSusp, new { @class = "form-control select2" })
                             @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         @Html.LabelFor(model => model.IdFormaPag, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
@@ -86,7 +86,7 @@
                         @Html.LabelFor(model => model.IdCc, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
                             @*@Html.EditorFor(model => model.EhDesign, new { htmlAttributes = new { @class = "form-control" } })*@
-                            @Html.DropDownListFor(model => model.IdCc, (SelectList)ViewBag.Banco, new { @class = "form-control select2" })
+                            @Html.DropDownListFor(model => model.IdCc, (SelectList)ViewBag.Cc, new { @class = "form-control select2" })
                             @Html.ValidationMessageFor(model => model.IdCc, "", new { @class = "text-danger" })
                         </div>
                     </div>

@@ -35,7 +35,7 @@ namespace Zen.Web.Models
 
         [Column(name: "VALOR")]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
-        [Range(0, 9999999999999999.99)]
+
         public double? Valor { get; set; } = 0;
 
         [Column(name: "NUM_CHQ")]
@@ -47,7 +47,7 @@ namespace Zen.Web.Models
         public string Sentido { get; set; }
 
         [Column(name: "SALDO_ANT")]
-        [Range(0, 9999999999999999.99)]
+     
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public double SaldoAnt { get; set; }
 

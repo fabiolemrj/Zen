@@ -7291,6 +7291,8 @@
     <Compile Include="InfraEstrutura\DireitoAcesso.cs" />
     <Compile Include="Models\Banco.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\ClienteRanking.cs" />
+    <Compile Include="Models\Cntr_CpCr.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\ConfigEmail.cs" />
     <Compile Include="Models\Configuracao.cs" />
@@ -7298,6 +7300,7 @@
     <Compile Include="Models\ContaCorrente.cs" />
     <Compile Include="Models\ContaPagar.cs" />
     <Compile Include="Models\ContaPagarFixa.cs" />
+    <Compile Include="Models\ContaPagarObs.cs" />
     <Compile Include="Models\contasreceber.cs" />
     <Compile Include="Models\Cor.cs" />
     <Compile Include="Models\Despesa.cs" />
@@ -7333,11 +7336,13 @@
     <Compile Include="Servico\ServicoAprvOrc.cs" />
     <Compile Include="Servico\ServicoBanco.cs" />
     <Compile Include="Servico\ServicoCliente.cs" />
+    <Compile Include="Servico\ServicoCntr_CprCr.cs" />
     <Compile Include="Servico\ServicoConfig.cs" />
     <Compile Include="Servico\ServicoConfigEmail.cs" />
     <Compile Include="Servico\ServicoContaCorrente.cs" />
     <Compile Include="Servico\ServicoContaPagar.cs" />
     <Compile Include="Servico\ServicoContaPagarFixa.cs" />
+    <Compile Include="Servico\ServicoContaPagarObs.cs" />
     <Compile Include="Servico\ServicoContaReceber.cs" />
     <Compile Include="Servico\ServicoCor.cs" />
     <Compile Include="Servico\ServicoDespesa.cs" />
@@ -7535,6 +7540,7 @@
     <Content Include="Views\ContaPagarFixa\Delete.cshtml" />
     <Content Include="Views\MovCc\Index.cshtml" />
     <Content Include="Views\FluxoCaixa\Index.cshtml" />
+    <Content Include="Views\FluxoCaixa\ListaClienteRanking.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -22,6 +22,7 @@ namespace Zen.Web.Controllers
         ServicoFormaPag servFormaPag = new ServicoFormaPag();
         ServicoSetor servSetor = new ServicoSetor();
         ServicoCliente servCli = new ServicoCliente();
+        ServicoContaCorrente servcCc = new ServicoContaCorrente();
 
         private string CreateBreadCrumbIndex()
         {
@@ -145,7 +146,7 @@ namespace Zen.Web.Controllers
             model.Total = 0;
             model.FlgConf = "N";
             model.IdUsuario = valorDaClaim;
-
+            ViewBag.Estado = "L";
             return View(model);
         }
 
@@ -197,9 +198,16 @@ namespace Zen.Web.Controllers
             objeto.DtPag = model.DtPag;
             objeto.DtPagDesc = model.DtPagDesc;
             objeto.DtVenc = model.DtVenc;
-            objeto.Estado = model.Estado;
+
+            if (model.Estado != "P" && model.DtPag != null)
+            {
+                objeto.Estado = "P";
+            }
+            else
+                objeto.Estado = model.Estado;
+
             objeto.FlgConf = model.FlgConf;           
-            objeto.Historico = model.Historico;
+            objeto.Historico = model.Historico.ToUpper();
             objeto.IdCheque = model.IdCheque;
             objeto.IdCliente = model.IdCliente;
             objeto.IdFormaPag = model.IdFormaPag;
@@ -208,10 +216,10 @@ namespace Zen.Web.Controllers
             objeto.IdUsuario = model.IdUsuario;
             objeto.Juros = model.Juros;
             objeto.NumAgChq = model.NumAgChq;
-            objeto.NumChq = model.NumChq;
+            objeto.NumChq = model.NumChq.ToUpper();
             objeto.NumOsi = model.NumOsi;
             objeto.NumParc = model.NumParc;
-            objeto.Obs = model.Obs;
+            objeto.Obs = model.Obs.ToUpper();
             objeto.PercTitDesc = model.PercTitDesc;
             
             return objeto;
@@ -271,6 +279,7 @@ namespace Zen.Web.Controllers
             ViewBag.Setor = new SelectList(servSetor.ObterListaObjetos(db, ""), "Id", "Nome");
             ViewBag.SituacaoAtivoSusp = new SelectList(ListasGenericas.SituacaoAtivoSusp, "Sigla", "Nome");
             ViewBag.Cliente = new SelectList(servCli.ObterListaObjetosPorNome(db, ""), "IdCliente", "Nome");
+            ViewBag.Cc = new SelectList(servcCc.ObterListaObjetos(db, ""), "Id", "NomeAgencia");
         }
 
         private void ObjetoParaModel(ContasReceber objeto, CreateEditViewModel model)
@@ -280,11 +289,13 @@ namespace Zen.Web.Controllers
             {
                 model.Desconto = objeto.Desconto.Value;
             }
-            catch (Exception ex)
+            catch
             {
                 model.Desconto = 0;
             }
-            
+
+            ViewBag.Estado = objeto.Estado;
+
             model.DtPag = objeto.DtPag;
             model.DtPagDesc = objeto.DtPagDesc;
             model.DtVenc = objeto.DtVenc;
@@ -305,7 +316,7 @@ namespace Zen.Web.Controllers
             {
                 model.Juros = objeto.Juros.Value;
             }
-            catch (Exception ex)
+            catch
             {
                 model.Juros = 0;
             }
@@ -319,7 +330,7 @@ namespace Zen.Web.Controllers
             {
                 model.PercTitDesc = objeto.PercTitDesc.Value;
             }
-            catch (Exception ex)
+            catch
             {
                 model.PercTitDesc = 0;
             }
@@ -328,7 +339,7 @@ namespace Zen.Web.Controllers
             {
                 model.Valor = objeto.Valor.Value;
             }
-            catch (Exception ex)
+            catch
             {
                 model.Valor = 0;
             }

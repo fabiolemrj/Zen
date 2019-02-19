@@ -204,7 +204,12 @@
                             <li><a href="@Url.Action("Index", "FluxoCaixa")"><i class="fa fa-money"></i> Fluxo de Caixa </a></li>
                         }
                         @*<li><a href="#"><i class="fa fa-money"></i> Fluxo de Caixa</a></li>*@
-                        <li><a href="#"><i class="fa fa-money"></i> Realizado</a></li>
+                        @if (User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CP.ToString()) ||
+                                                    User.IsInRole(Zen.Web.Models.Constantes.AC_CONS_CAD_CR.ToString()))
+                        {
+                            <li><a href="@Url.Action("ListaClienteRanking", "FluxoCaixa")"><i class="fa fa-money"></i> Ranking de Clientes </a></li>
+                        }
+                        @*<li><a href="#"><i class="fa fa-money"></i> Realizado</a></li>*@
                         <li><a href="#"><i class="fa fa-exchange"></i> Transferência</a></li>
                     </ul>
                 </li>

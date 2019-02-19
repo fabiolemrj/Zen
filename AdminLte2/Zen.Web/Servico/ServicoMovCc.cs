@@ -36,10 +36,148 @@ namespace Zen.Web.Servico
             db.SaveChanges();
         }
 
-        public void Delete(ZenContext db, MovCc objeto)
+       
+            public void Delete(ZenContext db, MovCc objeto)
         {
             db.MovCcs.Remove(objeto);
             db.SaveChanges();
+        }
+
+
+        public void AtualizarMovCcCr(ZenContext db, ContaPagar cp)
+        {
+
+            var movcc = ObterMovCcPorIdTitulo(db, cp.Id, "D");
+
+            var valor = 0.0;
+            var juros = 0.0;
+            var desc = 0.0;
+            var saldo = 0.0;
+            var idcc = 0;
+
+            try
+            {
+                idcc = cp.IdCc.Value;
+            }
+            catch
+            {
+                idcc = -1;
+            }
+
+            var cc = servCC.ObterObjetoPorId(db, idcc);
+            if (cc != null)
+            {
+                try
+                {
+                    saldo = cc.SaldoAtual.Value;
+                    valor = cp.Valor.Value;
+                    juros = cp.Juros.Value;
+                    desc = cp.Desconto.Value;
+                    valor = valor + juros - desc;
+                    cc.SaldoAtual = saldo - valor;
+                    cc.DtLanc = cp.DtPag.Value;
+                }
+                catch
+                {
+
+                }
+            }
+
+            if (movcc == null)
+            {
+                movcc = new MovCc
+                {
+                    IdTitulo = cp.Id,
+                    DtMov = cp.DtPag.Value,
+                    Sentido = "D",
+                    IdCc = cc.Id,
+                    Valor = valor,
+                    SaldoAnt = saldo,
+                    Historico = cp.Historico
+                };
+            }
+            else
+            {
+                movcc.DtMov = cp.DtPag.Value;
+                movcc.Sentido = "D";
+                movcc.IdCc = cp.IdCc.Value;
+                movcc.Valor = valor;
+                movcc.SaldoAnt = saldo;
+                movcc.Historico = cp.Historico;
+            }
+
+            //  Salvar(db, movcc);
+        }
+
+
+        public void AtualizarMovCcCr(ZenContext db, ContasReceber cr)
+        {
+
+            var movcc = ObterMovCcPorIdTitulo(db, cr.Id, "C");
+
+            var valor = 0.0;
+            var juros = 0.0;
+            var desc = 0.0;
+            var saldo = 0.0;
+            var idcc = 0;
+
+            try
+            {
+                idcc = cr.IdCc.Value;
+            }
+            catch
+            {
+                idcc = -1;
+            }
+
+            var cc = servCC.ObterObjetoPorId(db, idcc);
+            if (cc != null)
+            {
+                try
+                {
+                    saldo = cc.SaldoAtual.Value;
+                    valor = cr.Valor.Value;
+                    juros = cr.Juros.Value;
+                    desc = cr.Desconto.Value;
+                    valor = valor + juros - desc;
+                    cc.SaldoAtual = valor + saldo;
+                    cc.DtLanc = cr.DtPag.Value;
+                }
+                catch
+                {
+
+                }
+            }
+
+            if (movcc == null)
+            {
+                movcc = new MovCc
+                {
+                    IdTitulo = cr.Id,
+                    DtMov = cr.DtPag.Value,
+                    Sentido = "C",
+                    IdCc = cc.Id,
+                    Valor = valor,
+                    SaldoAnt = saldo,
+                    Historico = cr.Historico
+                };
+            }
+            else
+            {
+                movcc.DtMov = cr.DtPag.Value;
+                movcc.Sentido = "C";
+                movcc.IdCc = cr.IdCc.Value;
+                movcc.Valor = valor;
+                movcc.SaldoAnt = saldo;
+                movcc.Historico = cr.Historico;
+            }
+
+          //  Salvar(db, movcc);
+        }
+
+        public MovCc ObterMovCcPorIdTitulo(ZenContext db, int idtitulo, string sentido)
+        {
+            return db.MovCcs.FirstOrDefault(c => c.IdTitulo == idtitulo && c.Sentido == sentido);
         }
 
         public IQueryable<MovCc> ObterListaObjetos(ZenContext db, DateTime dtMovIni, DateTime dtMovFim, string sentido)
@@ -141,12 +279,12 @@ namespace Zen.Web.Servico
                 var cp = item.cp;
                 var nome = "";
                 if (item.forn != null)
-                   nome  = item.forn.Nome;
+                    nome = item.forn.Nome;
 
                 saldoAtual = item.movcc.SaldoAnt + item.movcc.Valor.Value;
 
                 lst.Add(new MovCc
-                {                    
+                {
                     ContaCorrente = cc,
                     ContaReceber = cp,
                     DtMov = item.movcc.DtMov,
@@ -169,7 +307,7 @@ namespace Zen.Web.Servico
             }
 
             var lstsentido = new List<MovCc>();
-             
+
 
             if (!string.IsNullOrEmpty(sentido) && (sentido != "T"))
             {
@@ -180,7 +318,7 @@ namespace Zen.Web.Servico
                 lstsentido.AddRange(lst);
             }
 
-            return lstsentido.OrderBy(c=>c.DtMov).AsQueryable();
+            return lstsentido.OrderBy(c => c.DtMov).AsQueryable();
         }
     }
 }

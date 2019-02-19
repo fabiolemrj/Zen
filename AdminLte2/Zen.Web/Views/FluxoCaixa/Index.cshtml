@@ -91,6 +91,14 @@
                                         <option value="P" @(ViewBag.estado == "P" ? "selected" : "")>Pagos</option>
                                     </select>
                                 </div>
+                                @*<div class="col-md-4">
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-lg btn-block btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>*@
                             </div>
                         </div>
                         <div class="row">
@@ -104,83 +112,78 @@
 
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-4">
+                        <div>
+                            <div class="col-md-8">
                                 <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-block btn-info">
+                                    <button type="submit" class="btn btn-lg btn-block btn-info">
                                         <span class="glyphicon glyphicon-search"></span>
                                     </button>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">                       
+                    <div class="col-md-6">
+                        <div class="box box-success">
+                            <div class="box box-header">
+                                Agrupamento por Formas de Pagamentos
+                            </div>
 
-                            <div class="nav-tabs-custom">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tabsumario" data-toggle="tab">Sumário</a></li>
-                                    <li><a href="#tabformapag" data-toggle="tab">Formas de Pagamentos</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tabsumario">
-                                        
-                                            <div class="col-md-6">
-                                                <div class="info-box">
-                                                    <span class="info-box-icon bg-aqua">
-                                                        <i class="fa fa-dollar"></i>
-                                                    </span>
-                                                    <div class="info-box-content">
-                                                        <span class="info-box-text">CREDITOS</span>
-                                                        <span class="info-box-number">@ViewBag.saldocr</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="info-box">
-                                                    <span class="info-box-icon bg-red">
-                                                        <i class="fa fa-dollar"></i>
-                                                    </span>
-                                                    <div class="info-box-content">
-                                                        <span class="info-box-text">DEBITOS</span>
-                                                        <span class="info-box-number">@ViewBag.saldocp</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="info-box">
-                                                    <span class="info-box-icon bg-yellow">
-                                                        <i class="fa fa-dollar"></i>
-                                                    </span>
-                                                    <div class="info-box-content">
-                                                        <span class="info-box-text">SALDO</span>
-                                                        <span class="info-box-number">@ViewBag.saldotot</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                       
-                                    </div>
-                                    <div class="tab-pane" id="tabformapag">
-                                        @if (ViewBag.lstFormapag != null)
-                                        {
-                                        <table class="table">
-                                            @foreach (var itm in @ViewBag.lstFormapag)
-                                            {
-                                            <tr>
-                                                <td>@itm.Nome</td>
-                                                <td>@string.Format("{0:C}", @itm.Valor) </td>
-                                            </tr>
-                                            }
-                                        </table>
-                                        }
+                            @if (ViewBag.lstFormapag != null)
+                            {
+                                <table class="table">
+                                    @foreach (var itm in @ViewBag.lstFormapag)
+                                    {
+                                        <tr>
+                                            <td>@itm.Nome</td>
+                                            <td>@string.Format("{0:C}", @itm.Valor) </td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="box box-default">
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-green">
+                                        <i class="fa fa-dollar"></i>
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">CREDITOS</span>
+                                        <span class="info-box-number">@ViewBag.saldocr</span>
                                     </div>
-                                   
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group"></div>
-                            </div>                             
-                        
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-red">
+                                        <i class="fa fa-dollar"></i>
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">DEBITOS</span>
+                                        <span class="info-box-number">@ViewBag.saldocp</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-yellow">
+                                        <i class="fa fa-dollar"></i>
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">SALDO</span>
+                                        <span class="info-box-number">@ViewBag.saldotot</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -202,9 +205,9 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                if (item.Sentido == "C")
+                                if (item.Sentido == "C" && item.Estado == "P")
                                 {
-                                    <tr class="bg-aqua">
+                                    <tr class="text-primary">
                                         <td>
                                             @Html.DisplayFor(modelItem => item.DtVenc)
                                         </td>
@@ -241,9 +244,9 @@
 
                                     </tr>
                                 }
-                                else
+                                else if(item.Sentido == "D" && item.Estado == "P")
                                 {
-                                    <tr class="bg-red">
+                                    <tr class="text-red">
                                         <td>
                                             @Html.DisplayFor(modelItem => item.DtVenc)
                                         </td>
@@ -278,6 +281,50 @@
                                         </td>
 
 
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DtVenc)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoDocumento.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Formapag.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Historico)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FornecCliente)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Valor)
+                                        </td>
+                                        <td >
+                                            @if (item.Estado == "P")
+                                            {
+                                                @Html.Raw("Pago")
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Lançado")
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @if (item.Sentido == "C")
+                                            {
+                                                @Html.Raw("Crédito")
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Débito")
+                                            }
+                                        </td>
                                     </tr>
                                 }
 

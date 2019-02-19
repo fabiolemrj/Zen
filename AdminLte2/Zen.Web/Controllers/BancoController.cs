@@ -125,7 +125,7 @@ namespace Zen.Web.Controllers
         private Banco ModelParaObjeto(CreateEditViewModel model, Banco banco)
         {
             banco.IdBanco = model.IdBanco;
-            banco.Nome = model.Nome;
+            banco.Nome = model.Nome.ToUpper();
 
             return banco;
         }

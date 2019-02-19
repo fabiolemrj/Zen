@@ -26,8 +26,17 @@ namespace Zen.Web.Servico
         {
             if (ObterObjetoPorId(db, objeto.Id) == null)
             {
-                objeto.Id = db.ContasPagar.Max(c => c.Id) + 1;
+                ServicoCntr_CprCr serv_cntrCpCr = new ServicoCntr_CprCr();
+                var cntr_cpcr = serv_cntrCpCr.ObterObjetoPorId(db,0);
+                cntr_cpcr.IdCp++; 
+                objeto.Id = cntr_cpcr.IdCp;
                 db.ContasPagar.Add(objeto);
+            }
+
+            if (objeto.Estado == "P")
+            {
+                ServicoMovCc servmovcc = new ServicoMovCc();
+                servmovcc.AtualizarMovCcCr(db, objeto);
             }
 
             db.SaveChanges();

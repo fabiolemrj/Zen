@@ -50,7 +50,7 @@ namespace Zen.Web.Servico
                          into _td
                          from td in _td.DefaultIfEmpty()
                          select new { cr, cl, tr, bc, cc, st, fp, td });
-               
+
                 foreach (var item in q)
                 {
                     lst.Add(new ContasReceber
@@ -99,145 +99,145 @@ namespace Zen.Web.Servico
                     //historico
                     case 1:
                         {
-                           
-                                var q = (from cr in db.ContasReceber
-                                         join bc in db.Bancos on cr.IdBancoCheque.ToString() equals bc.IdBanco
-                                         into _bc
-                                         from bc in _bc.DefaultIfEmpty()
-                                         join cl in db.CLientes on cr.IdCliente equals cl.IdCliente
-                                         into _cl
-                                         from cl in _cl.DefaultIfEmpty()
-                                         join tr in db.TipoReceitas on cr.IdTipoReceita equals tr.Id
-                                         into _tr
-                                         from tr in _tr.DefaultIfEmpty()
-                                         join cc in db.ContasCorrentes on cr.IdCc equals cc.Id
-                                         into _cc
-                                         from cc in _cc.DefaultIfEmpty()
-                                         join st in db.Setores on cr.IdSetor equals st.Id
-                                         into _st
-                                         from st in _st.DefaultIfEmpty()
-                                         join fp in db.FormasPag on cr.IdFormaPag equals fp.Id
-                                         into _fp
-                                         from fp in _fp.DefaultIfEmpty()
-                                         join td in db.TiposDoc on cr.IdTipoDoc equals td.Id
-                                         into _td
-                                         from td in _td.DefaultIfEmpty()
-                                         select new { cr, cl, tr, bc, cc, st, fp, td }).Where(b => b.cr.Historico.Contains(filtroNome)).OrderByDescending(b => b.cr.DtVenc);
 
-                                foreach (var item in q)
+                            var q = (from cr in db.ContasReceber
+                                     join bc in db.Bancos on cr.IdBancoCheque.ToString() equals bc.IdBanco
+                                     into _bc
+                                     from bc in _bc.DefaultIfEmpty()
+                                     join cl in db.CLientes on cr.IdCliente equals cl.IdCliente
+                                     into _cl
+                                     from cl in _cl.DefaultIfEmpty()
+                                     join tr in db.TipoReceitas on cr.IdTipoReceita equals tr.Id
+                                     into _tr
+                                     from tr in _tr.DefaultIfEmpty()
+                                     join cc in db.ContasCorrentes on cr.IdCc equals cc.Id
+                                     into _cc
+                                     from cc in _cc.DefaultIfEmpty()
+                                     join st in db.Setores on cr.IdSetor equals st.Id
+                                     into _st
+                                     from st in _st.DefaultIfEmpty()
+                                     join fp in db.FormasPag on cr.IdFormaPag equals fp.Id
+                                     into _fp
+                                     from fp in _fp.DefaultIfEmpty()
+                                     join td in db.TiposDoc on cr.IdTipoDoc equals td.Id
+                                     into _td
+                                     from td in _td.DefaultIfEmpty()
+                                     select new { cr, cl, tr, bc, cc, st, fp, td }).Where(b => b.cr.Historico.Contains(filtroNome)).OrderByDescending(b => b.cr.DtVenc);
+
+                            foreach (var item in q)
+                            {
+                                lst.Add(new ContasReceber
                                 {
-                                    lst.Add(new ContasReceber
-                                    {
-                                        Id = item.cr.Id,
-                                        Desconto = item.cr.Desconto,
-                                        DtPag = item.cr.DtPag,
-                                        DtPagDesc = item.cr.DtPagDesc,
-                                        DtVenc = item.cr.DtVenc,
-                                        Estado = item.cr.Estado,
-                                        FlgConf = item.cr.FlgConf,
-                                        FlgTitDesc = item.cr.FlgTitDesc,
-                                        Historico = item.cr.Historico,
-                                        IdBancoCheque = item.cr.IdBancoCheque,
-                                        IdCc = item.cr.IdCc,
-                                        IdCheque = item.cr.IdCheque,
-                                        IdCliente = item.cr.IdCliente,
-                                        IdDoNoChq = item.cr.IdDoNoChq,
-                                        IdFormaPag = item.cr.IdFormaPag,
-                                        IdLink = item.cr.IdLink,
-                                        IdSetor = item.cr.IdSetor,
-                                        IdTipoDoc = item.cr.IdTipoDoc,
-                                        IdTipoReceita = item.cr.IdTipoReceita,
-                                        IdUsuario = item.cr.IdUsuario,
-                                        Juros = item.cr.Juros,
-                                        NumAgChq = item.cr.NumAgChq,
-                                        NumChq = item.cr.NumChq,
-                                        NumOsi = item.cr.NumOsi,
-                                        NumParc = item.cr.NumParc,
-                                        Obs = item.cr.Obs,
-                                        Valor = item.cr.Valor,
-                                        Cliente = item.cl,
-                                        TipoReceita = item.tr,
-                                        BancoCheque = item.bc,
-                                        Setor = item.st,
-                                        ContaCorrente = item.cc,
-                                        FormaPag = item.fp,
-                                        TipoDoc = item.td
-                                    });
-                                }
-                           
+                                    Id = item.cr.Id,
+                                    Desconto = item.cr.Desconto,
+                                    DtPag = item.cr.DtPag,
+                                    DtPagDesc = item.cr.DtPagDesc,
+                                    DtVenc = item.cr.DtVenc,
+                                    Estado = item.cr.Estado,
+                                    FlgConf = item.cr.FlgConf,
+                                    FlgTitDesc = item.cr.FlgTitDesc,
+                                    Historico = item.cr.Historico,
+                                    IdBancoCheque = item.cr.IdBancoCheque,
+                                    IdCc = item.cr.IdCc,
+                                    IdCheque = item.cr.IdCheque,
+                                    IdCliente = item.cr.IdCliente,
+                                    IdDoNoChq = item.cr.IdDoNoChq,
+                                    IdFormaPag = item.cr.IdFormaPag,
+                                    IdLink = item.cr.IdLink,
+                                    IdSetor = item.cr.IdSetor,
+                                    IdTipoDoc = item.cr.IdTipoDoc,
+                                    IdTipoReceita = item.cr.IdTipoReceita,
+                                    IdUsuario = item.cr.IdUsuario,
+                                    Juros = item.cr.Juros,
+                                    NumAgChq = item.cr.NumAgChq,
+                                    NumChq = item.cr.NumChq,
+                                    NumOsi = item.cr.NumOsi,
+                                    NumParc = item.cr.NumParc,
+                                    Obs = item.cr.Obs,
+                                    Valor = item.cr.Valor,
+                                    Cliente = item.cl,
+                                    TipoReceita = item.tr,
+                                    BancoCheque = item.bc,
+                                    Setor = item.st,
+                                    ContaCorrente = item.cc,
+                                    FormaPag = item.fp,
+                                    TipoDoc = item.td
+                                });
+                            }
+
                             break;
                         }
                     case 2:
-                        {                          
-                                var q = (from cr in db.ContasReceber
-                                         join bc in db.Bancos on cr.IdBancoCheque.ToString() equals bc.IdBanco
-                                         into _bc
-                                         from bc in _bc.DefaultIfEmpty()
-                                         join cl in db.CLientes on cr.IdCliente equals cl.IdCliente
-                                         into _cl
-                                         from cl in _cl.DefaultIfEmpty()
-                                         join tr in db.TipoReceitas on cr.IdTipoReceita equals tr.Id
-                                         into _tr
-                                         from tr in _tr.DefaultIfEmpty()
-                                         join cc in db.ContasCorrentes on cr.IdCc equals cc.Id
-                                         into _cc
-                                         from cc in _cc.DefaultIfEmpty()
-                                         join st in db.Setores on cr.IdSetor equals st.Id
-                                         into _st
-                                         from st in _st.DefaultIfEmpty()
-                                         join fp in db.FormasPag on cr.IdFormaPag equals fp.Id
-                                         into _fp
-                                         from fp in _fp.DefaultIfEmpty()
-                                         join td in db.TiposDoc on cr.IdTipoDoc equals td.Id
-                                         into _td
-                                         from td in _td.DefaultIfEmpty()                                        
-                                         select new { cr, cl, tr, bc, cc, st, fp, td }).Where(c => c.bc.Nome.Contains(filtroNome)).OrderByDescending(b => b.cr.DtVenc);
-                                        
-                                foreach (var item in q)
-                                {
-                                    lst.Add(new ContasReceber
-                                    {
-                                        Id = item.cr.Id,
-                                        Desconto = item.cr.Desconto,
-                                        DtPag = item.cr.DtPag,
-                                        DtPagDesc = item.cr.DtPagDesc,
-                                        DtVenc = item.cr.DtVenc,
-                                        Estado = item.cr.Estado,
-                                        FlgConf = item.cr.FlgConf,
-                                        FlgTitDesc = item.cr.FlgTitDesc,
-                                        Historico = item.cr.Historico,
-                                        IdBancoCheque = item.cr.IdBancoCheque,
-                                        IdCc = item.cr.IdCc,
-                                        IdCheque = item.cr.IdCheque,
-                                        IdCliente = item.cr.IdCliente,
-                                        IdDoNoChq = item.cr.IdDoNoChq,
-                                        IdFormaPag = item.cr.IdFormaPag,
-                                        IdLink = item.cr.IdLink,
-                                        IdSetor = item.cr.IdSetor,
-                                        IdTipoDoc = item.cr.IdTipoDoc,
-                                        IdTipoReceita = item.cr.IdTipoReceita,
-                                        IdUsuario = item.cr.IdUsuario,
-                                        Juros = item.cr.Juros,
-                                        NumAgChq = item.cr.NumAgChq,
-                                        NumChq = item.cr.NumChq,
-                                        NumOsi = item.cr.NumOsi,
-                                        NumParc = item.cr.NumParc,
-                                        Obs = item.cr.Obs,
-                                        Valor = item.cr.Valor,
-                                        Cliente = item.cl,
-                                        TipoReceita = item.tr,
-                                        BancoCheque = item.bc,
-                                        Setor = item.st,
-                                        ContaCorrente = item.cc,
-                                        FormaPag = item.fp,
-                                        TipoDoc = item.td
-                                    });
-                                }
+                        {
+                            var q = (from cr in db.ContasReceber
+                                     join bc in db.Bancos on cr.IdBancoCheque.ToString() equals bc.IdBanco
+                                     into _bc
+                                     from bc in _bc.DefaultIfEmpty()
+                                     join cl in db.CLientes on cr.IdCliente equals cl.IdCliente
+                                     into _cl
+                                     from cl in _cl.DefaultIfEmpty()
+                                     join tr in db.TipoReceitas on cr.IdTipoReceita equals tr.Id
+                                     into _tr
+                                     from tr in _tr.DefaultIfEmpty()
+                                     join cc in db.ContasCorrentes on cr.IdCc equals cc.Id
+                                     into _cc
+                                     from cc in _cc.DefaultIfEmpty()
+                                     join st in db.Setores on cr.IdSetor equals st.Id
+                                     into _st
+                                     from st in _st.DefaultIfEmpty()
+                                     join fp in db.FormasPag on cr.IdFormaPag equals fp.Id
+                                     into _fp
+                                     from fp in _fp.DefaultIfEmpty()
+                                     join td in db.TiposDoc on cr.IdTipoDoc equals td.Id
+                                     into _td
+                                     from td in _td.DefaultIfEmpty()
+                                     select new { cr, cl, tr, bc, cc, st, fp, td }).Where(c => c.bc.Nome.Contains(filtroNome)).OrderByDescending(b => b.cr.DtVenc);
 
+                            foreach (var item in q)
+                            {
+                                lst.Add(new ContasReceber
+                                {
+                                    Id = item.cr.Id,
+                                    Desconto = item.cr.Desconto,
+                                    DtPag = item.cr.DtPag,
+                                    DtPagDesc = item.cr.DtPagDesc,
+                                    DtVenc = item.cr.DtVenc,
+                                    Estado = item.cr.Estado,
+                                    FlgConf = item.cr.FlgConf,
+                                    FlgTitDesc = item.cr.FlgTitDesc,
+                                    Historico = item.cr.Historico,
+                                    IdBancoCheque = item.cr.IdBancoCheque,
+                                    IdCc = item.cr.IdCc,
+                                    IdCheque = item.cr.IdCheque,
+                                    IdCliente = item.cr.IdCliente,
+                                    IdDoNoChq = item.cr.IdDoNoChq,
+                                    IdFormaPag = item.cr.IdFormaPag,
+                                    IdLink = item.cr.IdLink,
+                                    IdSetor = item.cr.IdSetor,
+                                    IdTipoDoc = item.cr.IdTipoDoc,
+                                    IdTipoReceita = item.cr.IdTipoReceita,
+                                    IdUsuario = item.cr.IdUsuario,
+                                    Juros = item.cr.Juros,
+                                    NumAgChq = item.cr.NumAgChq,
+                                    NumChq = item.cr.NumChq,
+                                    NumOsi = item.cr.NumOsi,
+                                    NumParc = item.cr.NumParc,
+                                    Obs = item.cr.Obs,
+                                    Valor = item.cr.Valor,
+                                    Cliente = item.cl,
+                                    TipoReceita = item.tr,
+                                    BancoCheque = item.bc,
+                                    Setor = item.st,
+                                    ContaCorrente = item.cc,
+                                    FormaPag = item.fp,
+                                    TipoDoc = item.td
+                                });
                             }
-                           
-                            break;
-                       
+
+                        }
+
+                        break;
+
                     case 3:
                         {
                             var q = (from cr in db.ContasReceber
@@ -308,26 +308,36 @@ namespace Zen.Web.Servico
                 }
             }
 
-            
+
             return lst.AsQueryable();
         }
 
-    public void Salvar(ZenContext db, ContasReceber objeto)
-    {
-        if (ObterObjetoPorId(db, objeto.Id) == null)
+        public void Salvar(ZenContext db, ContasReceber objeto)
         {
-            objeto.Id = db.ContasReceber.Max(c => c.Id) + 1;
-            db.ContasReceber.Add(objeto);
+            if (ObterObjetoPorId(db, objeto.Id) == null)
+            {
+                ServicoCntr_CprCr serv_cntrCpCr = new ServicoCntr_CprCr();
+                var cntr_cpcr = serv_cntrCpCr.ObterObjetoPorId(db, 0);
+                cntr_cpcr.IdCr++;
+                objeto.Id = cntr_cpcr.IdCr;
+                //objeto.Id = db.ContasReceber.Max(c => c.Id) + 1;
+                db.ContasReceber.Add(objeto);
+            }
+
+            if (objeto.Estado == "P")
+            {
+                ServicoMovCc servmovcc = new ServicoMovCc();
+                servmovcc.AtualizarMovCcCr(db, objeto);
+            }
+
+            db.SaveChanges();
         }
 
-        db.SaveChanges();
-    }
+        public void Delete(ZenContext db, ContasReceber objeto)
+        {
+            db.ContasReceber.Remove(objeto);
+            db.SaveChanges();
+        }
 
-    public void Delete(ZenContext db, ContasReceber objeto)
-    {
-        db.ContasReceber.Remove(objeto);
-        db.SaveChanges();
     }
-
-}
 }

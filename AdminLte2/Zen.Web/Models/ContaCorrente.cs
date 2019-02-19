@@ -38,11 +38,9 @@ namespace Zen.Web.Models
         public int NumeroAgencia { get; set; }
 
         [Column(name: "SALDO_ATU")]
-        [Range(0, 9999999999999999.99)]
         public double? SaldoAtual { get; set; } = 0;
 
         [Column(name: "SALDO_INI")]
-        [Range(0, 9999999999999999.99)]
         public double? SaldoIni { get; set; } = 0;
 
         [NotMapped]
