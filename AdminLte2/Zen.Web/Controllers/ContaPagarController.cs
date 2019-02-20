@@ -10,6 +10,7 @@ using Zen.Web.Servico;
 using Zen.Web.Utils;
 using Zen.Web.ViewModels.ContaPagarViewModel;
 
+
 namespace Zen.Web.Controllers
 {
     public class ContaPagarController : CustomController
@@ -26,6 +27,7 @@ namespace Zen.Web.Controllers
 
         ServicoContaPagar servico = new ServicoContaPagar();
         ServicoContaCorrente servcCc = new ServicoContaCorrente();
+        ServicoContaPagarObs servObs = new ServicoContaPagarObs();
 
         private string CreateBreadCrumbIndex()
         {
@@ -239,6 +241,87 @@ namespace Zen.Web.Controllers
             objeto.DetalheCompra = model.DetCompra.ToUpper();
 
             return objeto;
+        }
+
+        public ActionResult EditContaPagarObs(int id)
+        {
+            TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+            TempData["nometela"] = "Editar Observação de Despesa";
+            TempData["lboper"] = "Editar";
+
+            var model = CreateEditContaPagarObsViewModel();
+            var objeto = servObs.ObterObjetoPorId(id);
+
+            if(objeto == null)
+            {
+                objeto = new ContaPagarObs();
+                objeto.IdTitulo = id;
+            }
+                ObjetoParaModel(objeto, model);
+            
+            return View("EditContaPagarObs", model);
+        }
+
+        [HttpPost]
+        public ActionResult EditContaPagarObs(CreateEditContaPagarObsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+                TempData["nometela"] = "Editar Observação Despesa";
+                TempData["lboper"] = "Editar";
+
+                PopularViewBag();
+                return View("Create", model);
+            }
+            var objeto = servObs.ObterObjetoPorId(model.IdTitulo);
+
+            if (objeto == null)
+            {
+                objeto = new ContaPagarObs();                
+            }
+
+            ModelParaObjeto(model, objeto);
+
+            try
+            {
+                servObs.Salvar(objeto);
+                TempData["sucesso"] = $@"Observação da Conta Pagar salvo com sucesso!";
+            }
+            catch
+            {
+                TempData["erro"] = $@"Erro ao tentar editar a Observação da Conta Pagar {objeto.IdTitulo}";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        private ContaPagarObs ModelParaObjeto(CreateEditContaPagarObsViewModel model, ContaPagarObs objeto)
+        {
+            
+            objeto.IdTitulo = model.IdTitulo;
+            objeto.Marca = model.Marca;
+            objeto.Produto = model.Produto;
+            objeto.Quantidade = model.Quantidade;
+            objeto.Valor = model.Valor;
+
+            return objeto;
+        }
+
+        private void ObjetoParaModel(ContaPagarObs objeto, CreateEditContaPagarObsViewModel model)
+        {
+            model.IdTitulo = objeto.IdTitulo;
+            model.Marca = objeto.Marca;
+            model.Produto = objeto.Produto;
+            model.Quantidade = objeto.Quantidade;
+            model.Valor = objeto.Valor;
+
+        }
+        private CreateEditContaPagarObsViewModel CreateEditContaPagarObsViewModel()
+        {
+
+            var model = new CreateEditContaPagarObsViewModel();
+            return model;
         }
 
         [DireitoAcesso(Constantes.AC_EDIT_CAD_CP)]

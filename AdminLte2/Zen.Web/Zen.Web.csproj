@@ -7386,6 +7386,7 @@
     <Compile Include="ViewModels\ContaCorrente\DeleteViewModel.cs" />
     <Compile Include="ViewModels\ContaPagarFixaViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\ContaPagarFixaViewModel\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\ContaPagarViewModel\CreateEditContaPagarObsViewModel.cs" />
     <Compile Include="ViewModels\ContaPagarViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\ContaPagarViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\ContaReceberViewModel\CreateEditViewModel.cs" />
@@ -7541,6 +7542,7 @@
     <Content Include="Views\MovCc\Index.cshtml" />
     <Content Include="Views\FluxoCaixa\Index.cshtml" />
     <Content Include="Views\FluxoCaixa\ListaClienteRanking.cshtml" />
+    <Content Include="Views\ContaPagar\EditContaPagarObs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
