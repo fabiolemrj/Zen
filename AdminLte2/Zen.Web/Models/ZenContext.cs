@@ -46,6 +46,10 @@ namespace Zen.Web.Models
         public DbSet<ContaPagarFixa> ContasPagarFixas { get; set; }
         public DbSet<MovCc> MovCcs { get; set; }
         public DbSet<Cntr_CpCr> Cntr_CpCrs { get; set; }
+        public DbSet<Orcamento> Orcamentos { get; set; }
+        public DbSet<OrcamentoDet> OrcamentoDets { get; set; }
+        public DbSet<OrcAreas> OrcAreas { get; set; }
+        public DbSet<OrcVariacao> OrcVariacao { get; set; }
 
     }
 }

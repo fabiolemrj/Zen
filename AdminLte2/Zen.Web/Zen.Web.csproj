@@ -7315,6 +7315,10 @@
     <Compile Include="Models\Maquina.cs" />
     <Compile Include="Models\material.cs" />
     <Compile Include="Models\MovCc.cs" />
+    <Compile Include="Models\Orcamento.cs" />
+    <Compile Include="Models\OrcamentoDet.cs" />
+    <Compile Include="Models\OrcAreas.cs" />
+    <Compile Include="Models\OrcVariacao.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\PerfilAcoes.cs" />
     <Compile Include="Models\Permissoes.cs" />
@@ -7355,6 +7359,7 @@
     <Compile Include="Servico\ServicoMaquina.cs" />
     <Compile Include="Servico\ServicoMaterial.cs" />
     <Compile Include="Servico\ServicoMovCc.cs" />
+    <Compile Include="Servico\ServicoOrcamento.cs" />
     <Compile Include="Servico\ServicoPerfil.cs" />
     <Compile Include="Servico\ServicoPerfilAcoes.cs" />
     <Compile Include="Servico\ServicoProduto.cs" />
