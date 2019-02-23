@@ -1,0 +1,254 @@
+﻿<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+@using X.PagedList.Mvc
+@model X.PagedList.PagedList<Zen.Web.Models.Orcamento>
+@{
+    /**/
+
+    ViewBag.Title = "Pedido de Orçamento";
+}
+
+@using (Html.BeginForm("Index", "Orcamento", FormMethod.Get, new { id = "formPedidoOrc" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="box-header">
+                        <h3 class="box-title">Pesquisa de Pedidos de Orçamentos</h3>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-12">Data de Vencimento</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                Data Inicial
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="datetime" class="form-control pull-right" id="dtini" name="dtini" placeholder="Data Inicio" value="@ViewBag.Dtini" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                Data Final
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="datetime" class="form-control pull-right" id="dtfim" name="dtfim" placeholder="Data Final" value="@ViewBag.Dtfim" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label>Aprovação</label>
+                                <select name="aprovados" id="aprovados" class="form-control select2-dropdown">
+                                    <option value="T" @(ViewBag.aprovados == "T" ? "selected" : "")>Todos</option>
+                                    <option value="A" @(ViewBag.aprovados == "A" ? "selected" : "")>Aprovados</option>
+                                    <option value="N" @(ViewBag.aprovados == "N" ? "selected" : "")>Não Aprovados</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label>Orçamento</label>
+                                <input type="text" class="form-control" placeholder="Buscar por orçamento" name="orcamento" value="@ViewBag.orcamento">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-5">
+                                <label>Pendentes</label>
+                                <select name="pendentes" id="pendentes" class="form-control select2-dropdown">
+                                    <option value="T" @(ViewBag.pendentes == "T" ? "selected" : "")>Todos</option>
+                                    <option value="S" @(ViewBag.pendentes == "S" ? "selected" : "")>Sim</option>
+                                    <option value="N" @(ViewBag.pendentes == "N" ? "selected" : "")>Não</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <label>Referência</label>
+                                @* @Html.TextBoxFor(p => Model.Filtro, new { @class = "form-control" })*@
+                                <input type="text" class="form-control" placeholder="Buscar por referência" name="referencia" value="@ViewBag.referencia">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <label>Cliente</label>
+                                @* @Html.TextBoxFor(p => Model.Filtro, new { @class = "form-control" })*@
+                                <input type="text" class="form-control" placeholder="Buscar por Cliente" name="cliente" value="@ViewBag.cliente">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <label></label>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-block btn-info">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="box-body">
+
+                        <table id="tabela" class="table table-bordered table-hover table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width:20px">Numero</th>
+                                    <th class="text-center" style="width:20px">Orçamento</th>
+                                    <th class="text-center" style="width:30px">Data</th>
+                                    <th class="text-center" style="width:20px">Pendente</th>
+                                    <th class="text-center" style="width:100px">Referência</th>
+                                    <th class="text-center" style="width:120px">Cliente</th>
+                                    <th class="text-center" style="width:90px">Contato</th>
+                                    <th class="text-center" style="width:90px">Telefone</th>
+                                    <th class="text-center" style="width:90px">Email</th>
+                                    <th class="text-center" style="width:10px">Itens</th>
+                                    <th class="text-center" style="width:190px">
+                                        <div class="btn-block btn-group ">
+                                            <a href="@Url.Action("Create",new { id=-1})" class="btn btn-block btn-primary btn-sm" title="Apagar">
+                                                Novo
+                                            </a>
+
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IdPedido)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IdOrcamento)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DtPedido)
+                                        </td>
+                                        <td>
+                                            @if (item.Pendente == "S")
+                                            {
+                                                @Html.Raw("Sim")
+                                            }
+                                            else if (item.Pendente == "N")
+                                            {
+                                                @Html.Raw("Não")
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("")
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NmReferencia)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NomeCliente)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Contato)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tel1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email1)
+                                        </td>
+                                        <td align="center">
+                                            <div class="btn-block btn-group ">
+                                                <a href="@Url.Action("Index","OrcamentoDet",new { idpedido=item.IdPedido})" class="btn btn-info btn-sm" title="Itens">
+                                                    <span class="fa fa-list"></span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="btn-block btn-group ">
+                                                <a href="@Url.Action("Edit",new { id=item.IdPedido})" class="btn btn-info btn-sm" title="Editar">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </a>
+                                                <a href="@Url.Action("Delete",new { id=item.IdPedido})" class="btn btn-danger btn-sm" title="Apagar">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </a>
+                                                <a href="@Url.Action("Calculo",new { id=item.IdPedido})" class="btn btn-primary btn-sm" title="Calcular">
+                                                    <span class="fa fa-calculator"></span>
+                                                </a>
+                                                <a href="@Url.Action("Aprovar",new { id=item.IdPedido})" class="btn btn-success btn-sm" title="Aprovar">
+                                                    <span class="fa fa-check-square-o"></span>
+                                                </a>
+                                                <a href="@Url.Action("Enviar",new { id=item.IdPedido})" class="btn btn-success btn-sm" title="Enviar">
+                                                    <span class="fa fa-send-o"></span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+
+                @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, aprovados = ViewBag.aprovados, cliente = ViewBag.cliente,
+               referencia = ViewBag.referencia, dtfim = ViewBag.Dtfim, dtini = ViewBag.Dtini,orcamento = ViewBag.orcamento, pendentes = ViewBag.pendentes }))
+            </div>
+            <div class="col-md-6">
+                <span class="pull-right">
+                    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+                </span>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<!-- Bootstrap 3.3.7 -->
+@*<script src="~/Lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="~/Lib/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#dtini').mask('00/00/0000', { placeholder: "dd/mm/aaaa" });
+        $('#dtfim').mask('00/00/0000', { placeholder: "dd/mm/aaaa" });
+
+        //Date picker
+        $('#dtini').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        })
+
+        //Date picker
+        $('#dtfim').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        })
+
+    });
+</script>

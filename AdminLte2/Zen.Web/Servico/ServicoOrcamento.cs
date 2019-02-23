@@ -31,7 +31,7 @@ namespace Zen.Web.Servico
             db.SaveChanges();
         }
 
-        public IQueryable<Orcamento> ObterListaObjetos(ZenContext db, DateTime dtini, DateTime dtfim)
+        public IQueryable<Orcamento> ObterListaObjetosPedidos(ZenContext db, DateTime dtini, DateTime dtfim)
         {
             var lst = new List<Orcamento>();
             var dataini = DateTime.Now;
@@ -51,7 +51,9 @@ namespace Zen.Web.Servico
                      join cl in db.CLientes on orc.IdCliente equals cl.IdCliente
                      into _cl
                      from cl in _cl.DefaultIfEmpty()
-                     join rf in db.CLientes on orc.IdOrcamento equals rf.IdCliente
+                     join rf in db.CLientes on orc.IdCliente equals rf.IdCliente
+                     into _rf 
+                     from rf in _rf.DefaultIfEmpty()
                      select new { orc, cl, rf }).Where(c => c.orc.DtPedido >= dataini && c.orc.DtPedido <= datafim);
 
             foreach (var item in q)
@@ -59,12 +61,8 @@ namespace Zen.Web.Servico
                 lst.Add(new Orcamento()
                 {
                     IdPedido = item.orc.IdPedido,
-                    AltA = item.orc.AltA,
-                    AltF = item.orc.AltF,
-                    ArteFinal = item.orc.ArteFinal,
                     Celular = item.orc.Celular,
                     Comissao = item.orc.Comissao,
-                    CompF = item.orc.CompF,
                     Contato = item.orc.Contato,
                     DtAtual = item.orc.DtAtual,
                     DtPedido = item.orc.DtPedido,
@@ -72,25 +70,15 @@ namespace Zen.Web.Servico
                     Email2 = item.orc.Email2,
                     Fax = item.orc.Fax,
                     FormaPag = item.orc.FormaPag,
-                    FotoPoli = item.orc.FotoPoli,
-                    FotoPoliFornec = item.orc.FotoPoliFornec,
-                    FotoRet = item.orc.FotoRet,
-                    FotoRetFornec = item.orc.FotoRetFornec,
-                    FotoTraco = item.orc.FotoTraco,
-                    FotoTracoFornec = item.orc.FotoTracoFornec,
                     IdCliente = item.orc.IdCliente,
                     IdOrcamento = item.orc.IdOrcamento,
                     IdReferencia = item.orc.IdReferencia,
                     IdUsuario = item.orc.IdUsuario,
                     IdUsuAtu = item.orc.IdUsuAtu,
-                    ImpF = item.orc.ImpF,
-                    ImpV = item.orc.ImpV,
                     Incompleto = item.orc.Incompleto,
                     Indicacao = item.orc.Indicacao,
                     ItensAprov = item.orc.ItensAprov,
                     ItensEnv = item.orc.ItensEnv,
-                    LargA = item.orc.LargA,
-                    LargF = item.orc.LargF,
                     NmReferencia = item.orc.NmReferencia,
                     NomeCliente = item.orc.NomeCliente,
                     NotifCel = item.orc.NotifCel,
@@ -99,17 +87,17 @@ namespace Zen.Web.Servico
                     NotiFOutro = item.orc.NotiFOutro,
                     NotifTel = item.orc.NotifTel,
                     Obs = item.orc.Obs,
-                    Obs1 = item.orc.Obs1,
                     Prazo = item.orc.Prazo,
-                    Qtd = item.orc.Qtd,
                     Ramal1 = item.orc.Ramal1,
                     Ramal2 = item.orc.Ramal2,
                     RamalF = item.orc.RamalF,
                     SinalPerc = item.orc.SinalPerc,
-                    SitFotolito = item.orc.SitFotolito,
                     Tel1 = item.orc.Tel1,
                     Tel2 = item.orc.Tel2,
                     Urgente = item.orc.Urgente,
+                    Pendente = item.orc.Pendente,
+                    Editando = item.orc.Editando,
+                    ItensPend = item.orc.ItensPend,
 
                     Referencia = item.rf,
                     Cliente = item.cl

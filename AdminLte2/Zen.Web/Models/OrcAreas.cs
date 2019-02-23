@@ -22,9 +22,8 @@ namespace Zen.Web.Models
         [Column(name: "NRSEQ", Order = 3)]
         public int NrSeq { get; set; }
 
-        [Key]
-        [Column(name: "QTD",Order =4)]
-        public int Quant { get; set; }
+        [Column(name: "QTD")]
+        public int? Quant { get; set; }
 
         [Column(name: "LARG")]
         public double? Larg { get; set; }

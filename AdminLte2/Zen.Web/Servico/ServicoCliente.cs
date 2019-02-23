@@ -104,6 +104,21 @@ namespace Zen.Web.Servico
 
         }
 
+        public IEnumerable<Models.Cliente> ObterListaObjetosIniciandoNomePor(ZenContext db, string filtroNome)
+        {
+
+            if (string.IsNullOrWhiteSpace(filtroNome))
+            {
+                return db.CLientes.OrderBy(u => u.Nome);
+            }
+            else
+            {
+                return db.CLientes.Where(u => u.Nome.StartsWith(filtroNome)).OrderBy(u => u.Nome);
+
+            }
+
+        }
+
         public IEnumerable<Cliente> ObterObjetoPorApelido(ZenContext db, string apelido, bool ehdesign)
         {
             

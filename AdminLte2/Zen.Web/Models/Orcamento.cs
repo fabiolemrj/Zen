@@ -15,6 +15,7 @@ namespace Zen.Web.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdPedido { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Column(name: "DTPEDIDO")]
         public DateTime? DtPedido { get; set; }
 
@@ -128,6 +129,7 @@ namespace Zen.Web.Models
         [Column(name: "URGENTE")]
         public string Urgente { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Column(name: "DTATUAL")]
         public DateTime? DtAtual { get; set; }
 
@@ -143,63 +145,16 @@ namespace Zen.Web.Models
         [Column(name: "SINAL_PERC")]
         public double? SinalPerc { get; set; }
 
-        [Column(name: "LARG_F")]
-        public double? LargF { get; set; }
-
-        [Column(name: "ALT_F")]
-        public double? AltF { get; set; }
-
-        [Column(name: "COMP_F")]
-        public double? CompF { get; set; }
-
-        [Column(name: "LARG_A")]
-        public double? LargA { get; set; }
-
-        [Column(name: "ALT_A")]
-        public double? AltA { get; set; }
-
-        [Column(name: "QTD")]
-        public int? Qtd { get; set; }
-
-        [Column(name: "IMP_F")]
-        public int? ImpF { get; set; }
-
-        [Column(name: "IMP_V")]
-        public int? ImpV { get; set; }
+        [MaxLength(10)]
+        [Column(name: "EDITANDO")]
+        public string Editando { get; set; }
 
         [MaxLength(1)]
-        [Column(name: "ARTE_FINAL")]
-        public string ArteFinal { get; set; }
+        [Column(name: "PENDENTE")]
+        public string Pendente { get; set; }
 
-        [MaxLength(1)]
-        [Column(name: "FOTO_TRACO")]
-        public string FotoTraco { get; set; }
+        [Column(name: "ITENS_PEND")]
+        public int? ItensPend { get; set; }
 
-        [MaxLength(1)]
-        [Column(name: "FOTO_TRACO_FORNEC")]
-        public string FotoTracoFornec { get; set; }
-
-        [MaxLength(1)]
-        [Column(name: "FOTO_RET")]
-        public string FotoRet { get; set; }
-
-        [MaxLength(1)]
-        [Column(name: "FOTO_RET_FORNEC")]
-        public string FotoRetFornec { get; set; }
-
-        [MaxLength(1)]
-        [Column(name: "FOTO_POLI")]
-        public string FotoPoli { get; set; }
-
-        [MaxLength(1)]
-        [Column(name: "FOTO_POLI_FORNEC")]
-        public string FotoPoliFornec { get; set; }
-
-        [MaxLength(2)]
-        [Column(name: "SIT_FOTOLITO")]
-        public string SitFotolito { get; set; }
-
-        [Column(name: "OBS1")]
-        public string Obs1 { get; set; }
     }
 }
