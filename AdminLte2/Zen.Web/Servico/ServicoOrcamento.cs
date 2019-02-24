@@ -17,8 +17,11 @@ namespace Zen.Web.Servico
         {
             if (ObterObjetoPorId(db, objeto.IdPedido) == null)
             {
-
-                objeto.IdPedido = db.Orcamentos.Max(c => c.IdPedido) + 1;
+                ServicoCntr_Orc servCntrOrc = new ServicoCntr_Orc();
+                var cntr_cpcr = servCntrOrc.ObterObjetoPorId(db, 0);
+                cntr_cpcr.IdPedido++;
+                objeto.IdPedido = cntr_cpcr.IdPedido;
+                objeto.IdPedido = objeto.IdPedido;
                 db.Orcamentos.Add(objeto);
             }
 
@@ -34,8 +37,8 @@ namespace Zen.Web.Servico
         public IQueryable<Orcamento> ObterListaObjetosPedidos(ZenContext db, DateTime dtini, DateTime dtfim)
         {
             var lst = new List<Orcamento>();
-            var dataini = DateTime.Now;
-            var datafim = DateTime.Now;
+            var dataini = DateTime.Now.AddDays(-30);
+            var datafim = DateTime.Now.AddDays(30);
 
             if (dtini != null)
             {

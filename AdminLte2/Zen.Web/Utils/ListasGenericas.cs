@@ -14,6 +14,12 @@ namespace Zen.Web.Utils
             new {Sigla = "N", Nome = "Não"}
         };
 
+        public static List<object> ObterSimNaoCad = new List<object>
+        {
+            new {Sigla = "S", Nome = "Sim"},
+            new {Sigla = "N", Nome = "Não"}
+        };
+
         public static List<object> ObterSitAprov = new List<object>
         {
             new {Sigla = "T", Nome = "Todos"},

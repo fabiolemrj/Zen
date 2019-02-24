@@ -7340,6 +7340,7 @@
     <Compile Include="Models\Banco.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\ClienteRanking.cs" />
+    <Compile Include="Models\CntrOrc.cs" />
     <Compile Include="Models\Cntr_CpCr.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\ConfigEmail.cs" />
@@ -7389,6 +7390,7 @@
     <Compile Include="Servico\ServicoBanco.cs" />
     <Compile Include="Servico\ServicoCliente.cs" />
     <Compile Include="Servico\ServicoCntr_CprCr.cs" />
+    <Compile Include="Servico\ServicoCntr_Orc.cs" />
     <Compile Include="Servico\ServicoConfig.cs" />
     <Compile Include="Servico\ServicoConfigEmail.cs" />
     <Compile Include="Servico\ServicoContaCorrente.cs" />
@@ -7467,6 +7469,7 @@
     <Compile Include="ViewModels\MaterialViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\MaterialViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\Orcamento\CreateEditViewModel.cs" />
+    <Compile Include="ViewModels\Orcamento\DeleteViewModel.cs" />
     <Compile Include="ViewModels\PerfilViewModel\AddEditViewModel.cs" />
     <Compile Include="ViewModels\PerfilViewModel\AlterarSenhaViewModel.cs" />
     <Compile Include="ViewModels\PerfilViewModel\DeleteViewModel.cs" />
@@ -7602,6 +7605,7 @@
     <Content Include="Views\ContaPagar\EditContaPagarObs.cshtml" />
     <Content Include="Views\Orcamento\Index.cshtml" />
     <Content Include="Views\Orcamento\Create.cshtml" />
+    <Content Include="Views\Orcamento\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

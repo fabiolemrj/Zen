@@ -140,6 +140,7 @@ namespace Zen.Web.ViewModels.Orcamento
         public int? ItensAprov { get; set; }
 
         [Display(Name = "Sinal %")]
+        [Range(0, 100,ErrorMessage ="O valor deve estar entre 0 e 100")]
         public double? SinalPerc { get; set; }
 
         [Display(Name = "Observação")]

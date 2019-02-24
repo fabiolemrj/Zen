@@ -50,6 +50,7 @@ namespace Zen.Web.Models
         public DbSet<OrcamentoDet> OrcamentoDets { get; set; }
         public DbSet<OrcAreas> OrcAreas { get; set; }
         public DbSet<OrcVariacao> OrcVariacao { get; set; }
+        public DbSet<CntrOrc> CntrOrcs { get; set; }
 
     }
 }

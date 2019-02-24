@@ -224,10 +224,10 @@ namespace Zen.Web.Controllers
 
         private void PopularViewBag()
         {
-            ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNao, "Sigla", "Nome");
+            ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNaoCad, "Sigla", "Nome");
             ViewBag.aprovados = new SelectList(ListasGenericas.ObterSitAprov, "Sigla", "Nome");
             ViewBag.ativo = new SelectList(ListasGenericas.ObterAtivo, "Sigla", "Nome");
-            ViewBag.cliente = new SelectList(servCli.ObterListaObjetosIniciandoNomePor(db, ""),"IdCliente","Nome");
+            ViewBag.cliente = new SelectList(servCli.ObterListaObjetosIniciandoNomePor(db, ""), "IdCliente", "Nome");
         }
 
         [HttpPost]
@@ -263,11 +263,23 @@ namespace Zen.Web.Controllers
 
         private Orcamento ModelParaObjeto(CreateEditViewModel model, Orcamento objeto)
         {
-            objeto.IdCliente = model.IdCliente;
+            var cliente = servCli.ObterListaObjetosPorNome(db, model.NomeCliente).FirstOrDefault();
+            if(cliente != null)
+            {
+                objeto.IdCliente = cliente.IdCliente;
+            }
+            else
+            {
+                objeto.IdCliente = model.IdCliente;
+            }
             objeto.IdOrcamento = model.IdOrcamento;
             objeto.IdPedido = model.IdPedido;
             objeto.IdReferencia = model.IdReferencia;
-            if(model.DtAtual == null)
+            objeto.Contato = model.Contato;
+            objeto.Comissao = model.Comissao;
+            
+
+            if (model.DtAtual == null)
             {
                 objeto.DtAtual = model.DtPedido;
             }
@@ -275,8 +287,8 @@ namespace Zen.Web.Controllers
             {
                 objeto.DtAtual = model.DtAtual;
             }
-           
-            objeto.DtPedido = model.DtPedido;           
+
+            objeto.DtPedido = model.DtPedido;
 
             objeto.IdUsuario = model.IdUsuario;
             objeto.IdUsuAtu = model.IdUsuAtu;
@@ -308,23 +320,141 @@ namespace Zen.Web.Controllers
             objeto.Pendente = model.Pendente;
             objeto.ItensPend = model.ItensPend;
 
-            return objeto;           
+            return objeto;
         }
 
-      //  [HttpPost]
+        private CreateEditViewModel ObjetoParaModel(CreateEditViewModel model, Orcamento objeto)
+        {
+            model.Celular = objeto.Celular;
+            model.Cliente = objeto.Cliente;
+            model.Comissao = objeto.Comissao;
+            model.Contato = objeto.Contato;
+            model.DtAtual = objeto.DtAtual;
+            model.DtPedido = objeto.DtPedido;
+            model.Email1 = objeto.Email1;
+            model.Email2 = objeto.Email2;
+            model.Fax = objeto.Fax;
+            model.FormaPag = objeto.FormaPag;
+            model.IdCliente = objeto.IdCliente;
+            model.IdOrcamento = objeto.IdOrcamento;
+            model.IdPedido = objeto.IdPedido;
+            model.IdReferencia = objeto.IdReferencia;
+            model.IdUsuario = objeto.IdUsuario;
+            model.IdUsuAtu = objeto.IdUsuAtu;
+            model.Incompleto = objeto.Incompleto;
+            model.Indicacao = objeto.Indicacao;
+            model.ItensAprov = objeto.ItensAprov;
+            model.ItensEnv = objeto.ItensEnv;
+            model.ItensPend = objeto.ItensPend;
+            model.NmReferencia = objeto.NmReferencia;
+            model.NomeCliente = objeto.NomeCliente;
+            model.NotifCel = objeto.NotifCel;
+            model.NotifEmail = objeto.NotifEmail;
+            model.NotifFax = objeto.NotifFax;
+            model.NotiFOutro = objeto.NotiFOutro;
+            model.NotifTel = objeto.NotifTel;
+            model.Obs = objeto.Obs;
+            model.Pendente = objeto.Pendente;
+            model.Prazo = objeto.Prazo;
+            model.Ramal1 = objeto.Ramal1;
+            model.Ramal2 = objeto.Ramal2;
+            model.RamalF = objeto.RamalF;
+            model.SinalPerc = objeto.SinalPerc;
+            model.Tel1 = objeto.Tel1;
+            model.Tel2 = objeto.Tel2;
+            model.Urgente = objeto.Urgente;
+
+            return model;
+        }
+
+        [DireitoAcesso(Constantes.AC_EDIT_CAD_PEDORC)]
+        public ActionResult Edit(int id)
+        {
+            TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+            TempData["nometela"] = "Editar Pedido de Orçamento";
+            TempData["lboper"] = "Editar";
+
+            var model = CriarViewModelAddEdit();
+            var objeto = servico.ObterObjetoPorId(db, id);
+
+            ObjetoParaModel(model,objeto );
+
+            return View("Create", model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CreateEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+                TempData["nometela"] = "Editar Pedido de Orçamento";
+                TempData["lboper"] = "Editar";
+
+                PopularViewBag();
+                return View("Create", model);
+            }
+            var objeto = servico.ObterObjetoPorId(db, model.IdPedido);
+
+            ModelParaObjeto(model, objeto);
+
+            try
+            {
+                servico.Salvar(db, objeto);
+                TempData["sucesso"] = $@"Pedido de Orçamento salvo com sucesso!";
+            }
+            catch (Exception e)
+            {
+                TempData["erro"] = $@"Erro ao tentar editar o pedido de orçamento {objeto.IdPedido}";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [DireitoAcesso(Constantes.AC_APG_CAD_PEDORC)]
+        public ActionResult Delete(int id)
+        {
+            TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+            TempData["nometela"] = "Apagar Pedido de Orçamento";
+
+            var objeto = servico.ObterObjetoPorId(db, id);
+            DeleteViewModel model = new DeleteViewModel();
+            model.Id = objeto.IdPedido;
+            model.Nome = objeto.IdPedido.ToString();
+            return View(model);
+        }
+
         public JsonResult BuscaCliente(string Prefix)
         {
-       
-                    
-         var lstcliente = servCli.ObterListaObjetosIniciandoNomePor(db,Prefix);
+            var lstcliente = servCli.ObterListaObjetosIniciandoNomePor(db, Prefix);
 
             var lista = new List<object>();
-        foreach (var item in lstcliente)
+            foreach (var item in lstcliente)
             {
-                lista.Add(new {Id = item.IdCliente, Nome = item.Nome });
+                lista.Add(new { Id = item.IdCliente, Nome = item.Nome });
             }
-         
-           return Json(lista, JsonRequestBehavior.AllowGet);
+
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(DeleteViewModel model)
+        {
+            var objeto = servico.ObterObjetoPorId(db, model.Id);
+            try
+            {
+                if (objeto != null)
+                {
+                    servico.Delete(db, objeto);
+
+                }
+                TempData["sucesso"] = $@"O Pedido de orçamento {objeto.IdPedido} foi apagado com sucesso!";
+            }
+            catch
+            {
+                TempData["erro"] = $@"Erro ao tentar apagar o pedido do orçamento {objeto.IdPedido}";
+            }
+            return RedirectToAction("Index");
         }
     }
 }
