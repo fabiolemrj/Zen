@@ -7367,6 +7367,13 @@
     <Compile Include="Models\Orcamento.cs" />
     <Compile Include="Models\OrcamentoDet.cs" />
     <Compile Include="Models\OrcAreas.cs" />
+    <Compile Include="Models\OrcCalculo.cs" />
+    <Compile Include="Models\OrcCartelas.cs" />
+    <Compile Include="Models\OrcCentMaq.cs" />
+    <Compile Include="Models\OrcCliches.cs" />
+    <Compile Include="Models\OrcFotolitos.cs" />
+    <Compile Include="Models\OrcImpDia.cs" />
+    <Compile Include="Models\OrcImpDiaria.cs" />
     <Compile Include="Models\OrcVariacao.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\PerfilAcoes.cs" />
@@ -7412,6 +7419,13 @@
     <Compile Include="Servico\ServicoOrcamento.cs" />
     <Compile Include="Servico\ServicoOrcamentoDet.cs" />
     <Compile Include="Servico\ServicoOrcArea.cs" />
+    <Compile Include="Servico\ServicoOrcCalculo.cs" />
+    <Compile Include="Servico\ServicoOrcCartela.cs" />
+    <Compile Include="Servico\ServicoOrcCentMaq.cs" />
+    <Compile Include="Servico\ServicoOrcCliches.cs" />
+    <Compile Include="Servico\ServicoOrcFotolitos.cs" />
+    <Compile Include="Servico\ServicoOrcImpDia.cs" />
+    <Compile Include="Servico\ServicoOrcImpDiaria.cs" />
     <Compile Include="Servico\ServicoOrcVariacao.cs" />
     <Compile Include="Servico\ServicoPerfil.cs" />
     <Compile Include="Servico\ServicoPerfilAcoes.cs" />

@@ -51,6 +51,12 @@ namespace Zen.Web.Models
         public DbSet<OrcAreas> OrcAreas { get; set; }
         public DbSet<OrcVariacao> OrcVariacao { get; set; }
         public DbSet<CntrOrc> CntrOrcs { get; set; }
-
+        public DbSet<OrcCalculo> OrcCalculos { get; set; }
+        public DbSet<OrcCartelas> OrcCartelas { get; set; }
+        public DbSet<OrcCliches> OrcCliches { get; set; }
+        public DbSet<OrcCentMaq> OrcCentMaqs { get; set; }
+        public DbSet<OrcFotolitos> OrcFotolitos { get; set; }
+        public DbSet<OrcImpDia> OrcImpDias { get; set; }
+        public DbSet<OrcImpDiaria> OrcImpDiarias { get; set; }
     }
 }
