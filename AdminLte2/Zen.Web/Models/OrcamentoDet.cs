@@ -115,6 +115,9 @@ namespace Zen.Web.Models
         [Column(name: "ALT_HS")]
         public double? AltHs { get; set; }
 
+        [Column(name: "QTD")]
+        public int? Quant { get; set; }
+
         [MaxLength(1)]
         [Column(name: "OFFSET")]
         public string OffSet { get; set; }
@@ -130,7 +133,7 @@ namespace Zen.Web.Models
         public string OutrosImp { get; set; }
 
         [MaxLength(32)]
-        [Column(name: "OBSIMP")]
+        [Column(name: "OBS_OIMP")]
         public string ObsImp { get; set; }
 
         [MaxLength(1)]

@@ -12,7 +12,7 @@ using Zen.Web.ViewModels.Orcamento;
 
 namespace Zen.Web.Controllers
 {
-    public class OrcamentoController : Controller
+    public class OrcamentoController : CustomController
     {
         ZenContext db = new ZenContext();
         ServicoOrcamento servico = new ServicoOrcamento();
@@ -30,7 +30,7 @@ namespace Zen.Web.Controllers
                          </li>
                          <li class='active'>
                            <i class='fa-file-o'> </i>
-                           <a href='/ContaPagar'> Pedidos </a>
+                           <a href='/Orcamento'> Pedidos </a>
                          </li>
                          
                     </ol>";
@@ -48,7 +48,7 @@ namespace Zen.Web.Controllers
                          </li>
                          <li>
                            <i class='fa-file-o'> </i>
-                           <a href='/ContaPagar'> Pedidos </a>
+                           <a href='/Orcamento'> Pedidos </a>
                          </li>
                          <li class='active'> Cadastro
                          </li>
@@ -57,6 +57,7 @@ namespace Zen.Web.Controllers
 
 
         // GET: Orcamento
+        [DireitoAcesso(Constantes.AC_CONS_CAD_PEDORC)]
         public ActionResult Index(int pagina = 1, int tamPag = Constantes.TamanhoPagina, string dtini = "", string dtfim = "",
                                  string aprovados = "T", string cliente = "", string referencia = "", string orcamento = "", string pendentes = "T")
         {
@@ -69,7 +70,7 @@ namespace Zen.Web.Controllers
 
         }
 
-        [DireitoAcesso(Constantes.AC_CONS_CAD_PEDORC)]
+        
         private IPagedList<Orcamento> PrepararViewModel(int pagina, int tamPag, string dtini, string dtfim,
                                                        string aprovados, string cliente, string referencia, string orcamento,
                                                        string pendentes = "")

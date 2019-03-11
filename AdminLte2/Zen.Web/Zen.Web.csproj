@@ -7320,6 +7320,7 @@
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\MovCcController.cs" />
     <Compile Include="Controllers\OrcamentoController.cs" />
+    <Compile Include="Controllers\OrcamentoDetController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PermissoesController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -7620,6 +7621,7 @@
     <Content Include="Views\Orcamento\Index.cshtml" />
     <Content Include="Views\Orcamento\Create.cshtml" />
     <Content Include="Views\Orcamento\Delete.cshtml" />
+    <Content Include="Views\OrcamentoDet\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
