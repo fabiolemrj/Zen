@@ -101,6 +101,18 @@ namespace Zen.Web.Models
         [Column(name: "ALT_Rs")]
         public double? AltRs { get; set; }
 
+        [Column(name: "LARG_A")]
+        public double? LargA { get; set; }
+
+        [Column(name: "LARG_F")]
+        public double? AltF { get; set; }
+
+        [Column(name: "IMP_F")]
+        public double? ImpF { get; set; }
+
+        [Column(name: "IMP_V")]
+        public double? ImpV { get; set; }
+
         [MaxLength(1)]
         [Column(name: "HOT_STAMP")]
         public string HotStamp { get; set; }
@@ -114,6 +126,12 @@ namespace Zen.Web.Models
 
         [Column(name: "ALT_HS")]
         public double? AltHs { get; set; }
+
+        [Column(name: "ALT_A")]
+        public double? AltA { get; set; }
+
+        [Column(name: "ALT_F")]
+        public double? AltF { get; set; }
 
         [Column(name: "QTD")]
         public int? Quant { get; set; }

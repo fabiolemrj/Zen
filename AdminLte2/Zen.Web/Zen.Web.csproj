@@ -7483,6 +7483,7 @@
     <Compile Include="ViewModels\MaquinaViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\MaterialViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\MaterialViewModel\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\OrcamentoDetViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\Orcamento\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\Orcamento\DeleteViewModel.cs" />
     <Compile Include="ViewModels\PerfilViewModel\AddEditViewModel.cs" />
