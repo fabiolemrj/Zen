@@ -59,18 +59,23 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
         public double? LargA { get; set; }
 
         [Display(Name = "Largura")]
+        [Range(0.5, 250,ErrorMessage ="Valor inválido para largura")]
         public double? LargF { get; set; }
 
         [Display(Name = "Altura")]
         public double? AltA { get; set; }
 
         [Display(Name = "Altura")]
+        [Range(0.5, 250, ErrorMessage = "Valor inválido para altura")]
         public double? AltF { get; set; }
 
         [Display(Name = "Comprimento")]
+        [Range(0.5, 250, ErrorMessage = "Valor inválido para comprimento")]
         public double? CompF { get; set; }
 
         [Display(Name = "Quantidade")]
+        [Range(1,999999,ErrorMessage ="A quantidade de itens deve ser maior que zero")]
+        [Required(ErrorMessage = "O campo quantidade é obrigatório", AllowEmptyStrings = false)]
         public int? Quant { get; set; }
 
         [Display(Name = "Off Set")]
@@ -90,6 +95,14 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
 
         [Display(Name = "Sem Acabamento")]
         public string SemAcab { get; set; }
+
+        [Display(Name = "Frente")]
+        [Required(ErrorMessage = "O campo impressão frente é obrigatório", AllowEmptyStrings = false)]
+        public int ImpF { get; set; }
+
+        [Display(Name = "Verso")]
+        [Required(ErrorMessage = "O campo impressão verso é obrigatório", AllowEmptyStrings = false)]
+        public int? ImpV { get; set; }
 
         [Display(Name = "Corte Simples")]
         [MaxLength(1, ErrorMessage = "O campo Corte simples deve ter até 1 caracter")]

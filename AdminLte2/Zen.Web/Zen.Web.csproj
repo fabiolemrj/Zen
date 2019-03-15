@@ -7623,6 +7623,7 @@
     <Content Include="Views\Orcamento\Create.cshtml" />
     <Content Include="Views\Orcamento\Delete.cshtml" />
     <Content Include="Views\OrcamentoDet\Index.cshtml" />
+    <Content Include="Views\OrcamentoDet\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

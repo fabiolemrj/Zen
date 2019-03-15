@@ -105,13 +105,13 @@ namespace Zen.Web.Models
         public double? LargA { get; set; }
 
         [Column(name: "LARG_F")]
-        public double? AltF { get; set; }
+        public double? LargF { get; set; }
 
         [Column(name: "IMP_F")]
-        public double? ImpF { get; set; }
+        public int? ImpF { get; set; }
 
         [Column(name: "IMP_V")]
-        public double? ImpV { get; set; }
+        public int? ImpV { get; set; }
 
         [MaxLength(1)]
         [Column(name: "HOT_STAMP")]

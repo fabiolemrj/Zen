@@ -19,7 +19,8 @@
                 </div>
                
                 <div class="box-body">
-                    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-info pull-right" })
+                    @*@Html.ActionLink("Novo", "Create", null, new { idpedido = @ViewBag.IdPedido, @class = "btn btn-info pull-right" })*@
+                    <a href="@Url.Action("Create",new { idpedido=ViewBag.IdPedido})" class="btn btn-info pull-right" title="Novo">Novo</a>
                 </div>
                 <div class="box-body">
                     <table id="tabela" class="table table-bordered table-hover table-striped">
