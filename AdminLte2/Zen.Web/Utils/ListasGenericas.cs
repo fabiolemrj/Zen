@@ -27,6 +27,17 @@ namespace Zen.Web.Utils
             new {Sigla = "N", Nome = "Não Aprovados"}
         };
 
+        public static List<object> ObterSitFotolito = new List<object>
+        {
+            new {Sigla = "AG", Nome = "Aguardando"},
+            new {Sigla = "AQ", Nome = "Existente"},
+            new {Sigla = "NV", Nome = "Novo"},
+            new {Sigla = "MK", Nome = "Mascara"},
+            new {Sigla = "AE", Nome = "Aguardando/Existente"},
+            new {Sigla = "AM", Nome = "Aguardando/Mascara"},
+            new {Sigla = "EM", Nome = "Existente/Mascara"}
+        };
+
         public static List<object> Vazia = new List<object>
         {
             new {Sigla = "", Nome = ""}

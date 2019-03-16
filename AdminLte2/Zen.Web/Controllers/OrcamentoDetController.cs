@@ -311,6 +311,7 @@ namespace Zen.Web.Controllers
             ViewBag.ativo = new SelectList(ListasGenericas.ObterAtivo, "Sigla", "Nome");
             ViewBag.Produtos = new SelectList(servProd.ObterListaObjetos(db, ""),"ID","NOME");
             ViewBag.Material = new SelectList(servmat.ObterListaObjetos(db, ""),"ID","NOME");
+            ViewBag.SitFotolito = new SelectList(ListasGenericas.ObterSitFotolito, "Sigla", "Nome"); 
 
             ViewBag.IdPedido = idpedido;
         }

@@ -193,7 +193,28 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
 
         [Display(Name = "Outros")]
         public string OutrosAcab2 { get; set; }
-        
-        
+
+        public string FotoPoli { get; set; }
+
+        public string FotoPoliFornec { get; set; }
+
+        public string FotoRet { get; set; }
+
+        public string FotoRetFornec { get; set; }
+
+        public string FotoTraco { get; set; }
+
+        public string FotoTracoFornec { get; set; }
+
+        public string Faca { get; set; }
+
+        public string ArteFinal { get; set; }
+
+        public string RelevoFrances { get; set; }
+
+        public string RfChapa { get; set; }
+        public double? LargRf { get; set; }
+        public double? AltRf { get; set; }
+        public string Obs1 { get; set; }
     }
 }

@@ -81,6 +81,10 @@ namespace Zen.Web.Models
         public Material Material4 { get; set; }
 
         [MaxLength(1)]
+        [Column(name: "ARTE_FINAL")]
+        public string ArteFinal { get; set; }
+
+        [MaxLength(1)]
         [Column(name: "MAT4_FORNEC")]
         public string Mat4Fornec { get; set; }
 
@@ -92,6 +96,10 @@ namespace Zen.Web.Models
         public string RelevoSeco { get; set; }
 
         [MaxLength(1)]
+        [Column(name: "RELEVO_FRANCES")]
+        public string RelevoFrances { get; set; }
+
+        [MaxLength(1)]
         [Column(name: "RS_CHAPA")]
         public string RsChapa { get; set; }
 
@@ -101,12 +109,25 @@ namespace Zen.Web.Models
         [Column(name: "ALT_Rs")]
         public double? AltRs { get; set; }
 
+        [MaxLength(1)]
+        [Column(name: "RF_CHAPA")]
+        public string RfChapa { get; set; }
+
+        [Column(name: "LARG_Rf")]
+        public double? LargRf { get; set; }
+
+        [Column(name: "ALT_Rf")]
+        public double? AltRf { get; set; }
+
         [Column(name: "LARG_A")]
         public double? LargA { get; set; }
 
         [Column(name: "LARG_F")]
         public double? LargF { get; set; }
 
+        [Column(name: "COMP_F")]
+        public double? CompF { get; set; }
+        
         [Column(name: "IMP_F")]
         public int? ImpF { get; set; }
 
@@ -153,6 +174,9 @@ namespace Zen.Web.Models
         [MaxLength(32)]
         [Column(name: "OBS_OIMP")]
         public string ObsImp { get; set; }
+
+        [Column(name: "OBS1")]
+        public string Obs1 { get; set; }
 
         [MaxLength(1)]
         [Column(name: "SEM_ACAB")]
@@ -206,6 +230,10 @@ namespace Zen.Web.Models
         public string CodFaca { get; set; }
 
         [MaxLength(1)]
+        [Column(name: "FACA")]
+        public string Faca { get; set; }
+
+        [MaxLength(1)]
         [Column(name: "CORTE_ESP")]
         public string CorteEsp { get; set; }
 
@@ -220,6 +248,30 @@ namespace Zen.Web.Models
         [MaxLength(1)]
         [Column(name: "VINCO")]
         public string Vinco { get; set; }
+
+        [MaxLength(1)]
+        [Column(name: "FOTO_POLI")]
+        public string FotoPoli { get; set; }
+
+        [MaxLength(1)]
+        [Column(name: "FOTO_POLI_FORNEC")]
+        public string FotoPoliFornec { get; set; }
+
+        [MaxLength(1)]
+        [Column(name: "FOTO_RET")]
+        public string FotoRet { get; set; }
+
+        [MaxLength(1)]
+        [Column(name: "FOTO_RET_FORNEC")]
+        public string FotoRetFornec { get; set; }
+
+        [MaxLength(1)]
+        [Column(name: "FOTO_TRACO")]
+        public string FotoTraco { get; set; }
+
+        [MaxLength(1)]
+        [Column(name: "FOTO_TRACO_FORNEC")]
+        public string FotoTracoFornec { get; set; }
 
         [MaxLength(1)]
         [Column(name: "LAM_FOSCA_F")]
@@ -253,5 +305,10 @@ namespace Zen.Web.Models
         [MaxLength(1)]
         [Column(name: "EXECUTADO")]
         public string Executado { get; set; }
+
+        [MaxLength(2)]
+        [Column(name: "SIT_FOTOLITO")]
+        public string SitFotolito { get; set; }
+
     }
 }
