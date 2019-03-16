@@ -18,7 +18,7 @@
             </div>
             <div class="box-body">
                 <div class="form-horizontal">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
 
 
                         <div class="box box-content">
@@ -26,14 +26,14 @@
                                 <label>Dados</label>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Item, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-8">
+                                @Html.LabelFor(model => model.Item, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-3">
                                     @Html.EditorFor(model => model.Item, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Item, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdProduto, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.IdProduto, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
                                     @Html.DropDownListFor(model => model.IdProduto, (SelectList)ViewBag.Produtos, new { @class = "form-control select2" })
                                     @*@Html.EditorFor(model => model.IdProduto, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.IdMaterial1, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
                                     @Html.DropDownListFor(model => model.IdMaterial1, (SelectList)ViewBag.Material, new { @class = "form-control select2" })
                                     @*@Html.EditorFor(model => model.IdMaterial1, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial2, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.IdMaterial2, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
                                     @Html.DropDownListFor(model => model.IdMaterial2, (SelectList)ViewBag.Material, new { @class = "form-control select2" })
 
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial3, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.IdMaterial3, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
                                     @*@Html.EditorFor(model => model.IdMaterial3, new { htmlAttributes = new { @class = "form-control" } })*@
                                     @Html.DropDownListFor(model => model.IdMaterial3, (SelectList)ViewBag.Material, new { @class = "form-control select2" })
@@ -67,12 +67,47 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial4, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.IdMaterial4, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
                                     @*@Html.EditorFor(model => model.IdMaterial4, new { htmlAttributes = new { @class = "form-control" } })*@
                                     @Html.DropDownListFor(model => model.IdMaterial4, (SelectList)ViewBag.Material, new { @class = "form-control select2" })
 
                                     @Html.ValidationMessageFor(model => model.IdMaterial4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Formato aberto</label>
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.LargA, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LargA, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.AltA, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.AltA, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Formato fechado</label>
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.LargF, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.LargF, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.AltF, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.AltF, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.CompF, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompF, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Quant, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.Quant, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Quant, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
