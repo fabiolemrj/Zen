@@ -149,12 +149,22 @@ namespace Zen.Web.Controllers
             model.Vazador = 0;
             model.Vinco = "N";
             model.WireO = "N";
+            model.FotoPoli = "N";
+            model.FotoPoliFornec = "N";
+            model.FotoRet = "N";
+            model.FotoTraco = "N";
+            model.FotoRetFornec = "N";
+            model.FotoTracoFornec = "N";
+            model.Faca = "N";
+            model.Quant = 0;
 
             return View(model);
         }
 
         private void Validar(CreateEditViewModel model)
         {
+          
+
             if((model.LargF > model.LargA) || (model.AltF > model.AltA))
             {
                 ModelState.AddModelError("1", "O formato fechado não pode ser maior que o formato aberto");
@@ -175,6 +185,11 @@ namespace Zen.Web.Controllers
                     ModelState.AddModelError("4", "Informe a dimensão da chapa do hot stamp");
                 if (model.OffV <= 0)
                     ModelState.AddModelError("5", "Informe a dimensão da chapa do hot stamp");
+            }
+
+            if (model.IdMaterial1 <= 0)
+            {
+                ModelState.AddModelError("6", "O campo material 1 é obrigatório");
             }
         }
 
@@ -293,6 +308,13 @@ namespace Zen.Web.Controllers
             objeto.Vazador = model.Vazador;
             objeto.Vinco = model.Vinco;
             objeto.WireO = model.WireO;
+            objeto.FotoPoli = model.FotoPoli;
+            objeto.FotoPoliFornec = model.FotoPoliFornec;
+            objeto.FotoRet = model.FotoRet;
+            objeto.FotoRetFornec = model.FotoRetFornec;
+            objeto.FotoTraco = model.FotoTracoFornec;
+            objeto.Faca = model.Faca;
+            objeto.Obs1 = model.Obs1;
 
             return objeto;
         }
@@ -310,8 +332,22 @@ namespace Zen.Web.Controllers
             ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNaoCad, "Sigla", "Nome");
             ViewBag.ativo = new SelectList(ListasGenericas.ObterAtivo, "Sigla", "Nome");
             ViewBag.Produtos = new SelectList(servProd.ObterListaObjetos(db, ""),"ID","NOME");
-            ViewBag.Material = new SelectList(servmat.ObterListaObjetos(db, ""),"ID","NOME");
-            ViewBag.SitFotolito = new SelectList(ListasGenericas.ObterSitFotolito, "Sigla", "Nome"); 
+
+            var ltsitem = new List<SelectListItem>();
+
+            ltsitem.Add(new SelectListItem() { Text = "", Value = "-1" });
+
+             var mat = new SelectList(servmat.ObterListaObjetos(db, ""),"ID","NOME");
+            
+            foreach (var item in mat)
+            {
+                ltsitem.Add(new SelectListItem() { Text = item.Text, Value = item.Value});
+            }
+
+           ViewBag.SitFotolito = new SelectList(ListasGenericas.ObterSitFotolito, "Sigla", "Nome");
+            
+
+            ViewBag.Material = ltsitem;
 
             ViewBag.IdPedido = idpedido;
         }

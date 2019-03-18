@@ -74,7 +74,7 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
         public double? CompF { get; set; }
 
         [Display(Name = "Quantidade")]
-        [Range(1,999999,ErrorMessage ="A quantidade de itens deve ser maior que zero")]
+        [Range(1,9999999,ErrorMessage ="A quantidade de itens deve ser maior que zero")]
         [Required(ErrorMessage = "O campo quantidade é obrigatório", AllowEmptyStrings = false)]
         public int? Quant { get; set; }
 
@@ -176,11 +176,9 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
         public string LamFoscaV { get; set; }
 
         [Display(Name = "Vazador")]
-        [MaxLength(1, ErrorMessage = "O campo vazador deve ter até 1 caracter")]
         public int? Vazador { get; set; }
 
         [Display(Name = "Ilhos")]
-        [MaxLength(10, ErrorMessage = "O campo Ilhos deve ter até 10 caracter")]
         public int? Ilhos { get; set; }
 
         [Display(Name = "Wire O")]
