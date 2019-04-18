@@ -10,14 +10,16 @@ namespace Zen.Web.Servico
     {
         public OrcCalculo ObterObjetoPorId(ZenContext db, int idpedido, int item)
         {
-            return db.OrcCalculos.FirstOrDefault(c => c.IdPedido == idpedido && c.Item == item);
+           
+                return db.OrcCalculos.FirstOrDefault(c => c.IdPedido == idpedido && c.Item == item);
+        
         }
 
         public void Salvar(ZenContext db, OrcCalculo objeto)
         {
             if (ObterObjetoPorId(db, objeto.IdPedido, objeto.Item) == null)
             {
-                objeto.Item = db.OrcCalculos.Max(c => c.Item) + 1;
+            //    objeto.Item = db.OrcCalculos.Max(c => c.Item) + 1;
                 db.OrcCalculos.Add(objeto);
             }
 

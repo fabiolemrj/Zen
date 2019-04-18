@@ -19,124 +19,148 @@
             </div>
             <div class="box-body">
                 <div class="form-horizontal">
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <div class="box box-content">
                             <div class="box-header">
                                 <label>Dados</label>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Item, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.Item, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.LabelFor(model => model.Item, htmlAttributes: new { @class = "control-label col-md-2"})
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Item, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.Item, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdProduto, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-9">
+                                @Html.LabelFor(model => model.IdProduto, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
                                     @Html.DropDownListFor(model => model.IdProduto, (SelectList)ViewBag.Produtos, new { @class = "form-control select2" })
-                                    @*@Html.EditorFor(model => model.IdProduto, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    @Html.ValidationMessageFor(model => model.IdProduto, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial1, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-9">
-                                    @Html.DropDownListFor(model => model.IdMaterial1, (List<SelectListItem>)ViewBag.Material, new { @class = "form-control select2" })
-                                    @*@Html.EditorFor(model => model.IdMaterial1, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    @Html.ValidationMessageFor(model => model.IdMaterial1, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial2, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-9">
-                                    @Html.DropDownListFor(model => model.IdMaterial2, (List<SelectListItem>)ViewBag.Material, new { @class = "form-control select2" })
 
+                                    @Html.ValidationMessageFor(model => model.IdProduto, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IdMaterial1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.DropDownListFor(model => model.IdMaterial1, (List<SelectListItem>)ViewBag.Material, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.IdMaterial1, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.CheckBoxFor(model => model.Mat1Fornec, new { htmlAttributes = new { @class = "form-control flat" } })
+                                    <label class="control-label">Fornecido pelo cliente</label>
+                                    @Html.ValidationMessageFor(model => model.Mat1Fornec, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IdMaterial2, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.DropDownListFor(model => model.IdMaterial2, (List<SelectListItem>)ViewBag.Material, new { @class = "form-control select2" })
                                     @*@Html.EditorFor(model => model.IdMaterial2, new { htmlAttributes = new { @class = "form-control" } })*@
                                     @Html.ValidationMessageFor(model => model.IdMaterial2, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.CheckBoxFor(model => model.Mat2Fornec, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label class="control-label">Fornecido pelo cliente</label>
+                                    @Html.ValidationMessageFor(model => model.Mat2Fornec, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial3, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-9">
+                                @Html.LabelFor(model => model.IdMaterial3, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
                                     @*@Html.EditorFor(model => model.IdMaterial3, new { htmlAttributes = new { @class = "form-control" } })*@
                                     @Html.DropDownListFor(model => model.IdMaterial3, (List<SelectListItem>)ViewBag.Material, new { @class = "form-control select2" })
-
                                     @Html.ValidationMessageFor(model => model.IdMaterial3, "", new { @class = "text-danger" })
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.IdMaterial4, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-9">
-                                    @*@Html.EditorFor(model => model.IdMaterial4, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    @Html.DropDownListFor(model => model.IdMaterial4, (List<SelectListItem>)ViewBag.Material, new { @class = "form-control select2" })
-
-                                    @Html.ValidationMessageFor(model => model.IdMaterial4, "", new { @class = "text-danger" })
+                                <div class="col-md-3">
+                                    @Html.CheckBoxFor(model => model.Mat3Fornec, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label class="control-label">Fornecido pelo cliente</label>
+                                    @Html.ValidationMessageFor(model => model.Mat3Fornec, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Formato aberto</label>
+                                @Html.LabelFor(model => model.IdMaterial4, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @*@Html.EditorFor(model => model.IdMaterial4, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.DropDownListFor(model => model.IdMaterial4, (List<SelectListItem>)ViewBag.Material, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.IdMaterial4, "", new { @class = "text-danger" })
+                                </div>
                                 <div class="col-md-3">
+                                    @Html.CheckBoxFor(model => model.Mat4Fornec, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label class="control-label">Fornecido pelo cliente</label>
+                                    @Html.ValidationMessageFor(model => model.Mat4Fornec, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Formato aberto</label>
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.LargA, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.LargA, "", new { @class = "text-danger" })
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.AltA, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.AltA, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Formato fechado</label>
-                                <div class="col-md-3">
+                                <label class="control-label col-md-2">Formato fechado</label>
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.LargF, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.LargF, "", new { @class = "text-danger" })
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.AltF, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.AltF, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.CompF, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.CompF, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Quant, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-3">
+                                @Html.LabelFor(model => model.Quant, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.Quant, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Quant, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Impressão</label>
-                                <div class="col-md-3">
+                                <label class="control-label col-md-2">Impressão</label>
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.ImpF, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.ImpF, "", new { @class = "text-danger" })
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     @Html.EditorFor(model => model.ImpV, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.ImpV, "", new { @class = "text-danger" })
                                 </div>
 
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Impressão por cartela</label>
-                                <div class="col-md-3">
-                                    @Html.DropDownListFor(model => model.ImpF, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
-                                    @Html.ValidationMessageFor(model => model.ImpF, "", new { @class = "text-danger" })
+                                <label class="control-label col-md-2">Impressão por cartela</label>
+                                <div class="col-md-2">
+                                    @Html.DropDownListFor(model => model.TemCartela, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.TemCartela, "", new { @class = "text-danger" })
                                 </div>
-                                <label class="control-label col-md-3">Variações/Assinaturas</label>
-                                <div class="col-md-3">
-                                    @Html.DropDownListFor(model => model.ImpF, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
-                                    @Html.ValidationMessageFor(model => model.ImpF, "", new { @class = "text-danger" })
+                                <label class="control-label col-md-2">Variações/Assinaturas</label>
+                                <div class="col-md-2">
+                                    @Html.DropDownListFor(model => model.TemVariacoes, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.TemVariacoes, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-12">
+
                                 </div>
+
+                            </div>
+                            <div class="form-group">
+                               
                                 <div class="col-md-4">
                                     <div class="btn-group">
                                         <button class="btn btn-info">Outros Campos</button>
@@ -149,7 +173,7 @@
                                                 <a href="@Url.Action("Edit","OrcImpDia",new { idpedido=ViewBag.IdPedido, item = Model.Item})" title="Novo">Areas de impressão</a>
                                             </li>
                                             <li>
-                                                <a href="@Url.Action("Edit","OrcVariacoes",new { idpedido=ViewBag.IdPedido, item = Model.Item})" title="Novo">Variações</a>
+                                                <a href="@Url.Action("Index","OrcamentoVariacoes",new { idpedido=ViewBag.IdPedido, item = Model.Item})" title="Novo">Variações</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -160,6 +184,159 @@
                             <div class="form-group">
                                 @*<a href="@Url.Action("Edit","OrcVariacoes",new { idpedido=ViewBag.IdPedido, item = Model.Item})" class="btn btn-info pull-right" title="Novo">Variações</a>*@
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="box box-content">
+                            @if (Model.TemCartela == "S" && Model.TemVariacoes == "N")
+                            {
+
+                                <div class="box-header">
+                                    <label>Impressão por cartela sem variação</label>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Unidades por cartela</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.QuantCart, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.QuantCart, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Impressão sangrada</label>
+                                        <div class="col-md-2">
+                                            @Html.DropDownListFor(model => model.Sangrada, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                            @Html.ValidationMessageFor(model => model.Sangrada, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Margem (cm)</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Margem, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Margem, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Distância (cm)</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                            else if (Model.TemCartela == "S" && Model.TemVariacoes == "S")
+                            {
+                                <div class="box-header">
+                                    <label>Impressão por cartela com variação</label>
+                                </div>
+
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Variações</label>
+                                        <label class="control-label col-md-2">Frente</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.VariacaoFrente, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            @Html.ValidationMessageFor(model => model.VariacaoFrente, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="control-label col-md-1">Verso</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.VariacaoVerso, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            @Html.ValidationMessageFor(model => model.VariacaoVerso, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Unidades por cartela</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.QuantCart, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.QuantCart, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Impressão sangrada</label>
+                                        <div class="col-md-2">
+                                            @Html.DropDownListFor(model => model.Sangrada, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                            @Html.ValidationMessageFor(model => model.Sangrada, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Margem (cm)</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Margem, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Margem, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Distância (cm)</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                            else if (Model.TemCartela == "N" && Model.TemVariacoes == "S")
+                            {
+                                <div class="box-header">
+                                    <label>Impressões por unidade com variações</label>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Variações</label>
+                                        <label class="control-label col-md-2">Frente</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.VariacaoFrente, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            @Html.ValidationMessageFor(model => model.VariacaoFrente, "", new { @class = "text-danger" })
+                                        </div>
+                                        <label class="control-label col-md-1">Verso</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.VariacaoVerso, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            @Html.ValidationMessageFor(model => model.VariacaoVerso, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Impressão sangrada</label>
+                                        <div class="col-md-2">
+                                            @Html.DropDownListFor(model => model.Sangrada, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                            @Html.ValidationMessageFor(model => model.Sangrada, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Margem (cm)</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Margem, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Margem, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="box-header">
+                                    <label>Impressão por unidade sem variações</label>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Impressão Sangrada</label>
+                                        <div class="col-md-2">
+                                            @Html.DropDownListFor(model => model.Sangrada, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                            @Html.ValidationMessageFor(model => model.Sangrada, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Margem (cm)</label>
+                                        <div class="col-md-2">
+                                            @Html.EditorFor(model => model.Margem, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Margem, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -250,58 +427,59 @@
                                     @Html.ValidationMessageFor(model => model.Faca, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-3">
-
+                                    @Html.EditorFor(model => model.FacaExt, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FacaExt, "", new { @class = "text-danger" })
                                 </div>
-                                <label class="control-label col-md-3">cm linear</label>
+                                <label class="control-label col-md-1">cm linear</label>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">Ilhos</label>
                                 <div class="col-md-3">
-                                        @Html.EditorFor(model => model.Ilhos, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Ilhos, "", new { @class = "text-danger" })
-                                    </div>
+                                    @Html.EditorFor(model => model.Ilhos, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Ilhos, "", new { @class = "text-danger" })
+                                </div>
                                 <label class="control-label col-md-3">Wire-o</label>
                                 <div class="col-md-3">
                                     @Html.DropDownListFor(model => model.WireO, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
                                     @Html.ValidationMessageFor(model => model.WireO, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Laminação Fosca Frente</label>
-                                    <div class="col-md-3">
-                                        @Html.DropDownListFor(model => model.LamFoscaF, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
-                                        @Html.ValidationMessageFor(model => model.LamFoscaF, "", new { @class = "text-danger" })
-                                    </div>
-                                    <label class="control-label col-md-3">Laminação Fosca Verso</label>
-                                    <div class="col-md-3">
-                                        @Html.DropDownListFor(model => model.LamFoscaV, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
-                                        @Html.ValidationMessageFor(model => model.LamFoscaV, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Espiral</label>
-                                    <div class="col-md-3">
-                                        @Html.DropDownListFor(model => model.Espiral, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
-                                        @Html.ValidationMessageFor(model => model.Espiral, "", new { @class = "text-danger" })
-                                    </div>
-                                    <label class="control-label col-md-3">Vazador</label>
-                                    <div class="col-md-3">
-                                        @Html.EditorFor(model => model.Vazador, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Vazador, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Observação</label>
-                                    <div class="col-md-9">
-                                        @Html.TextAreaFor(model => model.OutrosAcab2, new { @class = "form-control" })
-
-                                        @Html.ValidationMessageFor(model => model.OutrosAcab2, "", new { @class = "text-danger" })
-                                    </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Laminação Fosca Frente</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(model => model.LamFoscaF, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.LamFoscaF, "", new { @class = "text-danger" })
                                 </div>
-                            
+                                <label class="control-label col-md-3">Laminação Fosca Verso</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(model => model.LamFoscaV, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.LamFoscaV, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Espiral</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(model => model.Espiral, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(model => model.Espiral, "", new { @class = "text-danger" })
+                                </div>
+                                <label class="control-label col-md-3">Vazador</label>
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.Vazador, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Vazador, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Observação</label>
+                                <div class="col-md-9">
+                                    @Html.TextAreaFor(model => model.OutrosAcab2, new { @class = "form-control" })
+
+                                    @Html.ValidationMessageFor(model => model.OutrosAcab2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-1">
 
@@ -310,7 +488,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                         <div class="box box-content">
                             <div class="box-header">
                                 <label>Outras impressões</label>
@@ -334,7 +512,7 @@
                                     @Html.EditorFor(model => model.LargRs, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.LargRs, "", new { @class = "text-danger" })
                                 </div>
-                                <label class="control-label col-md-1">cm</label>
+                                <label class="control-label col-sm-1">cm</label>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Relevo frances</label>
@@ -417,7 +595,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                         <div class="box box-content">
                             <div class="box-header">
                                 <label>Dados Complementares</label>
@@ -495,7 +673,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Observação</label>
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     @Html.TextAreaFor(model => model.Obs1, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Obs1, "", new { @class = "text-danger" })
                                 </div>

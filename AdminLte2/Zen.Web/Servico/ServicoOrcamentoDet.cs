@@ -10,7 +10,9 @@ namespace Zen.Web.Servico
     {
         public OrcamentoDet ObterObjetoPorId(ZenContext db, int idpedido, int item)
         {
-            return db.OrcamentoDets.FirstOrDefault(c=>c.IdPedido== idpedido && c.Item == item);
+           
+             return  db.OrcamentoDets.SingleOrDefault(c => c.IdPedido == idpedido && c.Item == item);
+           
         }
 
         public void Salvar(ZenContext db, OrcamentoDet objeto)
@@ -52,13 +54,13 @@ namespace Zen.Web.Servico
                      from mat1 in _mat1.DefaultIfEmpty()
                      join mat2 in db.Materiais on orcdet.IdMaterial2 equals mat2.Id
                      into _mat2
-                     from mat2 in _mat1.DefaultIfEmpty()
+                     from mat2 in _mat2.DefaultIfEmpty()
                      join mat3 in db.Materiais on orcdet.IdMaterial3 equals mat3.Id
                      into _mat3
-                     from mat3 in _mat1.DefaultIfEmpty()
+                     from mat3 in _mat3.DefaultIfEmpty()
                      join mat4 in db.Materiais on orcdet.IdMaterial4 equals mat4.Id
                      into _mat4
-                     from mat4 in _mat1.DefaultIfEmpty()
+                     from mat4 in _mat4.DefaultIfEmpty()
                      select new { orcdet, orc, prod,mat1,mat2,mat3,mat4 }).Where(c=>c.orcdet.IdPedido == idpedido).OrderBy(c=>c.orcdet.Item);
 
             foreach (var item in q)

@@ -98,7 +98,7 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
 
         [Display(Name = "Frente")]
         [Required(ErrorMessage = "O campo impressão frente é obrigatório", AllowEmptyStrings = false)]
-        public int ImpF { get; set; }
+        public int? ImpF { get; set; }
 
         [Display(Name = "Verso")]
         [Required(ErrorMessage = "O campo impressão verso é obrigatório", AllowEmptyStrings = false)]
@@ -192,6 +192,18 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
         [Display(Name = "Outros")]
         public string OutrosAcab2 { get; set; }
 
+        [Display(Name = "MAT1_FORNEC")]
+        public bool Mat1Fornec { get; set; }
+
+        [Display(Name = "MAT2_FORNEC")]
+        public bool Mat2Fornec { get; set; }
+
+        [Display(Name = "MAT3_FORNEC")]
+        public bool Mat3Fornec { get; set; }
+
+        [Display(Name = "MAT4_FORNEC")]
+        public bool Mat4Fornec { get; set; }
+
         public string FotoPoli { get; set; }
 
         public string FotoPoliFornec { get; set; }
@@ -211,8 +223,29 @@ namespace Zen.Web.ViewModels.OrcamentoDetViewModel
         public string RelevoFrances { get; set; }
 
         public string RfChapa { get; set; }
+
         public double? LargRf { get; set; }
+
         public double? AltRf { get; set; }
+
         public string Obs1 { get; set; }
+        
+        public string TemCartela { get; set; }
+
+        public string TemVariacoes { get; set; }
+
+        public string Sangrada { get; set; }
+
+        public double? Margem { get; set; }
+
+        public int? QuantCart { get; set; }
+
+        public double? Distancia { get; set; }
+
+        public int? FacaExt { get; set; }
+
+        public int? VariacaoFrente { get; set; }
+
+        public int? VariacaoVerso { get; set; }
     }
 }

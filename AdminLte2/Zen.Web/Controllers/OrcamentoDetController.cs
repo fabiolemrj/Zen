@@ -20,6 +20,8 @@ namespace Zen.Web.Controllers
         ServicoOrcamento servOrc = new ServicoOrcamento();
         ServicoMaterial servmat = new ServicoMaterial();
         ServicoProduto servProd = new ServicoProduto();
+        ServicoOrcCalculo servicoOrcCalculo = new ServicoOrcCalculo();
+        ServicoOrcVariacao servicoOrcVariacao = new ServicoOrcVariacao();
 
         private string CreateBreadCrumbIndex()
         {
@@ -72,7 +74,7 @@ namespace Zen.Web.Controllers
             TempData["breadcrumb"] = CreateBreadCrumbIndex();
             TempData["nometela"] = "Item do Pedido de Orçamento";
 
-            var lista = PrepararViewModel(pagina, tamPag,idpedido);
+            var lista = PrepararViewModel(pagina, tamPag, idpedido);
 
             return View(lista);
         }
@@ -89,7 +91,7 @@ namespace Zen.Web.Controllers
             ViewBag.TamanhoPagina = tamPag;
             ViewBag.IdPedido = idpedido;
 
-            return lista.ToPagedList(pagina, tamPag);            
+            return lista.ToPagedList(pagina, tamPag);
         }
 
         [DireitoAcesso(Constantes.AC_INC_CAD_PEDORC)]
@@ -98,10 +100,10 @@ namespace Zen.Web.Controllers
             TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
             TempData["nometela"] = "Novo Item do Pedido de Orçamento";
             TempData["lboper"] = "Novo";
-                      
-            var model = CriarViewModelAddEdit(idpedido);
+            var item = -1;
+            var model = CriarViewModelAddEdit(idpedido, item);
             model.IdPedido = idpedido;
-            model.Item = -1;
+            model.Item = item;
             model.AltA = 0;
             model.AltF = 0;
             model.AltHs = 0;
@@ -157,34 +159,39 @@ namespace Zen.Web.Controllers
             model.FotoTracoFornec = "N";
             model.Faca = "N";
             model.Quant = 0;
+            model.Mat1Fornec = false;
+            model.Mat2Fornec = false;
+            model.Mat3Fornec = false;
+            model.Mat4Fornec = false;
+            ObjetoParaModel(model, new List<OrcVariacao> { });
 
             return View(model);
         }
 
         private void Validar(CreateEditViewModel model)
         {
-          
 
-            if((model.LargF > model.LargA) || (model.AltF > model.AltA))
+
+            if ((model.LargF > model.LargA) || (model.AltF > model.AltA))
             {
                 ModelState.AddModelError("1", "O formato fechado não pode ser maior que o formato aberto");
-            }               
+            }
 
-            if(model.HsChapa == "S")
+            if (model.HsChapa == "S")
             {
-                if(model.LargHs <= 0)
+                if (model.LargHs <= 0)
                     ModelState.AddModelError("2", "Informe a dimensão da chapa do hot stamp");
 
-                if(model.AltHs <= 0)
+                if (model.AltHs <= 0)
                     ModelState.AddModelError("3", "Informe a dimensão da chapa do hot stamp");
             }
-            
-            if(model.OffSet == "S")
+
+            if (model.OffSet == "S")
             {
                 if (model.OffF <= 0)
-                    ModelState.AddModelError("4", "Informe a dimensão da chapa do hot stamp");
+                    ModelState.AddModelError("4", "Informe o valor  de frente de offset");
                 if (model.OffV <= 0)
-                    ModelState.AddModelError("5", "Informe a dimensão da chapa do hot stamp");
+                    ModelState.AddModelError("5", "Informe o valor  de verso de offset");
             }
 
             if (model.IdMaterial1 <= 0)
@@ -203,7 +210,7 @@ namespace Zen.Web.Controllers
                 TempData["nometela"] = "Novo Pedido de Orçamento";
                 TempData["lboper"] = "Novo";
 
-                PopularViewBag(model.IdPedido);
+                PopularViewBag(model.IdPedido, model.Item);
 
                 return View(model);
             }
@@ -211,23 +218,55 @@ namespace Zen.Web.Controllers
             var objeto = new OrcamentoDet();
             ModelParaObjeto(model, objeto);
 
+            var objetoCalc = new OrcCalculo();
+            ModelParaObjeto(model, objetoCalc);
+
+            var objetoVariacao = new OrcVariacao();
+           
+
             try
             {
 
                 servico.Salvar(db, objeto);
+                objetoCalc.IdPedido = objeto.IdPedido;
+                objetoCalc.Item = objeto.Item;
+                servicoOrcCalculo.Salvar(db, objetoCalc);
                 TempData["sucesso"] = $@"Item do Pedido de orçamento salvo com sucesso!";
             }
             catch (Exception e)
             {
                 TempData["erro"] = $@"Erro ao tentar editar o item do pedido de orçamento {objeto.Item} ";
             }
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new { model.IdPedido });
+            //return RedirectToAction("Index");
         }
 
+        private OrcVariacao ModelParaObjeto(CreateEditViewModel model, OrcVariacao objeto)
+        {
+            objeto.Item = model.Item;
+            objeto.IdPedido = model.IdPedido;
+            //objeto.Quant = model.VariacaoFrente
+            return objeto;
+        }
+
+        private OrcCalculo ModelParaObjeto(CreateEditViewModel model, OrcCalculo objeto)
+        {
+            objeto.TemCart = model.TemCartela;
+            objeto.TemVar = model.TemVariacoes;
+            objeto.Sangrada = model.Sangrada;
+            objeto.Margem = model.Margem;
+            objeto.QuantCart = model.QuantCart;
+            objeto.Distancia = model.Distancia;
+            objeto.FacaExt = model.FacaExt;
+            objeto.Item = model.Item;
+            objeto.IdPedido = model.IdPedido;
+            return objeto;
+        }
         private OrcamentoDet ModelParaObjeto(CreateEditViewModel model, OrcamentoDet objeto)
         {
             var mat1 = "";
-            if(model.IdMaterial1 > 0)
+            if (model.IdMaterial1 > 0)
             {
                 objeto.Material1 = servmat.ObterObjetoPorId(db, model.IdMaterial1.Value);
                 mat1 = objeto.Material1.Nome;
@@ -246,7 +285,7 @@ namespace Zen.Web.Controllers
                 objeto.Material3 = servmat.ObterObjetoPorId(db, model.IdMaterial3.Value);
                 mat3 = objeto.Material3.Nome;
             }
-                        
+
             var mat4 = "";
             if (model.IdMaterial4 > 0)
             {
@@ -260,6 +299,10 @@ namespace Zen.Web.Controllers
                 objeto.Produto = servProd.ObterObjetoPorId(db, model.IdProduto.Value);
                 prod = objeto.Produto.Nome;
             }
+            objeto.IdMaterial1 = model.IdMaterial1;
+            objeto.IdMaterial2 = model.IdMaterial2;
+            objeto.IdMaterial3 = model.IdMaterial3;
+            objeto.IdMaterial4 = model.IdMaterial4;
 
             objeto.IdPedido = model.IdPedido;
             objeto.Item = model.Item;
@@ -288,6 +331,7 @@ namespace Zen.Web.Controllers
             objeto.LamFoscaV = model.LamFoscaV;
             objeto.LargA = model.LargA;
             objeto.LargF = model.LargF;
+            objeto.CompF = model.CompF;
             objeto.LargHs = model.LargHs;
             objeto.LargRs = model.LargRs;
             objeto.MeioCorte = model.MeioCorte;
@@ -316,40 +360,260 @@ namespace Zen.Web.Controllers
             objeto.Faca = model.Faca;
             objeto.Obs1 = model.Obs1;
 
+            if (model.Mat1Fornec && objeto.IdMaterial1 > 0)
+                objeto.Mat1Fornec = "S";
+            else
+                objeto.Mat1Fornec = "N";
+
+            if (model.Mat2Fornec && objeto.IdMaterial2 > 0)
+                objeto.Mat2Fornec = "S";
+            else
+                objeto.Mat2Fornec = "N";
+
+            if (model.Mat3Fornec && objeto.IdMaterial3 > 0)
+                objeto.Mat3Fornec = "S";
+            else
+                objeto.Mat3Fornec = "N";
+
+            if (model.Mat4Fornec && objeto.IdMaterial4 > 0)
+                objeto.Mat4Fornec = "S";
+            else
+                objeto.Mat4Fornec = "N";
+
             return objeto;
         }
 
-        private CreateEditViewModel CriarViewModelAddEdit(int idpedido)
+        private CreateEditViewModel CriarViewModelAddEdit(int idpedido, int item)
         {
-            PopularViewBag(idpedido);
+            PopularViewBag(idpedido, item);
 
             var model = new CreateEditViewModel();
             return model;
         }
 
-        private void PopularViewBag(int idpedido)
+        private void PopularViewBag(int idpedido, int item)
         {
             ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNaoCad, "Sigla", "Nome");
             ViewBag.ativo = new SelectList(ListasGenericas.ObterAtivo, "Sigla", "Nome");
-            ViewBag.Produtos = new SelectList(servProd.ObterListaObjetos(db, ""),"ID","NOME");
+            ViewBag.Produtos = new SelectList(servProd.ObterListaObjetos(db, ""), "ID", "NOME");
 
             var ltsitem = new List<SelectListItem>();
 
             ltsitem.Add(new SelectListItem() { Text = "", Value = "-1" });
 
-             var mat = new SelectList(servmat.ObterListaObjetos(db, ""),"ID","NOME");
-            
-            foreach (var item in mat)
+            var mat = new SelectList(servmat.ObterListaObjetos(db, ""), "ID", "NOME");
+
+            foreach (var it in mat)
             {
-                ltsitem.Add(new SelectListItem() { Text = item.Text, Value = item.Value});
+                ltsitem.Add(new SelectListItem() { Text = it.Text, Value = it.Value });
             }
 
-           ViewBag.SitFotolito = new SelectList(ListasGenericas.ObterSitFotolito, "Sigla", "Nome");
-            
+            ViewBag.SitFotolito = new SelectList(ListasGenericas.ObterSitFotolito, "Sigla", "Nome");
+
 
             ViewBag.Material = ltsitem;
 
             ViewBag.IdPedido = idpedido;
+            ViewBag.Item = item;
+        }
+
+        public ActionResult Edit(int idpedido, int item)
+        {
+            TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+            TempData["nometela"] = "Editar Item do pedido do orçamento";
+            TempData["lboper"] = "Editar";
+
+            var model = CriarViewModelAddEdit(idpedido, item);
+
+            var objeto = servico.ObterObjetoPorId(db, idpedido, item);
+            if (objeto == null)
+            {
+                return HttpNotFound();
+            }
+
+            ObjetoParaModel(model, objeto);
+
+            var objetoOrcCalc = servicoOrcCalculo.ObterObjetoPorId(db, idpedido, item);
+            if (objetoOrcCalc == null)
+            {
+                objetoOrcCalc = new OrcCalculo();
+            }
+            else
+            {
+                ObjetoParaModel(model, objetoOrcCalc);
+            }
+
+             
+            var lstVariacao = servicoOrcVariacao.ObterListaObjetos(db,idpedido,item).ToList();
+
+            ObjetoParaModel(model, lstVariacao);
+
+
+            return View("Create", model);
+        }
+
+        private void ObjetoParaModel(CreateEditViewModel model, List<OrcVariacao> lstobjeto)
+        {
+            model.VariacaoFrente = 0;
+            model.VariacaoVerso = 0;
+            foreach (var item in lstobjeto)
+            {
+                if (item.Item <= 0)
+                    model.Item = item.Item;
+
+                if (item.IdPedido <= 0)
+                    model.IdPedido = item.IdPedido;
+
+                if (item.Local == "F")
+                {
+                    model.VariacaoFrente++;
+                }
+                else if(item.Local == "V")
+                {
+                    model.VariacaoVerso++;
+                }
+            }
+            
+        }
+
+        private void ObjetoParaModel(CreateEditViewModel model, OrcCalculo objeto)
+        {
+            model.IdPedido = objeto.IdPedido;
+            model.Item = objeto.Item;
+            model.TemCartela = objeto.TemCart;
+            model.TemVariacoes = objeto.TemVar;
+            model.Sangrada = objeto.Sangrada;
+            model.Margem = objeto.Margem;
+            model.QuantCart = objeto.QuantCart;
+            model.Distancia = objeto.Distancia;
+            model.FacaExt = objeto.FacaExt;
+
+        }
+        private void ObjetoParaModel(CreateEditViewModel model, OrcamentoDet objeto)
+        {
+            model.IdMaterial1 = objeto.IdMaterial1;
+            model.IdMaterial2 = objeto.IdMaterial2;
+            model.IdMaterial3 = objeto.IdMaterial3;
+            model.IdMaterial4 = objeto.IdMaterial4;
+            model.IdProduto = objeto.IdProduto;
+
+            model.IdPedido = objeto.IdPedido;
+            model.Item = objeto.Item;
+
+            model.AltA = objeto.AltA;
+            model.AltF = objeto.AltF;
+            model.AltHs = objeto.AltHs;
+            model.AltRs = objeto.AltRs;
+            model.CodFaca = objeto.CodFaca;
+            model.Cola = objeto.Cola;
+            model.ContraPlaca = objeto.ContraPlaca;
+            model.Cordao = objeto.Cordao;
+            model.CorteEsp = objeto.CorteEsp;
+            model.CorteSimples = objeto.CorteSimples;
+            model.CompF = objeto.CompF;
+            model.CorteVinco = objeto.CorteVinco;
+            model.IdProduto = objeto.IdProduto;
+            model.Ilhos = objeto.Ilhos;
+            model.ImpF = objeto.ImpF;
+            model.ImpV = objeto.ImpV;
+            model.LamFoscaF = objeto.LamFoscaF;
+            model.LamFoscaV = objeto.LamFoscaV;
+            model.LargA = objeto.LargA;
+            model.LargF = objeto.LargF;
+            model.LargHs = objeto.LargHs;
+            model.LargRs = objeto.LargRs;
+            model.MeioCorte = objeto.MeioCorte;
+            model.Montagem = objeto.Montagem;
+            model.ObsAcab1 = objeto.ObsAcab1;
+            model.ObsImp = objeto.ObsImp;
+            model.OffF = objeto.OffF;
+            model.OffSet = objeto.OffSet;
+            model.OffV = objeto.OffV;
+            model.OutrosAcab1 = objeto.OutrosAcab1;
+            model.OutrosAcab2 = objeto.OutrosAcab2;
+            model.OutrosImp = objeto.OutrosImp;
+            model.Pintura = objeto.Pintura;
+            model.Quant = objeto.Quant;
+            model.RelevoSeco = objeto.RelevoSeco;
+            model.RsChapa = objeto.RsChapa;
+            model.SemAcab = objeto.SemAcab;
+            model.Vazador = objeto.Vazador;
+            model.Vinco = objeto.Vinco;
+            model.WireO = objeto.WireO;
+            model.FotoPoli = objeto.FotoPoli;
+            model.FotoPoliFornec = objeto.FotoPoliFornec;
+            model.FotoRet = objeto.FotoRet;
+            model.FotoRetFornec = objeto.FotoRetFornec;
+            model.FotoTraco = objeto.FotoTracoFornec;
+            model.Faca = objeto.Faca;
+            model.Obs1 = objeto.Obs1;
+
+            if (objeto.Mat1Fornec == "S")
+                model.Mat1Fornec = true;
+            else
+                model.Mat1Fornec = false;
+
+            if (objeto.Mat2Fornec == "S")
+                model.Mat2Fornec = true;
+            else
+                model.Mat2Fornec = false;
+
+            if (objeto.Mat3Fornec == "S")
+                model.Mat3Fornec = true;
+            else
+                model.Mat3Fornec = false;
+
+            if (objeto.Mat4Fornec == "S")
+                model.Mat4Fornec = true;
+            else
+                model.Mat4Fornec = false;
+
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CreateEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["breadcrumb"] = CreateBreadCrumbCreatEdit();
+                TempData["nometela"] = "Editar Item do pedido do orçamento";
+                TempData["lboper"] = "Editar";
+
+                PopularViewBag(model.IdPedido, model.Item);
+
+                return View("Create", model);
+            }
+            var objeto = servico.ObterObjetoPorId(db, model.IdPedido, model.Item);
+
+            var objetoOrcCalc = servicoOrcCalculo.ObterObjetoPorId(db, model.IdPedido, model.Item);
+
+            if (objetoOrcCalc == null)
+            {
+                objetoOrcCalc = new OrcCalculo();
+            }
+
+            ModelParaObjeto(model, objetoOrcCalc);
+
+            if (objeto == null)
+            {
+                return HttpNotFound();
+            }
+
+            ModelParaObjeto(model, objeto);
+
+            try
+            {
+                servicoOrcCalculo.Salvar(db, objetoOrcCalc);
+                servico.Salvar(db, objeto);
+                TempData["sucesso"] = $@"Item do pedido de orçamento salvo com sucesso!";
+            }
+            catch (Exception e)
+            {
+                TempData["erro"] = $@"Erro ao tentar editar o cliente {objeto.IdPedido}";
+            }
+
+            return RedirectToAction("Index", new { model.IdPedido });
+            //return RedirectToAction("Index");
         }
 
     }

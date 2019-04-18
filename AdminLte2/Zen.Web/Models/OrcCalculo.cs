@@ -153,8 +153,9 @@ namespace Zen.Web.Models
         [Column(name: "FACA_EXT")]
         public int? FacaExt { get; set; }
 
+        [MaxLength(1)]
         [Column(name: "FACA_DET")]
-        public int? FacaDet { get; set; }
+        public string FacaDet { get; set; }
 
         [Column(name: "VR_DET")]
         public double? VrDet { get; set; }
@@ -215,7 +216,7 @@ namespace Zen.Web.Models
         [Column(name: "VR_UNIT_WO")]
         public double? VrUnitWo { get; set; }
 
-        [Column(name: "VR_WIRE_WO")]
+        [Column(name: "VR_WIRE_O")]
         public double? VrWireWo { get; set; }
 
         [Column(name: "RISCO_WO")]
@@ -502,6 +503,9 @@ namespace Zen.Web.Models
         [Column(name: "NUM_IMP")]
         public int? NumImp { get; set; }
 
+        [Column(name: "VRU_IMP")]
+        public double? VrUImp { get; set; }
+
         [Column(name: "VRUF_IMP")]
         public double? VrUfImp { get; set; }
 
@@ -543,5 +547,6 @@ namespace Zen.Web.Models
 
         [Column(name: "VR_TOTAL")]
         public double? VrTotal { get; set; }
+        
     }
 }
