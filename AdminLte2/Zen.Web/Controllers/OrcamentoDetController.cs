@@ -221,8 +221,7 @@ namespace Zen.Web.Controllers
             var objetoCalc = new OrcCalculo();
             ModelParaObjeto(model, objetoCalc);
 
-            var objetoVariacao = new OrcVariacao();
-           
+            var objetoVariacao = new OrcVariacao();           
 
             try
             {

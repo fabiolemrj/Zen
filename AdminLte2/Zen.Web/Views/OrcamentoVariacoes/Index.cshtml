@@ -26,7 +26,10 @@
                                 <th class="text-center">Especificação</th>
                                 <th class="text-center">Quantidade</th>
                                 <th class="text-center">Localização</th>
-                                <th class="text-center" style="width:100px"></th>
+                                <th class="text-center" style="width:100px">
+                                    <a href="@Url.Action("Create",new { idpedido=Model.Idpedido, item = Model.Item})" class="btn btn-info btn-sm" title="Novo">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,7 +43,6 @@
                                         @Html.DisplayFor(modelItem => item.Variacao)
                                     </td>
                                     <td>
-
                                         @Html.DisplayFor(modelItem => item.Quant)
                                     </td>
                                     <td>
@@ -54,7 +56,6 @@
                                         }
                                         @*@Html.DisplayFor(modelItem => item.Local)*@
                                     </td>
-
                                     <td>
                                         <div class="btn-group">
                                             <a href="@Url.Action("Edit",new { idpedido=item.IdPedido, item = item.Item, nrseq = item.NrSeq})" class="btn btn-info btn-sm" title="Editar">

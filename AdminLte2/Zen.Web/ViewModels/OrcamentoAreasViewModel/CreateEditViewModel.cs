@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Zen.Web.ViewModels.OrcamentoVariacoesViewModel
+namespace Zen.Web.ViewModels.OrcamentoAreasViewModel
 {
     public class CreateEditViewModel
     {
@@ -17,14 +17,14 @@ namespace Zen.Web.ViewModels.OrcamentoVariacoesViewModel
         [Display(Name = "Sequencial")]
         public int NrSeq { get; set; }
 
+        [Display(Name = "Altura")]
+        public double? Altura { get; set; }
+
+        [Display(Name = "Largura")]
+        public double? Largura { get; set; }
 
         [Display(Name = "Quantidade")]
         public int? Quant { get; set; }
-        
-        [Display(Name = "Variação")]
-        public string Variacao { get; set; }
 
-        [Display(Name = "Local")]
-        public string Local { get; set; }
     }
 }

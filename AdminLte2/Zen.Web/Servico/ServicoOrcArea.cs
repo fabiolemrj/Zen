@@ -17,7 +17,7 @@ namespace Zen.Web.Servico
         {
             if (ObterObjetoPorId(db, objeto.IdPedido, objeto.Item, objeto.NrSeq) == null)
             {
-                objeto.NrSeq = db.OrcAreas.Max(c => c.NrSeq) + 1;
+                objeto.NrSeq = db.OrcAreas.Where(c=>c.IdPedido == objeto.IdPedido && c.Item == objeto.Item).Max(c => c.NrSeq) + 1;
                 db.OrcAreas.Add(objeto);
             }
             db.SaveChanges();
@@ -28,9 +28,9 @@ namespace Zen.Web.Servico
             return db.OrcAreas.Where(u => u.IdPedido == orcamentodet.IdPedido && u.Item == orcamentodet.Item).OrderBy(u => u.NrSeq);
         }
 
-        public IQueryable<OrcVariacao> ObterListaObjetos(ZenContext db, int idpedido, int item)
+        public IQueryable<OrcAreas> ObterListaObjetos(ZenContext db, int idpedido, int item)
         {
-            return db.OrcVariacao.Where(u => u.IdPedido == idpedido && u.Item == item).OrderBy(u => u.NrSeq);
+            return db.OrcAreas.Where(u => u.IdPedido == idpedido && u.Item == item).OrderBy(u => u.NrSeq);
         }
     }
 }

@@ -7319,6 +7319,7 @@
     <Compile Include="Controllers\MaquinaController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\MovCcController.cs" />
+    <Compile Include="Controllers\OrcamentoAreasController.cs" />
     <Compile Include="Controllers\OrcamentoController.cs" />
     <Compile Include="Controllers\OrcamentoDetController.cs" />
     <Compile Include="Controllers\OrcamentoVariacoesController.cs" />
@@ -7484,6 +7485,8 @@
     <Compile Include="ViewModels\MaquinaViewModel\DeleteViewModel.cs" />
     <Compile Include="ViewModels\MaterialViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\MaterialViewModel\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\OrcamentoAreasViewModel\CreateEditViewModel.cs" />
+    <Compile Include="ViewModels\OrcamentoAreasViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModels\OrcamentoDetViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\OrcamentoVariacoesViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\OrcamentoVariacoesViewModel\IndexViewModel.cs" />
@@ -7628,6 +7631,9 @@
     <Content Include="Views\OrcamentoDet\Index.cshtml" />
     <Content Include="Views\OrcamentoDet\Create.cshtml" />
     <Content Include="Views\OrcamentoVariacoes\Index.cshtml" />
+    <Content Include="Views\OrcamentoVariacoes\Create.cshtml" />
+    <Content Include="Views\OrcamentoAreas\Index.cshtml" />
+    <Content Include="Views\OrcamentoAreas\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

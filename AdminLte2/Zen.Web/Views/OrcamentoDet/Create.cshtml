@@ -170,10 +170,10 @@
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                                <a href="@Url.Action("Edit","OrcImpDia",new { idpedido=ViewBag.IdPedido, item = Model.Item})" title="Novo">Areas de impressão</a>
+                                                <a href="@Url.Action("Index","OrcamentoAreas",new { idpedido=Model.IdPedido, item = Model.Item})" title="Area de impressão">Areas de impressão</a>
                                             </li>
                                             <li>
-                                                <a href="@Url.Action("Index","OrcamentoVariacoes",new { idpedido=ViewBag.IdPedido, item = Model.Item})" title="Novo">Variações</a>
+                                                <a href="@Url.Action("Index","OrcamentoVariacoes",new { idpedido=Model.IdPedido, item = Model.Item})" title="Variações">Variações</a>
                                             </li>
                                         </ul>
                                     </div>

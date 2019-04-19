@@ -83,6 +83,12 @@ namespace Zen.Web.Utils
             new {Sigla = "S", Nome = "Semi-automatica"}
         };
 
+        public static List<object> LocalVariacao = new List<object>
+        {
+            new {Sigla = "F", Nome = "Frente"},
+            new {Sigla = "V", Nome = "Verso"}
+        };
+
         public static List<object> ObterEstados = new List<object>
         {
                 new {Sigla = "AC", Nome = "Acre" },

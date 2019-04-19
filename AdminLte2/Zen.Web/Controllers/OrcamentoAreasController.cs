@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using X.PagedList;
 using Zen.Web.Models;
 using Zen.Web.Servico;
 using Zen.Web.Utils;
-using Zen.Web.ViewModels.OrcamentoVariacoesViewModel;
+using Zen.Web.ViewModels.OrcamentoAreasViewModel;
 
 namespace Zen.Web.Controllers
 {
-    public class OrcamentoVariacoesController : CustomController
+    public class OrcamentoAreasController : CustomController
     {
+
         ZenContext db = new ZenContext();
-        ServicoOrcVariacao servico = new ServicoOrcVariacao();
+        ServicoOrcArea servico = new ServicoOrcArea();
 
         private string CreateBreadCrumbIndex(int idpedido, int item)
         {
@@ -36,7 +36,7 @@ namespace Zen.Web.Controllers
                         </li>
                          <li class='active'>
                            <i class='fa-file-o'> </i>
-                            Item de Variação
+                           <a href=#> Areas de Impressão</a>
                          </li>
                     </ol>";
         }
@@ -61,35 +61,30 @@ namespace Zen.Web.Controllers
                          </li>
                          <li>
                            <i class='fa-file-o'> </i>
-                           <a href='/OrcamentoVariacoes/Index?idpedido={idpedido}&item={item}'> Areas de impressão </a>
+                           <a href='/OrcamentoAreas/Index?idpedido={idpedido}&item={item}'> Areas de impressão </a>
                          </li>
                          <li class='active'> Cadastro
                          </li>
                     </ol>";
         }
 
-
-
         // GET: OrcamentoVariacoes
         public ActionResult Index(int idpedido, int item)
         {
             TempData["breadcrumb"] = CreateBreadCrumbIndex(idpedido, item);
-            TempData["nometela"] = "Variações do item do pedido";
+            TempData["nometela"] = "Areas de impressão do item";
 
             var viewmodel = PrepararViewModel(idpedido, item);
 
             return View(viewmodel);
         }
 
-
         private IndexViewModel PrepararViewModel(int idpedido, int item)
         {
             //PopularViewBag();
             var model = new IndexViewModel();
 
-            model.LstOrcVariacoes = servico.ObterListaObjetos(db, idpedido, item).ToList();
-            model.QuantFrente = model.LstOrcVariacoes.Count(c => c.Local == "F").ToString();
-            model.QuantVerso = model.LstOrcVariacoes.Count(c => c.Local == "V").ToString();
+            model.LstOrcAreas = servico.ObterListaObjetos(db, idpedido, item).ToList();
             model.Idpedido = idpedido;
             model.Item = item;
             return model;
@@ -97,11 +92,13 @@ namespace Zen.Web.Controllers
 
         public ActionResult Create(int idpedido, int item)
         {
-            TempData["nometela"] = "Novo Item de variação do pedido";
+            TempData["nometela"] = "Novo Item de Area de impressão";
             TempData["lboper"] = "Novo";
 
             var model = CriarViewModelAddEdit(idpedido, item);
             model.Quant = 0;
+            model.Largura = 0;
+            model.Altura = 0;
             model.NrSeq = -1;
 
             return View(model);
@@ -121,26 +118,54 @@ namespace Zen.Web.Controllers
                 return View(model);
             }
 
-            var objeto = new OrcVariacao();
+            var objeto = new OrcAreas();
             ModelParaObjeto(model, objeto);
 
             try
             {
                 servico.Salvar(db, objeto);
-                TempData["sucesso"] = $@"Item de variação do Pedido de orçamento salvo com sucesso!";
+                TempData["sucesso"] = $@"Item de Areas de impressão do Pedido de orçamento salvo com sucesso!";
             }
             catch (Exception e)
             {
-                TempData["erro"] = $@"Erro ao tentar editar o item do pedido de orçamento {objeto.Item} ";
+                TempData["erro"] = $@"Erro ao tentar editar o item de area de impressão do pedido de orçamento {objeto.Item} ";
             }
 
             return RedirectToAction("Index", new { idpedido = model.IdPedido, item = model.Item });
         }
 
+        private CreateEditViewModel CriarViewModelAddEdit(int idpedido, int item)
+        {
+            PopularViewBag(idpedido, item);
+
+            var model = new CreateEditViewModel();
+            model.IdPedido = idpedido;
+            model.Item = item;
+            return model;
+        }
+
+        private void PopularViewBag(int idpedido, int item)
+        {
+            ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNaoCad, "Sigla", "Nome");            
+        }
+
+        private OrcAreas ModelParaObjeto(CreateEditViewModel model, OrcAreas objeto)
+        {
+            objeto.Item = model.Item;
+            objeto.IdPedido = model.IdPedido;
+            objeto.NrSeq = model.NrSeq;
+            objeto.Quant = model.Quant;
+            objeto.Alt = model.Altura;
+            objeto.Larg = model.Largura;
+
+            return objeto;
+        }
+
+
         public ActionResult Edit(int idpedido, int item, int nrseq)
         {
             TempData["breadcrumb"] = CreateBreadCrumbCreatEdit(idpedido, item);
-            TempData["nometela"] = "Editar Item  de variação do pedido do orçamento";
+            TempData["nometela"] = "Editar Item da area de impressão do pedido do orçamento";
             TempData["lboper"] = "Editar";
 
             //var lstobjetos = servico.ObterListaObjetos(db, idpedido, item);
@@ -157,13 +182,23 @@ namespace Zen.Web.Controllers
             return View("Create", model);
         }
 
+        private void ObjetoParaModel(CreateEditViewModel model, OrcAreas objeto)
+        {
+            model.IdPedido = objeto.IdPedido;
+            model.Item = objeto.Item;
+            model.NrSeq = objeto.NrSeq;
+            model.Quant = objeto.Quant;
+            model.Altura = objeto.Alt;
+            model.Largura = objeto.Larg;
+        }
+
         [HttpPost]
         public ActionResult Edit(CreateEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 TempData["breadcrumb"] = CreateBreadCrumbCreatEdit(model.IdPedido, model.Item);
-                TempData["nometela"] = "Editar Item de variação do pedido";
+                TempData["nometela"] = "Editar Item de area de impressão do pedido";
                 TempData["lboper"] = "Editar";
                 PopularViewBag(model.IdPedido, model.Item);
                 return View(model);
@@ -182,53 +217,15 @@ namespace Zen.Web.Controllers
             {
 
                 servico.Salvar(db, objeto);
-                TempData["sucesso"] = $@"O item de variação do pedido de orçamento salvo com sucesso!";
+                TempData["sucesso"] = $@"O item area de impressão do pedido de orçamento salvo com sucesso!";
             }
             catch (Exception e)
             {
-                TempData["erro"] = $@"Erro ao tentar editar a variação do item de pedido{objeto.IdPedido}";
+                TempData["erro"] = $@"Erro ao tentar editar o item da area de impressão do item de pedido{objeto.IdPedido}";
             }
 
             return RedirectToAction("Index", new { idpedido = model.IdPedido, item = model.Item });
-
         }
 
-        private CreateEditViewModel CriarViewModelAddEdit(int idpedido, int item)
-        {
-            PopularViewBag(idpedido, item);
-
-            var model = new CreateEditViewModel();
-            model.IdPedido = idpedido;
-            model.Item = item;
-            return model;
-        }
-
-        private void PopularViewBag(int idpedido, int item)
-        {
-            ViewBag.SimNao = new SelectList(ListasGenericas.ObterSimNaoCad, "Sigla", "Nome");
-            ViewBag.LocalVariacao = new SelectList(ListasGenericas.LocalVariacao, "Sigla", "Nome");
-
-        }
-
-        private void ObjetoParaModel(CreateEditViewModel model, OrcVariacao objeto)
-        {
-            model.IdPedido = objeto.IdPedido;
-            model.Item = objeto.Item;
-            model.NrSeq = objeto.NrSeq;
-            model.Quant = objeto.Quant;
-            model.Variacao = objeto.Variacao;
-            model.Local = objeto.Local;
-        }
-
-        private OrcVariacao ModelParaObjeto(CreateEditViewModel model, OrcVariacao objeto)
-        {
-            objeto.Item = model.Item;
-            objeto.IdPedido = model.IdPedido;
-            objeto.NrSeq = model.NrSeq;
-            objeto.Local = model.Local;
-            objeto.Variacao = model.Variacao;
-
-            return objeto;
-        }
     }
 }
