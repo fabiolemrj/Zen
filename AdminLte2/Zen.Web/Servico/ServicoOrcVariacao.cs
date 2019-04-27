@@ -17,7 +17,7 @@ namespace Zen.Web.Servico
         {
             if (ObterObjetoPorId(db, objeto.IdPedido, objeto.Item, objeto.NrSeq) == null)
             {
-                objeto.NrSeq = db.OrcVariacao.Max(c => c.NrSeq) + 1;
+                objeto.NrSeq = db.OrcVariacao.Where(c => c.IdPedido == objeto.IdPedido && c.Item == objeto.Item).Max(c => c.NrSeq) + 1;
                 db.OrcVariacao.Add(objeto);
             }
             db.SaveChanges();

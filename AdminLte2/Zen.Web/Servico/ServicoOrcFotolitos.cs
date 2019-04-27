@@ -17,9 +17,23 @@ namespace Zen.Web.Servico
         {
             if (ObterObjetoPorId(db, objeto.IdPedido, objeto.Item, objeto.NrSeq) == null)
             {
-                objeto.NrSeq = db.OrcAreas.Max(c => c.NrSeq) + 1;
+                objeto.NrSeq = db.OrcFotolitos.Where(c => c.IdPedido == objeto.IdPedido && c.Item == objeto.Item).Max(c => c.NrSeq) + 1;
                 db.OrcFotolitos.Add(objeto);
             }
+            db.SaveChanges();
+        }
+
+        public void Salvar(ZenContext db, List<OrcFotolitos> LstObjetos)
+        {
+            foreach(var objeto in LstObjetos)
+            {
+                if (ObterObjetoPorId(db, objeto.IdPedido, objeto.Item, objeto.NrSeq) == null)
+                {
+                    objeto.NrSeq = db.OrcAreas.Where(c => c.IdPedido == objeto.IdPedido && c.Item == objeto.Item).Max(c => c.NrSeq) + 1;
+                    db.OrcFotolitos.Add(objeto);
+                }
+            }
+           
             db.SaveChanges();
         }
 

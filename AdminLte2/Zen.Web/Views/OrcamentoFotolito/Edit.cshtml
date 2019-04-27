@@ -1,0 +1,119 @@
+﻿
+@model Zen.Web.ViewModels.OrcamentoFotolitoViewModel.CreateEditViewModel
+
+@{ ViewBag.Title = "Item de Fotolito";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    @if (@TempData["lboper"] != null)
+                    {
+                        @Html.Raw(@TempData["lboper"]);
+                    }
+                </h3>
+            </div>
+
+            <div class="box-body">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.IdPedido)
+                    @Html.HiddenFor(model => model.Item)
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Numero</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.NrSeq, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.NrSeq, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Fornecedor</label>
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(model => model.Fornecedor, (SelectList)ViewBag.SimNao, new { @class = "form-control select2" })
+
+                            @Html.ValidationMessageFor(model => model.Fornecedor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Largura</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Largura, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Largura, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Altura</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Altura, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Quantidade</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Quant, new { htmlAttributes = new { @class = "form-control", onblur = "CalcTotal()" } })
+                            @Html.ValidationMessageFor(model => model.Quant, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Valor</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", onblur = "CalcTotal()" } })
+                            @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Total</label>
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="box box-footer">
+                        <div class="btn">
+                            <button type="submit" id="btsalvar" class="btn btn-app ">
+                                <i class="fa fa-save"></i> Salvar
+                            </button>
+                            <a href="@Url.Action("Index","OrcamentoFotolito/Index",new { idpedido = Model.IdPedido,item = Model.Item}) " class="btn btn-app " title="Salvar">
+                                <i class="fa fa-arrow-circle-o-left"></i> Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('#Valor').mask("#.##0,00", { reverse: true });
+    });
+
+    function CalcTotal() {
+        var quant = $("#Quant").val();
+
+        var valor = $("#Valor").val();
+
+        var vr = parseFloat(valor.replace('.', '').replace(',', '.'));
+
+        var qt = parseFloat(quant.replace(',', '.'));
+
+        var tot = (vr * qt);
+
+        $("#Total").val(tot.toString().replace('.', ','));
+    }
+
+
+
+</script>

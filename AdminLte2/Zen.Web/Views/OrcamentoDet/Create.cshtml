@@ -610,6 +610,9 @@
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
+                                                <a href="@Url.Action("Index","OrcamentoFotolito",new { idpedido=ViewBag.IdPedido, item = Model.Item})" title="Novo">Fotolito</a>
+                                            </li>
+                                            <li>
                                                 <a href="@Url.Action("Edit","OrcImpDia",new { idpedido=ViewBag.IdPedido, item = Model.Item})" title="Novo">Entrada de maquinas</a>
                                             </li>
                                             <li>

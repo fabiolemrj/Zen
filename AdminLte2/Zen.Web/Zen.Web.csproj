@@ -7322,6 +7322,7 @@
     <Compile Include="Controllers\OrcamentoAreasController.cs" />
     <Compile Include="Controllers\OrcamentoController.cs" />
     <Compile Include="Controllers\OrcamentoDetController.cs" />
+    <Compile Include="Controllers\OrcamentoFotolitoController.cs" />
     <Compile Include="Controllers\OrcamentoVariacoesController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PermissoesController.cs" />
@@ -7393,6 +7394,7 @@
     <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="Models\Transporte.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\ValFotoPadrao.cs" />
     <Compile Include="Models\ZenContext.cs" />
     <Compile Include="Models\Zona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -7488,6 +7490,8 @@
     <Compile Include="ViewModels\OrcamentoAreasViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\OrcamentoAreasViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModels\OrcamentoDetViewModel\CreateEditViewModel.cs" />
+    <Compile Include="ViewModels\OrcamentoFotolitoViewModel\CreateEditViewModel.cs" />
+    <Compile Include="ViewModels\OrcamentoFotolitoViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModels\OrcamentoVariacoesViewModel\CreateEditViewModel.cs" />
     <Compile Include="ViewModels\OrcamentoVariacoesViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModels\Orcamento\CreateEditViewModel.cs" />
@@ -7634,6 +7638,8 @@
     <Content Include="Views\OrcamentoVariacoes\Create.cshtml" />
     <Content Include="Views\OrcamentoAreas\Index.cshtml" />
     <Content Include="Views\OrcamentoAreas\Create.cshtml" />
+    <Content Include="Views\OrcamentoFotolito\Index.cshtml" />
+    <Content Include="Views\OrcamentoFotolito\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

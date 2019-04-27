@@ -19,7 +19,7 @@ namespace Zen.Web.Servico
         {
             if (ObterObjetoPorId(db, objeto.IdPedido, objeto.Item) == null)
             {
-                objeto.Item = db.OrcamentoDets.Max(c => c.Item) + 1;
+                objeto.Item = db.OrcamentoDets.Where(c=>c.IdPedido == objeto.IdPedido).Max(c => c.Item) + 1;
                 db.OrcamentoDets.Add(objeto);
             }
 

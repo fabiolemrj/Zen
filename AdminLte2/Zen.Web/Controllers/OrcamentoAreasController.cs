@@ -187,7 +187,7 @@ namespace Zen.Web.Controllers
             model.IdPedido = objeto.IdPedido;
             model.Item = objeto.Item;
             model.NrSeq = objeto.NrSeq;
-            model.Quant = objeto.Quant;
+            model.Quant = objeto.Quant; 
             model.Altura = objeto.Alt;
             model.Largura = objeto.Larg;
         }
