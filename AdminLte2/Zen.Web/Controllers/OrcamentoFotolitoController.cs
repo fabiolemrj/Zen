@@ -367,5 +367,13 @@ namespace Zen.Web.Controllers
 
                 return result;
         }
+
+        public ActionResult Delete(int idpedido, int item, int nrseq)
+        {
+            TempData["erro"] = $@"Não é possível apagar item de fotolito!";
+            var objeto = servico.ObterObjetoPorId(db, idpedido, item, nrseq);
+            return RedirectToAction("Index", new { idpedido = idpedido, item = item });
+
+        }
     }
 }

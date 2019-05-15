@@ -102,16 +102,16 @@
                         <table id="tabela" class="table table-bordered table-hover table-striped table-responsive">
                             <thead>
                                 <tr>
-                                    <th class="text-center" style="width:20px">Numero</th>
-                                    <th class="text-center" style="width:20px">Orçamento</th>
-                                    <th class="text-center" style="width:30px">Data</th>
-                                    <th class="text-center" style="width:20px">Pendente</th>
-                                    <th class="text-center" style="width:100px">Referência</th>
-                                    <th class="text-center" style="width:120px">Cliente</th>
-                                    <th class="text-center" style="width:90px">Contato</th>
-                                    <th class="text-center" style="width:90px">Telefone</th>
-                                    <th class="text-center" style="width:90px">Email</th>
-                                    <th class="text-center" style="width:10px">Itens</th>
+                                    <th class="text-center" >Numero</th>
+                                    <th class="text-center" >Orçamento</th>
+                                    <th class="text-center" >Data</th>
+                                    <th class="text-center" >Pendente</th>
+                                    <th class="text-center" >Referência</th>
+                                    <th class="text-center" >Cliente</th>
+                                    <th class="text-center" >Contato</th>
+                                    <th class="text-center" >Telefone</th>
+                                   @* <th class="text-center" >Email</th>*@
+                                    <th class="text-center" >Itens</th>
                                     <th class="text-center" style="width:190px">
                                         <div class="btn-block btn-group ">
                                             <a href="@Url.Action("Create",new { id=-1})" class="btn btn-block btn-primary btn-sm" title="Apagar">
@@ -162,9 +162,9 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Tel1)
                                         </td>
-                                        <td>
+                                        @*<td>
                                             @Html.DisplayFor(modelItem => item.Email1)
-                                        </td>
+                                        </td>*@
                                         <td align="center">
                                             <div class="btn-block btn-group ">
                                                 <a href="@Url.Action("Index","OrcamentoDet",new { idpedido=item.IdPedido})" class="btn btn-info btn-sm" title="Itens">

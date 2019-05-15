@@ -1,0 +1,88 @@
+﻿@model Zen.Web.ViewModels.OrcamentoCentMaqViewModel.IndexViewModel
+
+@using (Html.BeginForm("Index", "OrcamentoCentMaq", FormMethod.Get, new { id = "formOrcCentMaq" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="result"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h4>Entrada de Maquina</h4>
+                </div>
+
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="control-label">Pedido: @Model.Idpedido</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Item: @Model.Item</label>
+                    </div>
+                    <table id="tabela" class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Numero</th>
+                                <th class="text-center">Fixo</th>
+                                <th class="text-center">Valor</th>
+                                <th class="text-center">Quantidade</th>
+
+                                <th class="text-center">Total</th>
+                                <th class="text-center" style="width:100px">
+                                    <a href="@Url.Action("Create",new { idpedido=Model.Idpedido, item = Model.Item})" class="btn btn-info btn-sm" title="Novo">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.LstOrcCentMaq)
+                            {
+                                double? total = item.Quant * item.Valor.Value;
+
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NrSeq)
+                                    </td>
+                                   
+                                   
+                                    <td>
+                                        @if (item.Fixo == "S")
+                                        {
+                                            @Html.Raw("Sim")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("Não")
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Valor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quant)
+                                    </td>
+                                    <td>
+
+
+                                        @Html.Raw(total)
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="@Url.Action("Edit",new { idpedido=item.IdPedido, item = item.Item, nrseq = item.NrSeq})" class="btn btn-info btn-sm" title="Editar">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </a>
+                                            <a href="@Url.Action("Delete",new { idpedido=item.IdPedido, item = item.Item, nrseq = item.NrSeq})" class="btn btn-danger btn-sm" title="Apagar">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

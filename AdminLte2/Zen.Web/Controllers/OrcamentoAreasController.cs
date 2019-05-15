@@ -215,7 +215,6 @@ namespace Zen.Web.Controllers
 
             try
             {
-
                 servico.Salvar(db, objeto);
                 TempData["sucesso"] = $@"O item area de impressão do pedido de orçamento salvo com sucesso!";
             }
@@ -227,5 +226,12 @@ namespace Zen.Web.Controllers
             return RedirectToAction("Index", new { idpedido = model.IdPedido, item = model.Item });
         }
 
+        public ActionResult Delete(int idpedido, int item, int nrseq)
+        {
+            TempData["erro"] = $@"Não é possível apagar item de area de impressão!";
+            var objeto = servico.ObterObjetoPorId(db, idpedido, item, nrseq);
+            return RedirectToAction("Index", new { idpedido = idpedido, item = item });
+
+        }
     }
 }

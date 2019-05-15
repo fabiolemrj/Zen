@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Zen.Web.Models
 {
-    [Table("orccentmaq")]
+    [Table("orcentmaq")]
     public class OrcCentMaq
     {
         [Key]

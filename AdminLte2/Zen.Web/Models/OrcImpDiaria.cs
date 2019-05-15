@@ -37,5 +37,8 @@ namespace Zen.Web.Models
         [MaxLength(1)]
         [Column(name: "FIXO")]
         public string Fixo { get; set; }
+
+        [Column(name: "VALOR_DIA")]
+        public double? ValorDia { get; set; }
     }
 }
